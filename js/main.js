@@ -8,7 +8,7 @@
     phoneLabel: '+91 99999 99999',
     whatsapp: '919999999999',
     whatsappText: 'Hi, I am interested in Valencia Town plots on Indore–Ujjain Road. Please share price and plot sizes.',
-    rera: '',                       // e.g. 'P-IND-26-1234'. Empty shows "Applied / TBA"
+    rera: '',                       // e.g. 'P-IND-26-1234'. Shown in the footer once set
     formEndpoint: 'https://script.google.com/macros/s/AKfycbwnNCz74HjqDYzwVD0q0TPSB8Cw9Yr-FzU9EmfDq0XTHyniRTZDg1wej91xEWx1Qvk0/exec'                // Google Apps Script web app URL (see apps-script/README.md). Empty = lead is sent via WhatsApp
   };
 
@@ -28,7 +28,10 @@
   $$('.js-wa').forEach(function (a) { a.href = waUrl; });
   $$('.js-call').forEach(function (a) { a.href = 'tel:+' + CONFIG.phone; });
   $$('.js-phone-label').forEach(function (el) { el.textContent = CONFIG.phoneLabel; });
-  if (CONFIG.rera) $$('.js-rera').forEach(function (el) { el.textContent = CONFIG.rera; el.classList.remove('muted', 'tbd'); });
+  if (CONFIG.rera) {
+    $$('.js-rera').forEach(function (el) { el.textContent = CONFIG.rera; el.classList.remove('muted', 'tbd'); });
+    $$('.js-rera-line').forEach(function (el) { el.hidden = false; });
+  }
   var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
 
   // CTA click tracking
@@ -88,18 +91,36 @@
     $$('.reveal, .reveal-img').forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  // Stats count up from 0, and replay each time they scroll back into view
+  function fmt(el, n) {
+    return (el.getAttribute('data-prefix') || '') + n.toLocaleString('en-IN') + (el.getAttribute('data-suffix') || '');
+  }
   function countUp(el) {
-    var end = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '', suf = el.getAttribute('data-suffix') || '';
-    var t0 = null, dur = 1400;
+    var end = +el.getAttribute('data-count'), t0 = null, dur = 2000;
+    cancelAnimationFrame(el._raf);
     function step(t) {
       if (!t0) t0 = t;
       var p = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = pre + Math.round(end * eased).toLocaleString('en-IN') + suf;
-      if (p < 1) requestAnimationFrame(step);
+      el.textContent = fmt(el, Math.round(end * eased));
+      if (p < 1) el._raf = requestAnimationFrame(step);
     }
-    requestAnimationFrame(step);
+    el._raf = requestAnimationFrame(step);
   }
-  if (!reduceMotion) setTimeout(function () { $$('[data-count]').forEach(countUp); }, 350);
+  var counters = $$('[data-count]');
+  if (!reduceMotion && counters.length) {
+    counters.forEach(function (el) { el.textContent = fmt(el, 0); });
+    if ('IntersectionObserver' in window) {
+      var countIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) countUp(en.target);
+          else { cancelAnimationFrame(en.target._raf); en.target.textContent = fmt(en.target, 0); }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { countIO.observe(el); });
+    } else {
+      counters.forEach(countUp);
+    }
+  }
 
   // FAQ: animate open/close height
   $$('.faq details').forEach(function (d) {

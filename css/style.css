@@ -437,3 +437,96 @@ html{scrollbar-color:var(--gold) var(--black);scrollbar-width:thin}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold-lt),var(--gold));border:2px solid var(--black);border-radius:6px}
 ::-webkit-scrollbar-thumb:hover{background:var(--gold-lt)}
 ::-webkit-scrollbar-corner{background:var(--black)}
+
+/* ===== Premium refinements ===== */
+:root{--radius:6px;--shadow:0 1px 0 rgba(0,0,0,.04)}
+
+/* Flat, quiet buttons */
+.btn--gold{background:var(--gold);box-shadow:none}
+.btn--gold:hover{background:var(--gold-lt);box-shadow:none}
+.btn--gold::after{display:none}
+.btn:hover{transform:none}
+.btn--ghost{backdrop-filter:none;background:transparent}
+.btn--ghost:hover{background:rgba(255,255,255,.1)}
+
+/* One radius, hairlines instead of heavy shadows */
+.card,.split__media,.video,.map,.faq-card,.facts,.price-cta,.g{border-radius:var(--radius)}
+.split__media,.video,.map{box-shadow:none}
+.hero .card{box-shadow:0 24px 48px -28px rgba(0,0,0,.55)}
+.section:not(.section--dark) .card{border:1px solid var(--line);box-shadow:none}
+.field input,.field select{border-radius:4px}
+.phone em{border-radius:4px 0 0 4px}
+.phone input{border-radius:0 4px 4px 0}
+.faq details{border-radius:var(--radius)}
+.faq details[open]{box-shadow:none}
+.badge{border-radius:3px}
+
+/* WhatsApp in brand colours */
+.form__wa{background:transparent;border:1px solid var(--line);color:#1f7a4d;border-radius:4px}
+.form__wa:hover{background:#f6f2ec}
+.wa-float{background:var(--black);color:#25d366;border:1px solid rgba(227,169,112,.45);box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+
+/* Readable small text */
+.form__legal,.footer__legal{font-size:.78rem}
+.facts dt{font-size:.72rem}
+
+/* Amenities: image tiles + refined list */
+.amen-tiles{display:grid;gap:.75rem;margin-bottom:2.5rem}
+.amen-tile{position:relative;margin:0;overflow:hidden;border-radius:var(--radius);background:#1a1a1d}
+.amen-tile img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.amen-tile:hover img{transform:scale(1.05)}
+.amen-tile figcaption{position:absolute;inset:auto 0 0;padding:2.5rem 1.1rem 1rem;background:linear-gradient(180deg,transparent,rgba(8,8,9,.85));display:flex;flex-direction:column;gap:.1rem}
+.amen-tile b{color:#fff;font-weight:500;font-size:1.05rem}
+.amen-tile span{color:rgba(255,255,255,.7);font-size:.85rem}
+.amen-list{list-style:none;padding:0;margin:0 0 2.75rem;display:grid;border-top:1px solid rgba(255,255,255,.1)}
+.amen-list li{display:flex;flex-direction:column;gap:.15rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1);transition:padding .3s}
+.amen-list li:hover{padding-left:.4rem}
+.amen-list b{color:#fff;font-weight:500}
+.amen-list span{color:rgba(255,255,255,.55);font-size:.9rem}
+
+/* Location */
+.about-loc{margin:1.25rem 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-loc summary{list-style:none;cursor:pointer;padding:1rem 2rem 1rem 0;font-weight:500;color:var(--ink);position:relative}
+.about-loc summary::-webkit-details-marker{display:none}
+.about-loc summary::after{content:"+";position:absolute;right:.25rem;top:50%;transform:translateY(-50%);font-size:1.4rem;color:var(--gold);transition:transform .25s}
+.about-loc[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.about-loc p{color:var(--muted);font-size:.95rem}
+.map{position:relative;background:#15151a;min-height:300px}
+.map__facade{position:absolute;inset:0;background:none;padding:0}
+.map__art{position:absolute;inset:0;width:100%;height:100%}
+.map__label{position:relative;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:1rem 1.4rem;background:rgba(11,11,12,.75);border:1px solid rgba(227,169,112,.35);border-radius:var(--radius);color:#fff;transition:transform .35s,border-color .3s}
+.map__label svg{width:40px;height:28px;margin-bottom:.2rem}
+.map__label small{color:rgba(255,255,255,.55)}
+.map__facade:hover .map__label{transform:translateY(-3px);border-color:var(--gold-lt)}
+
+/* CTA band on the signage render */
+.band{position:relative;isolation:isolate;background:#0b0b0c url(../assets/img/gate-sunset-1280.webp) center 60%/cover no-repeat;color:rgba(255,255,255,.8);padding:5.5rem 0}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,11,12,.78),rgba(11,11,12,.86))}
+.band h2{color:#fff}
+.band__mark{filter:none}
+
+@media (min-width:600px){
+  .amen-tiles{grid-template-columns:repeat(2,1fr)}
+  .amen-tile--lg{grid-column:span 2}
+  .amen-tile--lg img{aspect-ratio:16/8}
+  .amen-list{grid-template-columns:repeat(2,1fr);column-gap:2.5rem}
+}
+@media (min-width:900px){
+  .amen-tiles{grid-template-columns:repeat(3,1fr)}
+  .amen-tile--lg{grid-column:span 2}
+  .amen-tile--lg img{aspect-ratio:auto;height:100%}
+  .amen-list{grid-template-columns:repeat(3,1fr)}
+  .split--stretch{align-items:stretch}
+  .split--stretch .map{min-height:100%}
+  .band{padding:7rem 0}
+}
+.split>*{min-width:0}
+.map{width:100%;overflow:hidden}
+
+/* Hero headline: two clean lines on desktop */
+@media (min-width:900px){
+  .hero h1{font-size:clamp(2.8rem,4.2vw,3.7rem);max-width:none}
+  .hero__grid{grid-template-columns:1.35fr .85fr}
+}
+.distances__note{font-size:.78rem;color:var(--muted);margin:.6rem 0 0}
+@media (min-width:600px){.facts{grid-template-columns:repeat(3,1fr)}}
