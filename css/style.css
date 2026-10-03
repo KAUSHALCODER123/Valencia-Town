@@ -403,8 +403,8 @@ p{margin:0 0 1em}
   .section__head{margin-bottom:2.25rem}
   .nav a.is-current{color:var(--gold-lt)}
   .nav a.is-current::after{width:100%}
-  .faq-wrap{grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:start}
-  .faq-aside{position:sticky;top:calc(var(--hdr) + 1.5rem)}
+  .faq-wrap{grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:center}
+  .faq{margin:0}
   #location .split{align-items:stretch}
   #location .map{aspect-ratio:auto;min-height:100%}
   .wa-float__tip{display:block;position:absolute;right:calc(100% + 12px);top:50%;white-space:nowrap;background:var(--black);color:#fff;font-size:.82rem;padding:.45rem .8rem;border-radius:6px;transform:translate(8px,-50%);opacity:0;pointer-events:none;transition:opacity .3s,transform .35s}
@@ -429,3 +429,11 @@ p{margin:0 0 1em}
   .faq-card .row-ctas{width:100%}
 }
 .hero{overflow:hidden}
+
+/* Themed scrollbar */
+html{scrollbar-color:var(--gold) var(--black);scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold-lt),var(--gold));border:2px solid var(--black);border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-lt)}
+::-webkit-scrollbar-corner{background:var(--black)}
