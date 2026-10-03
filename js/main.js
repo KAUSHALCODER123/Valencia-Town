@@ -8,7 +8,7 @@
     phoneLabel: '+91 99999 99999',
     whatsapp: '919999999999',
     whatsappText: 'Hi, I am interested in Valencia Town plots on Indore–Ujjain Road. Please share price and plot sizes.',
-    rera: '',                       // e.g. 'P-IND-26-1234'. Empty shows "Applied"
+    rera: '',                       // e.g. 'P-IND-26-1234'. Empty shows "Applied / TBA"
     formEndpoint: 'https://script.google.com/macros/s/AKfycbwnNCz74HjqDYzwVD0q0TPSB8Cw9Yr-FzU9EmfDq0XTHyniRTZDg1wej91xEWx1Qvk0/exec'                // Google Apps Script web app URL (see apps-script/README.md). Empty = lead is sent via WhatsApp
   };
 
@@ -28,7 +28,7 @@
   $$('.js-wa').forEach(function (a) { a.href = waUrl; });
   $$('.js-call').forEach(function (a) { a.href = 'tel:+' + CONFIG.phone; });
   $$('.js-phone-label').forEach(function (el) { el.textContent = CONFIG.phoneLabel; });
-  if (CONFIG.rera) $$('.js-rera').forEach(function (el) { el.textContent = CONFIG.rera; el.classList.remove('muted'); });
+  if (CONFIG.rera) $$('.js-rera').forEach(function (el) { el.textContent = CONFIG.rera; el.classList.remove('muted', 'tbd'); });
   var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
 
   // CTA click tracking
@@ -73,7 +73,7 @@
         if (en.isIntersecting) { en.target.classList.add('is-in'); revealIO.unobserve(en.target); }
       });
     }, { rootMargin: '0px 0px -10% 0px' });
-    $$('.reveal-img').forEach(function (el) { revealIO.observe(el); });
+    $$('.reveal, .reveal-img').forEach(function (el) { revealIO.observe(el); });
 
     var links = {};
     $$('a[href^="#"]', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
@@ -85,49 +85,21 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) navIO.observe(s); });
   } else {
-    $$('.reveal-img').forEach(function (el) { el.classList.add('is-in'); });
+    $$('.reveal, .reveal-img').forEach(function (el) { el.classList.add('is-in'); });
   }
 
   function countUp(el) {
-    var end = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '';
+    var end = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '', suf = el.getAttribute('data-suffix') || '';
     var t0 = null, dur = 1400;
     function step(t) {
       if (!t0) t0 = t;
       var p = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = pre + Math.round(end * eased).toLocaleString('en-IN');
+      el.textContent = pre + Math.round(end * eased).toLocaleString('en-IN') + suf;
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
   if (!reduceMotion) setTimeout(function () { $$('[data-count]').forEach(countUp); }, 350);
-
-  // Amenities: hover/tap a row to swap the picture
-  var amenView = $('.amen__view'), amenImg = $('#amenImg'), amenCap = $('#amenCap');
-  var amenRows = $$('.amen__list li[data-img]');
-  function showAmen(li) {
-    if (li.classList.contains('is-active')) return;
-    amenRows.forEach(function (r) { r.classList.remove('is-active'); });
-    li.classList.add('is-active');
-    var src = li.getAttribute('data-img'), alt = li.getAttribute('data-alt'), label = $('b', li).textContent;
-    var pre = new Image();
-    pre.onload = function () {
-      amenView.classList.add('is-swapping');
-      setTimeout(function () {
-        amenImg.src = src; amenImg.alt = alt; amenCap.textContent = label;
-        amenView.classList.remove('is-swapping');
-      }, reduceMotion ? 0 : 250);
-    };
-    pre.src = src;
-  }
-  amenRows.forEach(function (li) {
-    li.addEventListener('mouseenter', function () { showAmen(li); });
-    li.addEventListener('focus', function () { showAmen(li); });
-    li.addEventListener('click', function () {
-      showAmen(li);
-      if (innerWidth < 900) amenView.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-    });
-  });
-  if (amenRows[0]) amenRows[0].classList.add('is-active');
 
   // FAQ: animate open/close height
   $$('.faq details').forEach(function (d) {
@@ -163,9 +135,8 @@
 
     function say(text, type) { msg.className = 'form__msg ' + (type || ''); msg.textContent = text; }
     function mark(input, bad) {
-      var f = input.closest('.field');
-      f.classList.remove('invalid');
-      if (bad) { void f.offsetWidth; f.classList.add('invalid'); }
+      input.classList.remove('invalid');
+      if (bad) { void input.offsetWidth; input.classList.add('invalid'); }
     }
     phone.addEventListener('input', function () { phone.value = phone.value.replace(/\D/g, '').slice(0, 10); });
 
@@ -248,7 +219,7 @@
   });
 
   // Gallery lightbox
-  var lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('figcaption', lb);
+  var lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('figcaption', lb) || {};
   var items = $$('#galleryGrid a'), current = 0;
   function show(i) {
     current = (i + items.length) % items.length;
