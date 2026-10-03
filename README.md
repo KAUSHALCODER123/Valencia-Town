@@ -72,3 +72,24 @@ On the page, real photos are labelled "Actual site photo" and renders "Artist's 
 - Real testimonials (with permission)
 - Brochure PDF
 - Google Analytics / Tag Manager and Meta Pixel IDs
+
+---
+
+## Local SEO – to do later
+
+### Before launch
+- **Set the real domain.** The canonical URL, Open Graph tags, sitemap and robots file still point to `https://www.valenciatown.in/`. Replace it with the domain the site goes live on (e.g. `valenciatown.vercel.app` or a custom domain).
+
+### Off-site (bigger impact than on-page)
+1. **Google Business Profile** for "Valencia Town" — exact map pin (22.902185, 75.864609), photos, phone, website link. Needed to appear on Google Maps for "plots near me" / "plots on Ujjain Road".
+2. **Property portals** after RERA approval — 99acres, MagicBricks, Housing.com, each linking back to the site.
+3. **Local backlinks** — local news, Indore real-estate blogs, Justdial and Sulekha listings.
+4. **Google reviews** from site visitors.
+5. **Hindi section or page** — many local searches are in Hindi (e.g. "इंदौर उज्जैन रोड पर प्लॉट").
+
+### Already done on the page
+- Title: "Plots on Indore–Ujjain Road, Shahna | Valencia Town"
+- Landmarks in hero, location heading, nearby paragraph and footer: Sri Aurobindo Hospital (SAIMS) 10 min, Vijay Nagar 25 min, Devi Ahilyabai Holkar Airport 25 min, Ujjain 40 min
+- Local FAQs with FAQ structured data
+- Location-based image alt text
+- Geo tags and structured address with coordinates
