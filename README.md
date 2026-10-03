@@ -5,7 +5,7 @@ Landing page for **Valencia Town**, a 48-acre gated township at Shahna, Indoreâ€
 Static site: HTML, CSS and vanilla JavaScript. Open `index.html` or serve the folder with any static host.
 
 ## Before going live
-Edit the `CONFIG` block at the top of `js/main.js` (phone, WhatsApp, RERA, form endpoint) and search `index.html` for `TODO` (price, coordinates, domain).
+Edit the `CONFIG` block at the top of `js/main.js` (phone, WhatsApp, RERA, form endpoint) and search `index.html` for `TODO` (price, domain).
 
 After any change to `css/style.css` or `js/main.js`, bump the `?v=` value on both links in `index.html` so phones load the new files.
 
@@ -68,7 +68,6 @@ On the page, real photos are labelled "Actual site photo" and renders "Artist's 
 - Phone and WhatsApp number
 - MP RERA registration number
 - Price / starting price
-- Exact site location (Google Maps pin)
 - Developer name, years in business, projects delivered, bank tie-ups
 - Real testimonials (with permission)
 - Brochure PDF

@@ -12,7 +12,8 @@
 <link rel="canonical" href="https://www.valenciatown.in/">
 <meta name="geo.region" content="IN-MP">
 <meta name="geo.placename" content="Shahna, Indore–Ujjain Road, Madhya Pradesh">
-<!-- TODO: add exact site coordinates: <meta name="geo.position" content="22.xxxx;75.xxxx"> <meta name="ICBM" content="22.xxxx, 75.xxxx"> -->
+<meta name="geo.position" content="22.902185;75.864609">
+<meta name="ICBM" content="22.902185, 75.864609">
 
 <!-- Open Graph / Social -->
 <meta property="og:type" content="website">
@@ -62,7 +63,8 @@
         {"@type": "City", "name": "Indore"},
         {"@type": "City", "name": "Ujjain"}
       ],
-      "hasMap": "https://www.google.com/maps/search/?api=1&query=Shahna+Ujjain+Road+Madhya+Pradesh",
+      "geo": {"@type": "GeoCoordinates", "latitude": 22.902185, "longitude": 75.864609},
+      "hasMap": "https://www.google.com/maps?q=22.902185,75.864609",
       "amenityFeature": [
         {"@type": "LocationFeatureSpecification", "name": "Clubhouse", "value": true},
         {"@type": "LocationFeatureSpecification", "name": "Temple", "value": true},
@@ -465,13 +467,12 @@
             </div>
           </details>
           <div class="row-ctas">
-            <a class="btn btn--gold" href="https://www.google.com/maps/search/?api=1&amp;query=Shahna+Ujjain+Road+Madhya+Pradesh" target="_blank" rel="noopener" data-cta="location_map">Get directions <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+            <a class="btn btn--gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=22.902185,75.864609" target="_blank" rel="noopener" data-cta="location_map">Get directions <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
             <a class="btn btn--line" href="#enquire" data-cta="location_site_visit">Book a site visit</a>
           </div>
         </div>
         <div class="map reveal">
-          <!-- TODO: replace q= with exact site coordinates, e.g. q=22.xxxx,75.xxxx -->
-          <button class="map__facade" id="mapFacade" data-src="https://maps.google.com/maps?q=Shahna%2C%20Ujjain%20Road%2C%20Madhya%20Pradesh&amp;z=12&amp;output=embed" aria-label="Load interactive map">
+          <button class="map__facade" id="mapFacade" data-src="https://maps.google.com/maps?q=22.902185,75.864609&amp;z=14&amp;output=embed" aria-label="Load interactive map">
             <svg class="map__art" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
               <rect width="400" height="300" fill="#15151a"/>
               <g stroke="#26262d" stroke-width="1"><path d="M0 60h400M0 120h400M0 180h400M0 240h400M80 0v300M160 0v300M240 0v300M320 0v300"/></g>
