@@ -86,20 +86,70 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "Where is Valencia Town located?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Valencia Town is located at Shahna on the Indore–Ujjain Road in Madhya Pradesh."}},
-        {"@type": "Question", "name": "How big is Valencia Town?",
-         "acceptedAnswer": {"@type": "Answer", "text": "The township is spread across approximately 48 acres with nearly 1,000 plots, representing an investment of around ₹500 crore."}},
-        {"@type": "Question", "name": "What amenities does Valencia Town offer?",
-         "acceptedAnswer": {"@type": "Answer", "text": "A clubhouse, temple, children's playground, library for senior citizens, meeting zone, women's activity zone, forest-style gardens, a dense forest zone and a gated, secure campus."}},
-        {"@type": "Question", "name": "Is Valencia Town a gated community?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Valencia Town is a complete gated and secure community campus designed for every generation of the family."}},
-        {"@type": "Question", "name": "Are there residential plots for sale on the Indore–Ujjain Road?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Yes. Valencia Town offers residential plots in a 48-acre gated township at Shahna on the Indore–Ujjain Road, between Indore and Ujjain."}},
-        {"@type": "Question", "name": "Is Valencia Town good for buyers from both Indore and Ujjain?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Valencia Town sits on the Indore–Ujjain corridor, so families working or living in either city can reach the township by road."}},
-        {"@type": "Question", "name": "How can I visit the site?",
-         "acceptedAnswer": {"@type": "Answer", "text": "Fill in the enquiry form, call us or message us on WhatsApp and our team will schedule a free site visit at your convenience."}}
+        {
+          "@type": "Question",
+          "name": "Where is Valencia Town?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At Shahna on the Indore–Ujjain Road, Madhya Pradesh."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How big is the project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "About 48 acres with nearly 1,000 plots, an investment of around ₹500 crore."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What amenities are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A clubhouse, temple, children's playground, library for senior citizens, meeting zone, women's activity zone, forest-style gardens, a dense forest zone and a gated, secure campus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it a gated community?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The whole township is one gated, secure campus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there plots for sale on the Indore–Ujjain Road here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Valencia Town sells residential plots in its gated township at Shahna, between Indore and Ujjain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it suit buyers from both Indore and Ujjain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The township is on the road between the two cities, so families living or working in either can reach it by road."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I see the plot before booking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We recommend it. Book a site visit and we'll walk you through the layout and the plots available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I visit the site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send the form, call us or message us on WhatsApp and we'll fix a time for a site visit."
+          }
+        }
       ]
     }
   ]
@@ -113,9 +163,11 @@
     <path fill="#E3A970" d="M43.81 45.84 0.36.1C14.51 21.38 29.02 42.46 43.81 63.44Z"/>
     <path fill="#C08A62" d="M46.08 31.39 89.53.1C75.38 21.38 60.87 42.46 46.08 63.44Z"/>
   </symbol>
+  <symbol id="arrow" viewBox="0 0 20 12"><path d="M0 6h18M13 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
 </svg>
 
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
 
 <header class="header" id="top">
   <div class="container header__inner">
@@ -124,13 +176,12 @@
       <span class="brand__text"><strong>VALENCIA TOWN</strong><small>AT SHAHNA, UJJAIN ROAD</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="Primary">
-      <a href="#details">Price &amp; Details</a>
+      <a href="#details">Details</a>
+      <a href="#layout">Master plan</a>
       <a href="#amenities">Amenities</a>
-      <a href="#layout">Master Plan</a>
       <a href="#gallery">Gallery</a>
       <a href="#location">Location</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn btn--gold nav__cta" href="#enquire" data-cta="nav_site_visit">Book Site Visit</a>
+      <a class="btn btn--copper nav__cta" href="#enquire" data-cta="nav_site_visit">Book a site visit</a>
     </nav>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span></button>
   </div>
@@ -142,144 +193,115 @@
   <section class="hero" aria-labelledby="hero-title">
     <picture class="hero__bg">
       <source type="image/webp" srcset="assets/img/entrance-road-640.webp 640w, assets/img/entrance-road-1280.webp 1280w" sizes="100vw">
-      <img src="assets/img/entrance-road-1280.webp" alt="Grand entrance of Valencia Town gated township on Indore–Ujjain Road" width="1280" height="720" fetchpriority="high" decoding="async">
+      <img src="assets/img/entrance-road-1280.webp" alt="Entrance of Valencia Town township on the Indore–Ujjain Road" width="1280" height="720" fetchpriority="high" decoding="async">
     </picture>
     <div class="container hero__grid">
       <div class="hero__copy">
-        <p class="hero__pill"><span class="dot"></span> Pre-Launch · MP RERA: <span class="js-rera">Applied / TBA</span></p>
-        <p class="eyebrow">Shahna · Indore–Ujjain Road · Madhya Pradesh</p>
-        <h1 id="hero-title">Premium Gated Plots on <span class="gold">Indore–Ujjain Road</span></h1>
-        <p class="hero__lead">A 48-acre gated township between Indore and Ujjain with a clubhouse, temple and forest gardens. <strong>Price on request</strong>: get today's best price and plot sizes in 2 minutes.</p>
-        <ul class="stats" aria-label="Project highlights">
-          <li><strong>48</strong><span>Acres</span></li>
-          <li><strong>~1,000</strong><span>Plots</span></li>
-          <li><strong>₹500 Cr</strong><span>Township</span></li>
-        </ul>
+        <p class="hero__place">Shahna, Indore–Ujjain Road, Madhya Pradesh</p>
+        <h1 id="hero-title">Build your own home in a gated township on the Indore–Ujjain Road</h1>
+        <p class="hero__lead">Residential plots at Shahna with a clubhouse, a temple and forest gardens inside the gates. <strong>Pre-launch:</strong> early enquiries get first pick of plot locations.</p>
+        <dl class="stats">
+          <div><dt>Acres</dt><dd data-count="48">48</dd></div>
+          <div><dt>Plots</dt><dd data-count="1000" data-prefix="~">~1,000</dd></div>
+          <div><dt>Crore project</dt><dd data-count="500" data-prefix="₹">₹500</dd></div>
+        </dl>
         <div class="hero__ctas">
-          <a class="btn btn--gold btn--lg" href="#enquire" data-cta="hero_site_visit">Book a Free Site Visit</a>
-          <a class="btn btn--ghost btn--lg js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="hero_whatsapp">
-            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3Z"/></svg>
-            WhatsApp Us
-          </a>
+          <a class="btn btn--copper btn--lg" href="#enquire" data-cta="hero_site_visit">Get price &amp; plot sizes <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="btn btn--ghost btn--lg js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="hero_whatsapp"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg> WhatsApp</a>
         </div>
       </div>
 
-      <!-- Hero lead form (desktop shows beside copy; mobile shows below) -->
-      <form class="card form js-lead" id="hero-form" novalidate aria-label="Get Price &amp; Plot Availability">
-        <p class="form__title">Get Price &amp; Plot Availability</p>
-        <p class="form__sub">Instant call back from our team. No spam.</p>
-        <div class="form__step">
-          <label class="field"><span>Full name</span><input name="name" type="text" autocomplete="name" required minlength="2" placeholder="Your name"></label>
-          <label class="field"><span>Mobile number</span>
-            <span class="phone"><em>+91</em><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile"></span>
-          </label>
-          <label class="field"><span>Looking for</span>
-            <select name="interest">
-              <option>Plot to build my home</option>
-              <option>Plot for investment</option>
-              <option>Price list &amp; plot sizes</option>
-              <option>Free site visit</option>
-            </select>
-          </label>
-          <button class="btn btn--gold btn--block" type="submit">Get Best Price</button>
-        </div>
+      <form class="panel form js-lead" id="hero-form" novalidate aria-label="Price list request">
+        <p class="form__title">Get the price sheet</p>
+        <p class="form__sub">Plot sizes, prices and the payment plan, sent to your phone.</p>
+        <label class="field"><input name="name" type="text" autocomplete="name" required minlength="2" placeholder=" "><span>Full name</span></label>
+        <label class="field field--phone"><em>+91</em><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder=" "><span>Mobile number</span></label>
+        <label class="field field--select"><select name="interest" aria-label="Looking for">
+          <option>Plot to build my home</option>
+          <option>Plot for investment</option>
+          <option>Price list &amp; plot sizes</option>
+          <option>Site visit</option>
+        </select><span>Looking for</span></label>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="source" value="hero_form">
+        <button class="btn btn--copper btn--block" type="submit"><span class="btn__label">Send me the price sheet</span><svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></button>
         <p class="form__msg" role="status" aria-live="polite"></p>
-        <a class="form__wa js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="hero_form_whatsapp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg> Prefer WhatsApp? Chat with us instantly
-        </a>
-        <p class="form__legal">By submitting, you agree to be contacted by Valencia Town via call, SMS or WhatsApp.</p>
+        <a class="form__wa js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="hero_form_whatsapp"><svg aria-hidden="true"><use href="#wa"/></svg> Or message us on WhatsApp</a>
+        <p class="form__legal">No obligation. We'll only contact you about Valencia Town.</p>
       </form>
     </div>
-  </section>
-
-  <!-- TRUST STRIP -->
-  <section class="strip" aria-label="Key features">
-    <div class="container strip__row">
-      <span>Gated &amp; Secure Campus</span>
-      <span>Forest-Style Gardens</span>
-      <span>Clubhouse &amp; Temple</span>
-      <span>Wide Internal Roads</span>
-      <span>For Every Generation</span>
-    </div>
+    <a class="hero__scroll" href="#overview" aria-label="Scroll to overview"><span></span></a>
   </section>
 
   <!-- OVERVIEW -->
   <section class="section" id="overview" aria-labelledby="overview-title">
-    <div class="container split">
-      <div class="split__media reveal">
-        <picture>
-          <source type="image/webp" srcset="assets/img/gate-sunset-640.webp 640w, assets/img/gate-sunset-1280.webp 842w" sizes="(min-width: 900px) 50vw, 100vw">
-          <img src="assets/img/gate-sunset-640.webp" alt="Valencia Town signature entrance gate at sunset with landscaped lawns" width="640" height="454" loading="lazy" decoding="async">
-        </picture>
-        <span class="badge">Coming Soon</span>
+    <div class="container overview">
+      <h2 id="overview-title" class="overview__quote">Not just a plot, but the beginning of a better life.</h2>
+      <div class="overview__body">
+        <p>Valencia Town is spread across about 48 acres at Shahna, with nearly 1,000 plots and an investment of around ₹500 crore. It isn't a plotting scheme with a boundary wall. It's a gated, secure campus planned for children, parents and grandparents alike.</p>
+        <p>You buy the land and build the home you want. Around it you get a clubhouse, a temple, a library for senior citizens, a women's activity zone and a lot of green: forest-style gardens and a dense forest zone.</p>
+        <a class="link-arrow" href="#enquire" data-cta="overview_brochure">Get the brochure <svg aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
-      <div class="split__copy reveal">
-        <p class="eyebrow">About the Project</p>
-        <h2 id="overview-title">A Grand, Thoughtfully Planned Township</h2>
-        <p>Valencia Town is a grand township spread across approximately <strong>48 acres</strong>, featuring nearly <strong>1,000 plots</strong> and representing an investment of around <strong>₹500 crore</strong>.</p>
-        <p>It is not merely a plotting project, but a complete gated and secure community campus, designed to meet the needs of every generation in a family.</p>
-        <p>Our vision goes beyond providing land to build a home. We aim to create a better community-living experience where families from every age group and background can fulfil their dream of owning a home.</p>
-        <div class="row-ctas">
-          <a class="btn btn--gold" href="#enquire" data-cta="overview_brochure">Download Brochure</a>
-          <a class="btn btn--line js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="overview_whatsapp">WhatsApp Us</a>
-        </div>
-      </div>
+      <figure class="overview__img cut reveal-img">
+        <img src="assets/img/gate-sunset-640.webp" srcset="assets/img/gate-sunset-640.webp 640w, assets/img/gate-sunset-1280.webp 842w" sizes="(min-width: 900px) 60vw, 100vw" alt="Valencia Town entrance gate at sunset" width="640" height="454" loading="lazy" decoding="async">
+        <figcaption>The entrance gate. Artist's impression.</figcaption>
+      </figure>
     </div>
   </section>
 
-
-  <!-- PROJECT DETAILS -->
-  <section class="section section--soft" id="details" aria-labelledby="details-title">
+  <!-- DETAILS -->
+  <section class="section section--sand" id="details" aria-labelledby="details-title">
     <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Project at a Glance</p>
-        <h2 id="details-title">Valencia Town: Key Details</h2>
-      </header>
+      <h2 id="details-title">Project details</h2>
       <!-- TODO: fill plot sizes, price, possession and RERA with confirmed figures -->
-      <dl class="facts reveal">
-        <div><dt>Land Parcel</dt><dd>~48 Acres</dd></div>
-        <div><dt>Total Plots</dt><dd>~1,000</dd></div>
-        <div><dt>Project Size</dt><dd>₹500 Cr</dd></div>
-        <div><dt>Plot Sizes</dt><dd class="tbd">On request</dd></div>
-        <div><dt>Price</dt><dd class="tbd">On request</dd></div>
-        <div><dt>Status</dt><dd>Pre-Launch</dd></div>
-        <div><dt>Possession</dt><dd class="tbd">TBA</dd></div>
-        <div><dt>MP RERA</dt><dd class="tbd js-rera">Applied / TBA</dd></div>
+      <dl class="facts">
+        <div><dt>Land</dt><dd>~48 acres</dd></div>
+        <div><dt>Plots</dt><dd>~1,000</dd></div>
+        <div><dt>Project size</dt><dd>₹500 crore</dd></div>
+        <div><dt>Status</dt><dd>Pre-launch</dd></div>
+        <div><dt>Plot sizes</dt><dd class="muted">On request</dd></div>
+        <div><dt>Price</dt><dd class="muted">On request</dd></div>
+        <div><dt>Possession</dt><dd class="muted">To be announced</dd></div>
+        <div><dt>MP RERA</dt><dd class="muted js-rera">Applied</dd></div>
       </dl>
-      <div class="price-cta reveal">
-        <div>
-          <h3>Unlock the Price List &amp; Plot Sizes</h3>
-          <p>Get the complete price sheet, available plot sizes and payment plans on WhatsApp.</p>
-        </div>
-        <div class="row-ctas">
-          <a class="btn btn--gold" href="#enquire" data-cta="details_price">Get Price List</a>
-          <a class="btn btn--line js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="details_whatsapp">WhatsApp for Price</a>
-        </div>
+      <div class="facts__cta">
+        <p>The price sheet, plot sizes and payment plan go out on WhatsApp.</p>
+        <a class="btn btn--dark" href="#enquire" data-cta="details_price">Get the price sheet <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- MASTER LAYOUT -->
+  <!-- HOW IT WORKS -->
+  <section class="section" aria-labelledby="steps-title">
+    <div class="container">
+      <h2 id="steps-title">How buying a plot works</h2>
+      <ol class="steps">
+        <li><b>Ask for the price sheet</b><span>Send the form or a WhatsApp message. You get plot sizes, prices and the payment plan.</span></li>
+        <li><b>Visit the site</b><span>We fix a time that suits you and show you the layout and available plots on the ground.</span></li>
+        <li><b>Choose your plot</b><span>Pick the size and location you want. Early buyers get the widest choice.</span></li>
+        <li><b>Book it</b><span>Our team takes you through the documents and the booking amount.</span></li>
+      </ol>
+      <a class="btn btn--copper" href="#enquire" data-cta="steps_start">Start with step one <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+  </section>
+
+  <!-- MASTER PLAN -->
   <section class="section" id="layout" aria-labelledby="layout-title">
     <div class="container split">
-      <div class="split__media reveal">
-        <img src="assets/img/master-layout-832.webp" alt="Master layout of Valencia Town plotted township along the Indore–Ujjain Road" width="832" height="464" loading="lazy" decoding="async">
-        <span class="badge">Master Layout</span>
-      </div>
-      <div class="split__copy reveal">
-        <p class="eyebrow">Master Plan</p>
-        <h2 id="layout-title">Planned for Light, Air &amp; Easy Movement</h2>
-        <p>Plots are laid out along wide internal roads, with a grand entry plaza, clubhouse, temple and landscaped green spines running through the township.</p>
-        <ul class="ticks">
-          <li>Grand entrance with landscaped entry plaza</li>
-          <li>Wide, tree-lined internal roads with street lighting</li>
-          <li>Central gardens, forest zone &amp; parametric arch garden</li>
-          <li>Temple and clubhouse within the campus</li>
+      <figure class="split__media cut reveal-img">
+        <img src="assets/img/master-layout-832.webp" alt="3D view of the Valencia Town master layout along the Indore–Ujjain Road" width="832" height="474" loading="lazy" decoding="async">
+        <figcaption>Master layout, from the 3D walkthrough.</figcaption>
+      </figure>
+      <div class="split__copy">
+        <h2 id="layout-title">Master plan</h2>
+        <p>The plots sit along a grid of wide internal roads that run back from the main road frontage. The entry plaza, clubhouse and temple are close to the gate, and green strips run through the layout.</p>
+        <ul class="plain-list">
+          <li>Entry plaza with landscaped lawns</li>
+          <li>Tree-lined internal roads with street lights</li>
+          <li>Central gardens, a forest zone and an arch garden</li>
+          <li>Temple and clubhouse inside the campus</li>
         </ul>
-        <div class="row-ctas">
-          <a class="btn btn--gold" href="#enquire" data-cta="layout_download">Get Detailed Layout</a>
-        </div>
+        <a class="link-arrow" href="#enquire" data-cta="layout_download">Ask for the detailed layout <svg aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -287,82 +309,58 @@
   <!-- AMENITIES -->
   <section class="section section--dark" id="amenities" aria-labelledby="amenities-title">
     <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Lifestyle Amenities</p>
-        <h2 id="amenities-title">Everything Your Family Needs, Within the Gates</h2>
-        <p>Modern amenities and abundant greenery, planned for children, parents, women and senior citizens alike.</p>
-      </header>
-      <ul class="amenities">
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg><h3>Clubhouse</h3><p>A stylish club for gatherings, leisure and celebrations.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3M8 9l4-4 4 4M6 21V12h12v9M4 21h16M10 21v-4h4v4M7 9h10v3H7z"/></svg><h3>Temple</h3><p>A serene space for prayer and community festivals.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 7v6M8 10h8M10 21l2-8 2 8M4 21h16"/></svg><h3>Children's Playground</h3><p>Safe, open play areas for kids to run, climb and explore.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zM13 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5z"/></svg><h3>Senior Citizens' Library</h3><p>A quiet reading retreat designed for our elders.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M14 15c3 0 8 1 8 5"/></svg><h3>Meeting Zone</h3><p>Community spaces to meet neighbours and build bonds.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg><h3>Women's Activity Zone</h3><p>A dedicated space for wellness, hobbies and activities.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6 10h3l-4 6h5v6h4v-6h5l-4-6h3z"/></svg><h3>Forest-Style Gardens</h3><p>Lush landscaped gardens and a dense forest zone.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><h3>Sports &amp; Play Courts</h3><p>Playground facilities for children and families.</p></li>
-        <li class="amenity reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg><h3>Gated &amp; Secure Campus</h3><p>A safe, controlled-access community for peace of mind.</p></li>
-      </ul>
-      <div class="center reveal"><a class="btn btn--gold btn--lg" href="#enquire" data-cta="amenities_site_visit">Schedule a Site Visit</a></div>
-    </div>
-  </section>
-
-  <!-- GENERATIONS -->
-  <section class="section" aria-labelledby="gen-title">
-    <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Designed for Every Generation</p>
-        <h2 id="gen-title">One Campus. Three Generations. A Better Life.</h2>
-      </header>
-      <div class="gen">
-        <article class="gen__card reveal">
-          <img src="assets/img/kids-play-area-640.webp" alt="Children playing in the landscaped play area at Valencia Town" width="640" height="360" loading="lazy" decoding="async">
-          <div><h3>For Children</h3><p>Playgrounds, open lawns and safe, traffic-calm streets to grow up outdoors.</p></div>
-        </article>
-        <article class="gen__card reveal">
-          <img src="assets/img/sports-court-640.webp" alt="Multi-sport court with colourful flooring inside the township" width="640" height="360" loading="lazy" decoding="async">
-          <div><h3>For Families &amp; Women</h3><p>A clubhouse, meeting zones and a dedicated women's activity zone.</p></div>
-        </article>
-        <article class="gen__card reveal">
-          <img src="assets/img/garden-lawn-640.webp" alt="Peaceful garden with seating for senior citizens" width="640" height="360" loading="lazy" decoding="async">
-          <div><h3>For Senior Citizens</h3><p>A library, temple and quiet green walkways to slow down and connect.</p></div>
-        </article>
+      <h2 id="amenities-title">Inside the gates</h2>
+      <div class="amen">
+        <figure class="amen__view cut" aria-live="polite">
+          <img id="amenImg" src="assets/img/clubhouse-pool-640.webp" alt="Clubhouse with reflecting pool" width="586" height="446" loading="lazy" decoding="async">
+          <figcaption id="amenCap">Clubhouse</figcaption>
+        </figure>
+        <ol class="amen__list">
+          <li data-img="assets/img/clubhouse-pool-640.webp" data-alt="Clubhouse with reflecting pool" tabindex="0"><b>Clubhouse</b><span>For get-togethers, functions and evenings out.</span></li>
+          <li><b>Temple</b><span>For daily prayer and festivals.</span></li>
+          <li data-img="assets/img/kids-play-area-640.webp" data-alt="Children's play area with lawns" tabindex="0"><b>Children's playground</b><span>Open lawns and play equipment.</span></li>
+          <li><b>Library for senior citizens</b><span>A quiet room to read and meet friends.</span></li>
+          <li><b>Meeting zone</b><span>Shared space for residents.</span></li>
+          <li><b>Women's activity zone</b><span>For fitness, hobbies and groups.</span></li>
+          <li data-img="assets/img/arch-walkway-640.webp" data-alt="Lit arch walkway through the forest garden" tabindex="0"><b>Forest gardens &amp; forest zone</b><span>Dense planting, walking paths and shade.</span></li>
+          <li data-img="assets/img/sports-court-640.webp" data-alt="Sports court with painted floor" tabindex="0"><b>Play courts</b><span>For children and families.</span></li>
+          <li data-img="assets/img/internal-road-640.webp" data-alt="Wide internal road with street lights" tabindex="0"><b>Wide internal roads</b><span>Lined with trees and street lights.</span></li>
+          <li data-img="assets/img/grand-gate-640.webp" data-alt="Gated entrance to the township" tabindex="0"><b>Gated, secure campus</b><span>One controlled entry for the whole township.</span></li>
+        </ol>
       </div>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section class="section section--soft" id="gallery" aria-labelledby="gallery-title">
+  <section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Project Gallery</p>
-        <h2 id="gallery-title">Take a Look Inside Valencia Town</h2>
-        <p>Artist's impressions of the township.</p>
-      </header>
+      <div class="head-row">
+        <h2 id="gallery-title">Gallery</h2>
+        <p class="muted">Artist's impressions. Tap to enlarge.</p>
+      </div>
       <div class="gallery" id="galleryGrid">
-        <a class="g g--wide" href="assets/img/signage-wall-1280.webp"><img src="assets/img/signage-wall-640.webp" alt="Valencia Town signature wall with landscape lighting" width="640" height="453" loading="lazy" decoding="async"></a>
-        <a class="g" href="assets/img/aerial-clubhouse-1280.webp"><img src="assets/img/aerial-clubhouse-640.webp" alt="Aerial view of the clubhouse and plotted layout" width="640" height="455" loading="lazy" decoding="async"></a>
-        <a class="g" href="assets/img/clubhouse-pool-1280.webp"><img src="assets/img/clubhouse-pool-640.webp" alt="Clubhouse with reflecting pool and palm trees" width="597" height="461" loading="lazy" decoding="async"></a>
-        <a class="g" href="assets/img/internal-road-1280.webp"><img src="assets/img/internal-road-640.webp" alt="Wide tree-lined internal road with street lights" width="640" height="360" loading="lazy" decoding="async"></a>
-        <a class="g" href="assets/img/arch-walkway-1280.webp"><img src="assets/img/arch-walkway-640.webp" alt="Illuminated arch walkway through the forest garden" width="640" height="360" loading="lazy" decoding="async"></a>
-        <a class="g g--wide" href="assets/img/flower-garden-1280.webp"><img src="assets/img/flower-garden-640.webp" alt="Flowering garden with lawns and seating" width="640" height="360" loading="lazy" decoding="async"></a>
-        <a class="g g--wide" href="assets/img/grand-gate-1280.webp"><img src="assets/img/grand-gate-640.webp" alt="Valencia Town entrance gate" width="640" height="407" loading="lazy" decoding="async"></a>
-        <a class="g g--wide" href="assets/img/entrance-road-1280.webp"><img src="assets/img/entrance-road-640.webp" alt="Valencia Town frontage on the Indore–Ujjain Road" width="640" height="360" loading="lazy" decoding="async"></a>
+        <a class="g g--wide" href="assets/img/signage-wall-1280.webp"><img src="assets/img/signage-wall-640.webp" alt="Valencia Town signage wall lit at night" width="640" height="453" loading="lazy" decoding="async"><span>Signage wall</span></a>
+        <a class="g" href="assets/img/aerial-clubhouse-1280.webp"><img src="assets/img/aerial-clubhouse-640.webp" alt="Aerial view of the clubhouse and plots" width="640" height="455" loading="lazy" decoding="async"><span>Clubhouse, aerial</span></a>
+        <a class="g" href="assets/img/clubhouse-pool-1280.webp"><img src="assets/img/clubhouse-pool-640.webp" alt="Clubhouse with reflecting pool and palms" width="586" height="446" loading="lazy" decoding="async"><span>Clubhouse pool</span></a>
+        <a class="g" href="assets/img/internal-road-1280.webp"><img src="assets/img/internal-road-640.webp" alt="Tree-lined internal road" width="640" height="360" loading="lazy" decoding="async"><span>Internal road</span></a>
+        <a class="g" href="assets/img/arch-walkway-1280.webp"><img src="assets/img/arch-walkway-640.webp" alt="Arch walkway in the forest garden" width="640" height="360" loading="lazy" decoding="async"><span>Arch garden</span></a>
+        <a class="g g--wide" href="assets/img/flower-garden-1280.webp"><img src="assets/img/flower-garden-640.webp" alt="Flowering garden with seating" width="640" height="360" loading="lazy" decoding="async"><span>Garden</span></a>
+        <a class="g g--wide" href="assets/img/garden-lawn-1280.webp"><img src="assets/img/garden-lawn-640.webp" alt="Lawn with seating and walking path" width="640" height="360" loading="lazy" decoding="async"><span>Lawn</span></a>
+        <a class="g g--wide" href="assets/img/kids-play-area-1280.webp"><img src="assets/img/kids-play-area-640.webp" alt="Children's play area" width="640" height="360" loading="lazy" decoding="async"><span>Play area</span></a>
       </div>
     </div>
   </section>
 
   <!-- VIDEO -->
-  <section class="section section--dark" aria-labelledby="video-title">
-    <div class="container video-wrap">
-      <header class="section__head reveal">
-        <p class="eyebrow">3D Walkthrough</p>
-        <h2 id="video-title">Take a Virtual Tour of Valencia Town</h2>
-        <p>Fly over the master plan, the grand entry, the temple and the gardens.</p>
-      </header>
-      <div class="video reveal">
-        <button class="video__facade" id="videoFacade" data-src="assets/video/walkthrough.mp4" aria-label="Play 3D walkthrough video">
-          <img src="assets/video/poster.jpg" alt="3D aerial walkthrough of Valencia Town on Indore–Ujjain Road" width="832" height="464" loading="lazy" decoding="async">
+  <section class="section section--dark section--tight" aria-labelledby="video-title">
+    <div class="container">
+      <div class="head-row">
+        <h2 id="video-title">3D walkthrough</h2>
+        <p>Aerial view, the entry, the temple and the gardens. 46 seconds.</p>
+      </div>
+      <div class="video cut">
+        <button class="video__facade" id="videoFacade" data-src="assets/video/walkthrough.mp4" aria-label="Play the 3D walkthrough">
+          <img src="assets/video/poster.jpg" alt="3D aerial walkthrough of Valencia Town" width="832" height="464" loading="lazy" decoding="async">
           <span class="video__play" aria-hidden="true"></span>
         </button>
       </div>
@@ -371,109 +369,70 @@
 
   <!-- LOCATION -->
   <section class="section" id="location" aria-labelledby="location-title">
-    <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Location Advantages</p>
-        <h2 id="location-title">Plots Between Indore &amp; Ujjain, at Shahna</h2>
-        <p>Valencia Town sits on the Indore–Ujjain Road growth corridor in Madhya Pradesh, close to both cities and surrounded by open greenery.</p>
-      </header>
-      <div class="split">
-        <div class="reveal">
-          <!-- TODO: replace "TBA" with verified drive distances/times -->
-          <ul class="distances">
-            <li><span>Indore–Ujjain Road</span><b>On the road</b></li>
-            <li><span>Ujjain city</span><b class="tbd">TBA</b></li>
-            <li><span>Indore city</span><b class="tbd">TBA</b></li>
-            <li><span>Railway station</span><b class="tbd">TBA</b></li>
-            <li><span>Indore Airport</span><b class="tbd">TBA</b></li>
-            <li><span>Schools &amp; colleges</span><b class="tbd">TBA</b></li>
-            <li><span>Hospitals</span><b class="tbd">TBA</b></li>
-          </ul>
-          <div class="row-ctas">
-            <a class="btn btn--gold" href="https://www.google.com/maps/search/?api=1&amp;query=Shahna+Ujjain+Road+Madhya+Pradesh" target="_blank" rel="noopener" data-cta="location_map">Get Directions</a>
-            <a class="btn btn--line" href="#enquire" data-cta="location_site_visit">Book Site Visit</a>
-          </div>
-        </div>
-        <div class="map reveal">
-          <!-- TODO: replace q= with exact site coordinates, e.g. q=22.xxxx,75.xxxx -->
-          <button class="map__facade" id="mapFacade" data-src="https://maps.google.com/maps?q=Shahna%2C%20Ujjain%20Road%2C%20Madhya%20Pradesh&amp;z=12&amp;output=embed" aria-label="Load interactive map">
-            <span class="map__pin" aria-hidden="true"></span>
-            <b>View Interactive Map</b>
-            <small>Shahna, Indore–Ujjain Road</small>
-          </button>
-        </div>
+    <div class="container split split--top">
+      <div class="split__copy">
+        <h2 id="location-title">Shahna, on the Indore–Ujjain Road</h2>
+        <p>The township is on the road between Indore and Ujjain, so either city is a drive away, and the site itself is open and green.</p>
+        <!-- TODO: replace "To be confirmed" with verified drive distances/times -->
+        <dl class="distances">
+          <div><dt>Indore–Ujjain Road</dt><dd>Road frontage</dd></div>
+          <div><dt>Ujjain</dt><dd class="muted">To be confirmed</dd></div>
+          <div><dt>Indore</dt><dd class="muted">To be confirmed</dd></div>
+          <div><dt>Railway station</dt><dd class="muted">To be confirmed</dd></div>
+          <div><dt>Indore airport</dt><dd class="muted">To be confirmed</dd></div>
+          <div><dt>Schools</dt><dd class="muted">To be confirmed</dd></div>
+          <div><dt>Hospitals</dt><dd class="muted">To be confirmed</dd></div>
+        </dl>
+        <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Shahna+Ujjain+Road+Madhya+Pradesh" target="_blank" rel="noopener" data-cta="location_map">Directions in Google Maps <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="map cut">
+        <!-- TODO: replace q= with exact site coordinates, e.g. q=22.xxxx,75.xxxx -->
+        <button class="map__facade" id="mapFacade" data-src="https://maps.google.com/maps?q=Shahna%2C%20Ujjain%20Road%2C%20Madhya%20Pradesh&amp;z=12&amp;output=embed" aria-label="Load the map">
+          <svg class="map__mark" aria-hidden="true"><use href="#vmark"/></svg>
+          <b>Show map</b>
+          <small>Shahna, Indore–Ujjain Road</small>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- LOCAL SEO CONTENT -->
-  <section class="section section--soft" aria-labelledby="why-title">
-    <div class="container narrow seo-copy reveal">
-      <h2 id="why-title">Why Buy a Plot on the Indore–Ujjain Road?</h2>
-      <p>The Indore–Ujjain Road links Madhya Pradesh's commercial capital with the temple city of Ujjain. For families who want the space of an independent home without leaving the reach of either city, a <strong>residential plot on the Indore–Ujjain Road</strong> offers the best of both.</p>
-      <h3>A gated township, not just open land</h3>
-      <p>Unlike scattered roadside plots, <strong>Valencia Town at Shahna</strong> is a planned, gated township of about 48 acres with nearly 1,000 plots, internal roads, a clubhouse, a temple, children's play areas and forest-style gardens. You build your own home, inside a secure community.</p>
-      <h3>For home buyers and investors from Indore &amp; Ujjain</h3>
-      <p>Whether you are looking for <strong>plots in Indore</strong> to build your family home, or <strong>plots near Ujjain</strong> as a long-term investment, Valencia Town gives you a clear, planned layout on one of the region's key corridors.</p>
-    </div>
-  </section>
-
-  <!-- TRUST -->
-  <section class="section section--dark" id="trust" aria-labelledby="trust-title">
-    <div class="container">
-      <header class="section__head reveal">
-        <p class="eyebrow">Why Trust Valencia Town</p>
-        <h2 id="trust-title">Transparent. Approved. Built to Last.</h2>
-      </header>
-      <!-- TODO: replace TBA with the developer's verified numbers -->
-      <ul class="trust reveal">
-        <li><b class="tbd">TBA</b><span>Years of experience</span></li>
-        <li><b class="tbd">TBA</b><span>Projects delivered</span></li>
-        <li><b class="tbd">TBA</b><span>Happy families</span></li>
-        <li><b class="tbd">TBA</b><span>Bank loan approvals</span></li>
-      </ul>
-      <div class="rera reveal">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
-        <div>
-          <p class="rera__label">MP RERA Registration</p>
-          <p class="rera__no js-rera">Applied / TBA</p>
-          <p class="rera__note">Verify at <a href="https://www.rera.mp.gov.in/" target="_blank" rel="noopener">rera.mp.gov.in</a></p>
-        </div>
-      </div>
-      <!-- Testimonials: add only real buyer quotes with consent. Template:
-      <ul class="quotes"><li><blockquote>"..."</blockquote><cite>Name, City</cite></li></ul>
-      -->
+  <!-- LOCAL CONTEXT -->
+  <section class="section section--sand" aria-labelledby="why-title">
+    <div class="container prose">
+      <h2 id="why-title">Why the Indore–Ujjain Road</h2>
+      <p>The road connects Indore, the state's commercial centre, with Ujjain. Buying a plot here means room for an independent house without cutting ties to either city.</p>
+      <p>Most land along the road is sold as open plots. Valencia Town is planned as one gated township, with internal roads, a clubhouse, a temple, play areas and gardens already in the layout. That makes it a fit for families from Indore or Ujjain building a home, and for buyers holding a plot as a long-term investment.</p>
+      <p class="rera-line">MP RERA registration: <span class="js-rera">applied</span>. You can check any project at <a href="https://www.rera.mp.gov.in/" target="_blank" rel="noopener">rera.mp.gov.in</a>.</p>
     </div>
   </section>
 
   <!-- CTA BAND -->
-  <section class="band" aria-label="Book a site visit">
-    <div class="container band__inner reveal">
-      <svg class="band__mark" aria-hidden="true"><use href="#vmark"/></svg>
-      <h2>Your Family's Better Life Begins Here</h2>
-      <p>Visit Valencia Town and choose the plot that's right for you.</p>
-      <div class="row-ctas row-ctas--center">
-        <a class="btn btn--dark btn--lg" href="#enquire" data-cta="band_site_visit">Book a Free Site Visit</a>
-        <a class="btn btn--outline-dark btn--lg js-call" href="tel:+919999999999" data-cta="band_call">Call Now</a>
+  <section class="band" aria-labelledby="band-title">
+    <div class="container band__inner">
+      <div>
+        <h2 id="band-title">The best plots go first.</h2>
+        <p>Corner plots and plots facing the gardens are limited in any layout. Ask now and choose before the public launch.</p>
+      </div>
+      <div class="band__ctas">
+        <a class="btn btn--dark btn--lg" href="#enquire" data-cta="band_price">Get price &amp; plot sizes <svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a class="btn btn--line-dark btn--lg js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="band_whatsapp"><svg class="ico" aria-hidden="true"><use href="#wa"/></svg> WhatsApp</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="section" id="faq" aria-labelledby="faq-title">
-    <div class="container narrow">
-      <header class="section__head reveal">
-        <p class="eyebrow">FAQs</p>
-        <h2 id="faq-title">Frequently Asked Questions</h2>
-      </header>
+    <div class="container split split--top">
+      <h2 id="faq-title">Questions buyers ask</h2>
       <div class="faq">
-        <details><summary>Where is Valencia Town located?</summary><p>Valencia Town is located at Shahna on the Indore–Ujjain Road in Madhya Pradesh.</p></details>
-        <details><summary>How big is Valencia Town?</summary><p>The township is spread across approximately 48 acres with nearly 1,000 plots, representing an investment of around ₹500 crore.</p></details>
-        <details><summary>What amenities does Valencia Town offer?</summary><p>A clubhouse, temple, children's playground, library for senior citizens, meeting zone, women's activity zone, forest-style gardens, a dense forest zone and a gated, secure campus.</p></details>
-        <details><summary>Is Valencia Town a gated community?</summary><p>Yes. Valencia Town is a complete gated and secure community campus designed for every generation of the family.</p></details>
-        <details><summary>Are there residential plots for sale on the Indore–Ujjain Road?</summary><p>Yes. Valencia Town offers residential plots in a 48-acre gated township at Shahna on the Indore–Ujjain Road, between Indore and Ujjain.</p></details>
-        <details><summary>Is Valencia Town good for buyers from both Indore and Ujjain?</summary><p>Valencia Town sits on the Indore–Ujjain corridor, so families working or living in either city can reach the township by road.</p></details>
-        <details><summary>How can I visit the site?</summary><p>Fill in the enquiry form, call us or message us on WhatsApp and our team will schedule a free site visit at your convenience.</p></details>
+        <details><summary>Where is Valencia Town?</summary><div><p>At Shahna on the Indore–Ujjain Road, Madhya Pradesh.</p></div></details>
+        <details><summary>How big is the project?</summary><div><p>About 48 acres with nearly 1,000 plots, an investment of around ₹500 crore.</p></div></details>
+        <details><summary>What amenities are there?</summary><div><p>A clubhouse, temple, children's playground, library for senior citizens, meeting zone, women's activity zone, forest-style gardens, a dense forest zone and a gated, secure campus.</p></div></details>
+        <details><summary>Is it a gated community?</summary><div><p>Yes. The whole township is one gated, secure campus.</p></div></details>
+        <details><summary>Are there plots for sale on the Indore–Ujjain Road here?</summary><div><p>Yes. Valencia Town sells residential plots in its gated township at Shahna, between Indore and Ujjain.</p></div></details>
+        <details><summary>Does it suit buyers from both Indore and Ujjain?</summary><div><p>The township is on the road between the two cities, so families living or working in either can reach it by road.</p></div></details>
+        <details><summary>Can I see the plot before booking?</summary><div><p>Yes. We recommend it. Book a site visit and we'll walk you through the layout and the plots available.</p></div></details>
+        <details><summary>How do I visit the site?</summary><div><p>Send the form, call us or message us on WhatsApp and we'll fix a time for a site visit.</p></div></details>
       </div>
     </div>
   </section>
@@ -481,40 +440,31 @@
   <!-- ENQUIRY -->
   <section class="section section--dark" id="enquire" aria-labelledby="enquire-title">
     <div class="container split">
-      <div class="split__copy reveal">
-        <p class="eyebrow">Enquire Now</p>
-        <h2 id="enquire-title">Book Your Free Site Visit</h2>
-        <p>Share your details and our relationship manager will get in touch with plot sizes, pricing and the brochure.</p>
+      <div class="split__copy">
+        <h2 id="enquire-title">See the plots before you decide</h2>
+        <p>Tell us when suits you and we'll arrange the visit. You'll get the price sheet and plot sizes before you come, so there are no surprises on site.</p>
         <ul class="contact">
-          <li><a class="js-call" href="tel:+919999999999" data-cta="contact_call"><span>Call</span><b class="js-phone-label">+91 99999 99999</b></a></li>
-          <li><a class="js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="contact_whatsapp"><span>WhatsApp</span><b>Chat with us</b></a></li>
-          <li><div><span>Site</span><b>Shahna, Indore–Ujjain Road, Madhya Pradesh</b></div></li>
+          <li><a class="js-call" href="tel:+919999999999" data-cta="contact_call"><small>Call</small><b class="js-phone-label">+91 99999 99999</b></a></li>
+          <li><a class="js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="contact_whatsapp"><small>WhatsApp</small><b>Message us</b></a></li>
+          <li><div><small>Site</small><b>Shahna, Indore–Ujjain Road, MP</b></div></li>
         </ul>
       </div>
-      <form class="card form js-lead reveal" id="main-form" novalidate aria-label="Schedule a Free Site Visit">
-        <p class="form__title">Schedule a Free Site Visit</p>
-        <p class="form__sub">Our team will confirm a time that suits you.</p>
-        <div class="form__step">
-          <label class="field"><span>Full name</span><input name="name" type="text" autocomplete="name" required minlength="2" placeholder="Your name"></label>
-          <label class="field"><span>Mobile number</span>
-            <span class="phone"><em>+91</em><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile"></span>
-          </label>
-          <label class="field"><span>Looking for</span>
-            <select name="interest">
-              <option>Plot to build my home</option>
-              <option>Plot for investment</option>
-              <option>Price list &amp; plot sizes</option>
-              <option>Free site visit</option>
-            </select>
-          </label>
-          <button class="btn btn--gold btn--block" type="submit">Book My Site Visit</button>
-        </div>
+      <form class="panel form js-lead" id="main-form" novalidate aria-label="Site visit request">
+        <p class="form__title">Book a site visit</p>
+        <label class="field"><input name="name" type="text" autocomplete="name" required minlength="2" placeholder=" "><span>Full name</span></label>
+        <label class="field field--phone"><em>+91</em><input name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder=" "><span>Mobile number</span></label>
+        <label class="field field--select"><select name="interest" aria-label="Looking for">
+          <option>Site visit</option>
+          <option>Plot to build my home</option>
+          <option>Plot for investment</option>
+          <option>Price list &amp; plot sizes</option>
+        </select><span>Looking for</span></label>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="source" value="main_form">
+        <button class="btn btn--copper btn--block" type="submit"><span class="btn__label">Book my visit</span><svg class="btn__arrow" aria-hidden="true"><use href="#arrow"/></svg></button>
         <p class="form__msg" role="status" aria-live="polite"></p>
-        <a class="form__wa js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="main_form_whatsapp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg> Prefer WhatsApp? Chat with us instantly
-        </a>
-        <p class="form__legal">By submitting, you agree to be contacted by Valencia Town via call, SMS or WhatsApp.</p>
+        <a class="form__wa js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="main_form_whatsapp"><svg aria-hidden="true"><use href="#wa"/></svg> Or message us on WhatsApp</a>
+        <p class="form__legal">By submitting you agree to be contacted by call, SMS or WhatsApp.</p>
       </form>
     </div>
   </section>
@@ -527,36 +477,32 @@
         <svg class="brand__mark" aria-hidden="true"><use href="#vmark"/></svg>
         <span class="brand__text"><strong>VALENCIA TOWN</strong><small>AT SHAHNA, UJJAIN ROAD</small></span>
       </a>
-      <p class="footer__tag">Not just a plot, but the beginning of a better life.</p>
-      <p class="footer__addr">Valencia Town, Shahna, Indore–Ujjain Road, Madhya Pradesh</p>
+      <p class="footer__addr">Shahna, Indore–Ujjain Road, Madhya Pradesh</p>
     </div>
     <nav aria-label="Footer">
-      <a href="#overview">Overview</a><a href="#amenities">Amenities</a><a href="#gallery">Gallery</a><a href="#location">Location</a><a href="#enquire">Enquire</a>
+      <a href="#details">Details</a><a href="#layout">Master plan</a><a href="#amenities">Amenities</a><a href="#gallery">Gallery</a><a href="#location">Location</a><a href="#enquire">Site visit</a>
     </nav>
   </div>
   <div class="container footer__legal">
     <!-- TODO: add MP RERA registration number once available -->
-    <p>MP RERA No.: <span class="js-rera">Applied / TBA</span></p>
-    <p>Disclaimer: Images are artist's impressions for representation only. Specifications, amenities and layouts are indicative and subject to change. This website does not constitute an offer or contract.</p>
-    <p>© <span id="year">2026</span> Valencia Town. All rights reserved.</p>
+    <p>MP RERA No.: <span class="js-rera">Applied</span></p>
+    <p>Images are artist's impressions. Layouts, specifications and amenities are indicative and may change. This page is not an offer or a contract.</p>
+    <p>© <span id="year">2026</span> Valencia Town</p>
   </div>
 </footer>
 
-<!-- Mobile sticky CTA bar -->
 <div class="mbar" role="navigation" aria-label="Quick contact">
   <a class="js-call" href="tel:+919999999999" data-cta="mbar_call"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call</a>
-  <a class="js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="mbar_whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3Z"/></svg>WhatsApp</a>
-  <a class="mbar__main" href="#enquire" data-cta="mbar_site_visit">Book Site Visit</a>
+  <a class="js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="mbar_whatsapp"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+  <a class="mbar__main" href="#enquire" data-cta="mbar_site_visit">Book a site visit</a>
 </div>
 
-<!-- Floating WhatsApp (desktop) -->
-<a class="wa-float js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-cta="float_whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></a>
+<a class="wa-float js-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener" data-cta="float_whatsapp"><svg aria-hidden="true"><use href="#wa"/></svg><span class="wa-float__tip">Chat on WhatsApp</span></a>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" hidden>
   <button class="lightbox__close" aria-label="Close">&times;</button>
   <button class="lightbox__nav lightbox__prev" aria-label="Previous image">&#8249;</button>
-  <img alt="">
+  <figure><img alt=""><figcaption></figcaption></figure>
   <button class="lightbox__nav lightbox__next" aria-label="Next image">&#8250;</button>
 </div>
 
