@@ -1,275 +1,201 @@
-/* Valencia Town landing page */
-(function () {
+/* Valencia Town: small, progressively enhanced interactions. */
+(() => {
   'use strict';
-
-  // ---- Edit these before going live ----
-  var CONFIG = {
-    phone: '919999999999',          // country code + number, digits only
-    phoneLabel: '+91 99999 99999',
-    whatsapp: '919999999999',
-    whatsappText: 'Hi, I am interested in Valencia Town plots on Indore–Ujjain Road. Please share price and plot sizes.',
-    rera: '',                       // e.g. 'P-IND-26-1234'. Shown in the footer once set
-    formEndpoint: 'https://script.google.com/macros/s/AKfycbwnNCz74HjqDYzwVD0q0TPSB8Cw9Yr-FzU9EmfDq0XTHyniRTZDg1wej91xEWx1Qvk0/exec'                // Google Apps Script web app URL (see apps-script/README.md). Empty = lead is sent via WhatsApp
-  };
-
-  document.documentElement.classList.add('js');
-  var $ = function (s, c) { return (c || document).querySelector(s); };
-  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+  const $ = (s, root = document) => root.querySelector(s);
+  const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+  const project = JSON.parse($('#project-data').textContent);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   window.dataLayer = window.dataLayer || [];
-  function track(event, data) {
-    window.dataLayer.push(Object.assign({ event: event }, data || {}));
-    if (typeof window.fbq === 'function' && event === 'generate_lead') window.fbq('track', 'Lead');
-  }
-
-  // Contact links from CONFIG
-  var waUrl = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(CONFIG.whatsappText);
-  $$('.js-wa').forEach(function (a) { a.href = waUrl; });
-  $$('.js-call').forEach(function (a) { a.href = 'tel:+' + CONFIG.phone; });
-  $$('.js-phone-label').forEach(function (el) { el.textContent = CONFIG.phoneLabel; });
-  if (CONFIG.rera) {
-    $$('.js-rera').forEach(function (el) { el.textContent = CONFIG.rera; el.classList.remove('muted', 'tbd'); });
-    $$('.js-rera-line').forEach(function (el) { el.hidden = false; });
-  }
-  var yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
-
-  // CTA click tracking
-  document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-cta]');
-    if (el) track('cta_click', { cta: el.getAttribute('data-cta') });
+  const track = (event, extra = {}) => window.dataLayer.push({event, ...extra});
+  const phoneValid = value => /^91[6-9]\d{9}$/.test(value) && !/^(\d)\1{9}$/.test(value.slice(2));
+  const cleanPhone = value => String(value || '').replace(/\D/g, '');
+  const salesPhone = cleanPhone(project.SALES_PHONE);
+  const whatsapp = cleanPhone(project.WHATSAPP_NUMBER);
+  const addContact = (label, href) => {
+    const a = document.createElement('a'); a.textContent = label; a.href = href;
+    $('#contact-details').append(a);
+  };
+  if (phoneValid(salesPhone)) addContact('+' + salesPhone, 'tel:+' + salesPhone);
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(project.SALES_EMAIL || '') && !/example\./i.test(project.SALES_EMAIL)) addContact(project.SALES_EMAIL, 'mailto:' + project.SALES_EMAIL);
+  if (phoneValid(whatsapp)) $$('.whatsapp').forEach(a => {
+    a.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('Hello, I would like to learn more about Valencia Town.'); a.hidden = false;
   });
-
-  // Header (solid after hero, hides on scroll down), progress bar, mobile bar
-  var header = $('.header'), bar = $('#progress'), mbar = $('.mbar'), nav = $('#nav');
-  var enquire = $('#enquire'), lastY = window.scrollY, ticking = false;
-  function onScroll() {
-    var y = window.scrollY, max = document.documentElement.scrollHeight - innerHeight;
-    header.classList.toggle('is-solid', y > 40);
-    header.classList.toggle('is-hidden', y > lastY && y > 400 && !nav.classList.contains('is-open'));
-    if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
-    if (mbar && enquire) {
-      var r = enquire.getBoundingClientRect();
-      mbar.classList.toggle('is-hidden', r.top < innerHeight * 0.6 && r.bottom > 0);
-    }
-    lastY = y; ticking = false;
+  if (/^P-[A-Z]{2,5}-\d{2}-\d{3,}$/i.test(project.RERA_NUMBER || '')) {
+    $('#rera-line').textContent = 'MP RERA No. ' + project.RERA_NUMBER; $('#rera-line').hidden = false;
   }
-  onScroll();
-  window.addEventListener('scroll', function () {
-    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-  }, { passive: true });
-
-  // Mobile menu
-  var burger = $('#burger');
-  function setNav(open) {
-    nav.classList.toggle('is-open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  $('#year').textContent = new Date().getFullYear();
+  const header = $('#header');
+  const updateHeader = () => header.classList.toggle('is-solid', scrollY > 40);
+  updateHeader(); addEventListener('scroll', updateHeader, {passive: true});
+  if ('IntersectionObserver' in window && !reduceMotion.matches) {
+    document.documentElement.classList.add('motion-ready');
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-in'); observer.unobserve(entry.target); }
+    }), {threshold: 0.08});
+    $$('.reveal').forEach(el => observer.observe(el));
   }
-  burger.addEventListener('click', function () { setNav(!nav.classList.contains('is-open')); });
-  $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { setNav(false); }); });
-
-  // Observers: image reveals, current nav item, stat count-up
-  if ('IntersectionObserver' in window) {
-    var revealIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-in'); revealIO.unobserve(en.target); }
-      });
-    }, { rootMargin: '0px 0px -10% 0px' });
-    $$('.reveal, .reveal-img').forEach(function (el) { revealIO.observe(el); });
-
-    var links = {};
-    $$('a[href^="#"]', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
-    var navIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        var a = links[en.target.id];
-        if (a && !a.classList.contains('nav__cta')) a.classList.toggle('is-current', en.isIntersecting);
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) navIO.observe(s); });
-  } else {
-    $$('.reveal, .reveal-img').forEach(function (el) { el.classList.add('is-in'); });
-  }
-
-  // Stats count up from 0, and replay each time they scroll back into view
-  function fmt(el, n) {
-    return (el.getAttribute('data-prefix') || '') + n.toLocaleString('en-IN') + (el.getAttribute('data-suffix') || '');
-  }
-  function countUp(el) {
-    var end = +el.getAttribute('data-count'), t0 = null, dur = 2000;
-    cancelAnimationFrame(el._raf);
-    function step(t) {
-      if (!t0) t0 = t;
-      var p = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(el, Math.round(end * eased));
-      if (p < 1) el._raf = requestAnimationFrame(step);
-    }
-    el._raf = requestAnimationFrame(step);
-  }
-  var counters = $$('[data-count]');
-  if (!reduceMotion && counters.length) {
-    counters.forEach(function (el) { el.textContent = fmt(el, 0); });
-    if ('IntersectionObserver' in window) {
-      var countIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) countUp(en.target);
-          else { cancelAnimationFrame(en.target._raf); en.target.textContent = fmt(en.target, 0); }
-        });
-      }, { threshold: 0.6 });
-      counters.forEach(function (el) { countIO.observe(el); });
-    } else {
-      counters.forEach(countUp);
-    }
-  }
-
-  // FAQ: animate open/close height
-  $$('.faq details').forEach(function (d) {
-    var sum = $('summary', d), body = $('div', d);
-    sum.addEventListener('click', function (e) {
-      if (reduceMotion || !body.animate) return;
-      e.preventDefault();
-      if (d.open) {
-        var a = body.animate([{ height: body.offsetHeight + 'px' }, { height: '0px' }], { duration: 280, easing: 'ease' });
-        a.onfinish = function () { d.open = false; };
-      } else {
-        d.open = true;
-        body.animate([{ height: '0px' }, { height: body.offsetHeight + 'px' }], { duration: 320, easing: 'cubic-bezier(.2,.7,.2,1)' });
+  // Native <dialog> supplies keyboard focus trapping, Escape and inert background.
+  const openDialog = dialog => {
+    if (dialog.open) return;
+    dialog._opener = document.activeElement;
+    dialog.showModal(); document.body.classList.add('modal-open');
+  };
+  const closeDialog = dialog => dialog.close();
+  $$('dialog').forEach(dialog => {
+    dialog.addEventListener('click', event => {
+      if (event.target.closest('[data-close]')) closeDialog(dialog);
+      if (event.target === dialog) {
+        const r = dialog.getBoundingClientRect();
+        if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeDialog(dialog);
       }
     });
-  });
-
-  // UTM / click-id capture (kept for the session)
-  var params = new URLSearchParams(location.search);
-  var attribution = {};
-  try { attribution = JSON.parse(sessionStorage.getItem('vt_attr') || '{}'); } catch (e) {}
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach(function (k) {
-    if (params.get(k)) attribution[k] = params.get(k);
-  });
-  try { sessionStorage.setItem('vt_attr', JSON.stringify(attribution)); } catch (e) {}
-
-  // Lead forms
-  var phoneRe = /^[6-9]\d{9}$/;
-  $$('.js-lead').forEach(function (form) {
-    var phone = form.elements.phone, name = form.elements.name;
-    var msg = $('.form__msg', form), btn = $('button[type="submit"]', form), label = $('.btn__label', btn);
-    var labelText = label.textContent;
-
-    function say(text, type) { msg.className = 'form__msg ' + (type || ''); msg.textContent = text; }
-    function mark(input, bad) {
-      input.classList.remove('invalid');
-      if (bad) { void input.offsetWidth; input.classList.add('invalid'); }
-    }
-    phone.addEventListener('input', function () { phone.value = phone.value.replace(/\D/g, '').slice(0, 10); });
-
-    function loading(on) {
-      btn.classList.toggle('is-loading', on);
-      btn.disabled = on;
-      label.textContent = on ? 'Sending…' : labelText;
-    }
-
-    function finish(data) {
-      track('generate_lead', { form: data.source });
-      say('Thanks, ' + data.name.split(' ')[0] + '. We\'ll call you shortly.', 'ok');
-      form.reset();
-      loading(false);
-    }
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var badName = name.value.trim().length < 2, badPhone = !phoneRe.test(phone.value);
-      mark(name, badName); mark(phone, badPhone);
-      if (badName || badPhone) {
-        say(badPhone && !badName ? 'Please enter a 10-digit mobile number.' : 'Please add your name and mobile number.', 'err');
-        (badName ? name : phone).focus();
-        return;
-      }
-
-      var data = Object.assign({
-        name: name.value.trim(),
-        phone: '+91' + phone.value,
-        interest: form.elements.interest.value,
-        source: form.elements.source.value,
-        page: location.href.split('?')[0],
-        submitted_at: new Date().toISOString()
-      }, attribution);
-
-      if (form.elements.website && form.elements.website.value) return; // bot filled the hidden field
-
-      loading(true); say('');
-      if (CONFIG.formEndpoint) {
-        // Sent as text/plain so Apps Script accepts it without a CORS preflight
-        fetch(CONFIG.formEndpoint, { method: 'POST', body: JSON.stringify(data) })
-          .then(function (r) { return r.json(); })
-          .then(function (res) { if (!res.ok) throw new Error(res.error || 'failed'); finish(data); })
-          .catch(function () { loading(false); say('That didn\'t go through. Please call or WhatsApp us.', 'err'); });
-      } else {
-        // No endpoint yet: hand the enquiry over on WhatsApp
-        var text = 'New enquiry – Valencia Town\nName: ' + data.name + '\nMobile: ' + data.phone + '\nLooking for: ' + data.interest;
-        window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-        finish(data);
-      }
+    dialog.addEventListener('close', () => {
+      document.body.classList.toggle('modal-open', !!$('dialog[open]'));
+      if (dialog._opener?.isConnected) dialog._opener.focus({preventScroll: true});
     });
   });
-
-  // Floating WhatsApp: show the label once after 20s
-  var waFloat = $('.wa-float');
-  if (waFloat) setTimeout(function () {
-    waFloat.classList.add('is-nudge');
-    setTimeout(function () { waFloat.classList.remove('is-nudge'); }, 4000);
-  }, 20000);
-
-  // Video: load only when the visitor clicks play
-  var vf = $('#videoFacade');
-  if (vf) vf.addEventListener('click', function () {
-    var v = document.createElement('video');
-    v.src = vf.getAttribute('data-src'); v.controls = true; v.autoplay = true; v.playsInline = true;
-    v.poster = $('img', vf).src; v.width = 832; v.height = 464;
-    v.setAttribute('aria-label', '3D walkthrough of Valencia Town');
-    vf.replaceWith(v);
-    track('video_play', { video: '3d_walkthrough' });
+  const menu = $('#mobile-menu');
+  $('.menu-toggle').addEventListener('click', () => openDialog(menu));
+  $$('a[href^="#"]', menu).forEach(a => a.addEventListener('click', () => closeDialog(menu)));
+  matchMedia('(min-width:1024px)').addEventListener('change', e => { if (e.matches && menu.open) menu.close(); });
+  const enquiry = $('#enquiry-modal');
+  const form = $('#enquiry-form');
+  const status = $('#form-status');
+  let submitting = false;
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-enquiry]');
+    if (trigger) {
+      if (menu.open) menu.close();
+      if (!submitting) {
+        form.hidden = false; $('#enquiry-success').hidden = true; status.textContent = '';
+        form.elements.interest.value = trigger.dataset.enquiry;
+      }
+      openDialog(enquiry);
+      track('cta_click', {cta: trigger.dataset.enquiry});
+    }
+    if (event.target.closest('[data-privacy]')) openDialog($('#privacy-modal'));
   });
-
-  // Map: load the Google Maps iframe only on click
-  var mf = $('#mapFacade');
-  if (mf) mf.addEventListener('click', function () {
-    var f = document.createElement('iframe');
-    f.src = mf.getAttribute('data-src'); f.title = 'Map: Valencia Town, Shahna, Indore–Ujjain Road';
-    f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true;
-    mf.replaceWith(f);
-    track('map_open');
+  // Keep attribution tab-local and exclude personal field values from analytics.
+  const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+  let attribution = {};
+  try { attribution = JSON.parse(sessionStorage.getItem('valencia-attribution') || '{}'); } catch {}
+  const params = new URLSearchParams(location.search);
+  keys.forEach(key => { if (params.has(key)) attribution[key] = params.get(key).slice(0, 200); });
+  try { sessionStorage.setItem('valencia-attribution', JSON.stringify(attribution)); } catch {}
+  form.elements.phone.addEventListener('input', () => form.elements.phone.setCustomValidity(''));
+  form.elements.name.addEventListener('input', () => form.elements.name.setCustomValidity(''));
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (submitting || form.elements.website.value) return;
+    const name = form.elements.name.value.trim();
+    let number = cleanPhone(form.elements.phone.value);
+    if (number.length === 12 && number.startsWith('91')) number = number.slice(2);
+    if (name.length < 2) { form.elements.name.setCustomValidity('Please enter your full name.'); form.elements.name.reportValidity(); return; }
+    if (!/^[6-9]\d{9}$/.test(number)) { form.elements.phone.setCustomValidity('Please enter a valid 10-digit Indian mobile number.'); form.elements.phone.reportValidity(); return; }
+    if (!project.formEndpoint) { status.textContent = 'Online requests are currently unavailable. Please try again later.'; return; }
+    const submit = $('button[type="submit"]', form);
+    submitting = true; submit.disabled = true; submit.textContent = 'Sending your request…'; status.textContent = '';
+    const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const payload = {name, phone: '+91'+number, interest: form.elements.interest.value, source:'private-visit-modal', page:location.origin+location.pathname, submitted_at:new Date().toISOString(), website:'', ...attribution};
+      const response = await fetch(project.formEndpoint, {method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:JSON.stringify(payload), signal:controller.signal});
+      if (!response.ok) throw new Error('HTTP failure');
+      const result = await response.json();
+      if (result.ok !== true) throw new Error('Request not acknowledged');
+      form.hidden = true; $('#enquiry-success').hidden = false;
+      $('#enquiry-success').setAttribute('tabindex', '-1'); $('#enquiry-success').focus();
+      track('generate_lead', {form: 'private-visit-modal'}); form.reset();
+    } catch {
+      status.textContent = 'We could not confirm receipt. Your details are still here. Please try again in a moment.';
+    } finally {
+      clearTimeout(timeout); submitting = false; submit.disabled = false; submit.innerHTML = 'Send request <span aria-hidden="true">↗</span>';
+    }
   });
-
-  // Gallery lightbox
-  var lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('figcaption', lb) || {};
-  var items = $$('#galleryGrid a'), current = 0;
-  function show(i) {
-    current = (i + items.length) % items.length;
-    var a = items[current];
-    lbImg.style.animation = 'none'; void lbImg.offsetWidth; lbImg.style.animation = '';
-    lbImg.src = a.href; lbImg.alt = $('img', a).alt;
-    lbCap.textContent = ($('span', a) || {}).textContent || '';
+  // One place at a time. Coordinates are percentages, populated only after verification.
+  let planIndex = 0;
+  const planItems = project.masterplan;
+  planItems.forEach((item, index) => {
+    if (!Number.isFinite(item.x) || !Number.isFinite(item.y) || item.x < 0 || item.x > 100 || item.y < 0 || item.y > 100) return;
+    const button = document.createElement('button'); button.className = 'plan-hotspot'; button.dataset.plan = index;
+    button.style.left = item.x+'%'; button.style.top = item.y+'%'; button.textContent = String(index+1).padStart(2,'0');
+    button.setAttribute('aria-label', item.title); button.addEventListener('click', () => showPlan(index));
+    $('#plan-hotspots').append(button);
+  });
+  function showPlan(index) {
+    planIndex = (index + planItems.length) % planItems.length;
+    const item = planItems[planIndex];
+    $('#plan-detail .eyebrow').textContent = String(planIndex+1).padStart(2,'0')+' / '+String(planItems.length).padStart(2,'0');
+    $('#plan-detail h3').textContent = item.title;
+    $('#plan-detail p:not(.eyebrow)').textContent = item.description;
+    $$('.plan-hotspot').forEach(button => {
+      const selected = Number(button.dataset.plan) === planIndex;
+      button.classList.toggle('active', selected); button.hidden = !selected; button.setAttribute('aria-pressed', String(selected));
+    });
   }
-  function closeLb() { lb.hidden = true; document.body.style.overflow = ''; items[current].focus(); }
-  items.forEach(function (a, i) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault(); show(i); lb.hidden = false; document.body.style.overflow = 'hidden';
-      $('.lightbox__close', lb).focus();
-    });
+  $('[data-plan-prev]').addEventListener('click', () => showPlan(planIndex-1));
+  $('[data-plan-next]').addEventListener('click', () => showPlan(planIndex+1)); showPlan(0);
+  const pan = $('.plan-pan'), zoomImage = $('#zoom-image');
+  let zoom = 1;
+  function setZoom(value, anchorX = pan.clientWidth/2, anchorY = pan.clientHeight/2) {
+    const next = Math.max(1, Math.min(4, value)); const ratio = next / zoom;
+    const left = (pan.scrollLeft + anchorX)*ratio-anchorX;
+    const top = (pan.scrollTop + anchorY)*ratio-anchorY;
+    zoom = next; zoomImage.style.width = (zoom*100)+'%'; zoomImage.style.minHeight = (zoom*100)+'%';
+    pan.scrollLeft = left; pan.scrollTop = top; $('#zoom-level').textContent = Math.round(zoom*100)+'%';
+  }
+  $$('[data-open-plan]').forEach(button => button.addEventListener('click', () => { openDialog($('#plan-modal')); setZoom(1); pan.scrollTo(0,0); }));
+  $$('[data-zoom]').forEach(button => button.addEventListener('click', () => setZoom(button.dataset.zoom === 'reset' ? 1 : zoom + (button.dataset.zoom === 'in' ? .5 : -.5))));
+  pan.addEventListener('keydown', event => {
+    if (['+','=','-','0'].includes(event.key)) { event.preventDefault(); setZoom(event.key === '0' ? 1 : zoom + (event.key === '-' ? -.5 : .5)); }
   });
-  $('.lightbox__close', lb).addEventListener('click', closeLb);
-  $('.lightbox__prev', lb).addEventListener('click', function () { show(current - 1); });
-  $('.lightbox__next', lb).addEventListener('click', function () { show(current + 1); });
-  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function (e) {
-    if (lb.hidden) return;
-    if (e.key === 'Escape') closeLb();
-    if (e.key === 'ArrowLeft') show(current - 1);
-    if (e.key === 'ArrowRight') show(current + 1);
+  const pointers = new Map(); let previousDistance = 0;
+  pan.addEventListener('pointerdown', e => { pointers.set(e.pointerId,{x:e.clientX,y:e.clientY}); pan.setPointerCapture(e.pointerId); pan.classList.add('dragging'); previousDistance = 0; });
+  pan.addEventListener('pointermove', e => {
+    if (!pointers.has(e.pointerId)) return;
+    const previous = pointers.get(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if (pointers.size === 2) {
+      const [a,b] = [...pointers.values()]; const distance = Math.hypot(a.x-b.x,a.y-b.y);
+      if (previousDistance) { const r = pan.getBoundingClientRect(); setZoom(zoom*distance/previousDistance,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top); }
+      previousDistance = distance;
+    } else { pan.scrollLeft -= e.clientX-previous.x; pan.scrollTop -= e.clientY-previous.y; }
   });
-  var sx = 0;
-  lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', function (e) {
-    var dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+  ['pointerup','pointercancel','lostpointercapture'].forEach(type => pan.addEventListener(type, e => { pointers.delete(e.pointerId); previousDistance=0; if (!pointers.size) pan.classList.remove('dragging'); }));
+  // Location never advances automatically: tap/keyboard controls give visitors time to read.
+  const destinations = Object.entries(project.distances); let routeIndex = 0;
+  const showRoute = index => {
+    routeIndex = (index+destinations.length)%destinations.length;
+    const [name,minutes] = destinations[routeIndex];
+    $('#route-time').replaceChildren(document.createTextNode(minutes));
+    const unit = document.createElement('small'); unit.textContent='MIN'; $('#route-time').append(unit);
+    $('#route-name').textContent = name === 'SAIMS' ? 'Sri Aurobindo Hospital (SAIMS)' : name;
+    $('.journey-count').textContent = String(routeIndex+1).padStart(2,'0')+' / 04';
+  };
+  $('[data-route-prev]').addEventListener('click', () => showRoute(routeIndex-1));
+  $('[data-route-next]').addEventListener('click', () => showRoute(routeIndex+1));
+  const film = $('#film-modal'), video = $('video', film);
+  $('[data-open-film]').addEventListener('click', () => {
+    openDialog(film); if (!video.getAttribute('src')) video.src='assets/video/walkthrough.mp4';
+    video.play().catch(() => {}); track('video_play', {video:'3d_walkthrough'});
   });
+  film.addEventListener('close', () => { video.pause(); video.currentTime = 0; });
+  const gallery = $('#gallery-modal'); const galleryItems = $$('[data-gallery]'); let galleryIndex = 0;
+  function showGallery(index) {
+    galleryIndex = (index+galleryItems.length)%galleryItems.length;
+    const source = $('img',galleryItems[galleryIndex]);
+    $('#gallery-image').src = source.getAttribute('src'); $('#gallery-image').alt = source.alt;
+    $('#gallery-caption').textContent = source.alt;
+    $('#gallery-count').textContent = String(galleryIndex+1).padStart(2,'0')+' / '+String(galleryItems.length).padStart(2,'0');
+  }
+  galleryItems.forEach((button,index) => button.addEventListener('click', () => { showGallery(index); openDialog(gallery); }));
+  $('[data-gallery-prev]').addEventListener('click', () => showGallery(galleryIndex-1));
+  $('[data-gallery-next]').addEventListener('click', () => showGallery(galleryIndex+1));
+  gallery.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); showGallery(galleryIndex+(e.key==='ArrowLeft'?-1:1)); }
+  });
+  let startX=0,startY=0;
+  $('.gallery-viewer').addEventListener('touchstart', e => {startX=e.touches[0].clientX;startY=e.touches[0].clientY;}, {passive:true});
+  $('.gallery-viewer').addEventListener('touchend', e => {
+    const dx=e.changedTouches[0].clientX-startX, dy=e.changedTouches[0].clientY-startY;
+    if (Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)) showGallery(galleryIndex+(dx<0?1:-1));
+  }, {passive:true});
 })();
