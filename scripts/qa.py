@@ -22,11 +22,11 @@ async def run():
    assert not any(s['overflow'] for s in section_results),f'Page overflow at {width}'
    assert not any(s['textOverflow'] for s in section_results),f'Text overflow at {width}: {section_results}'
    await page.locator('img[loading=lazy]').evaluate_all('(images)=>images.forEach(img=>img.loading="eager")')
-   await page.wait_for_function('Array.from(document.images).every(img=>!img.getAttribute("src") || img.complete)')
+   await page.wait_for_function('Array.from(document.images).every(img=>!img.getAttribute("src") || (img.complete && img.naturalWidth>0))',timeout=15000)
    assert await page.locator('img').evaluate_all('(images)=>images.every(img=>!img.getAttribute("src") || (img.complete&&img.naturalWidth>0))'),'Broken image'
    assert not await page.locator('#rera-line').is_visible()
    assert await page.locator('a[href*="99999"]').count()==0
-   assert await page.locator('.plan-hotspot').count()==8
+   assert await page.locator('.plan-video').count()==1 and await page.locator('.plan-hotspot').count()==0
    assert await page.locator('#film-modal').count()==0,'Film section should stay removed until a clean render exists'
    await page.locator('[data-plan-next]').click();assert await page.locator('#plan-detail h3').inner_text()=='Clubhouse'
    await page.locator('[data-plan-prev]').click();assert await page.locator('#plan-detail h3').inner_text()=='Grand entrance'
@@ -42,7 +42,7 @@ async def run():
    await page.locator('#full-name').fill('QA Local Test');await page.locator('#mobile-number').fill('9876543210')
    await page.route('https://script.google.com/**',lambda route: route.fulfill(status=200,content_type='application/json',body='{"ok":true}'))
    await page.locator('#enquiry-form button[type="submit"]').click();await page.locator('#enquiry-success').wait_for(state='visible')
-   await page.keyboard.press('Escape');assert not await page.locator('#enquiry-modal').is_visible()
+   await page.keyboard.press('Escape');await page.locator('#enquiry-modal').wait_for(state='hidden',timeout=3000)
    await page.locator('#visit [data-enquiry="Brochure"]').click();assert await page.locator('#interest').input_value()=='Brochure'
    await page.locator('#full-name').fill('QA Failure Test');await page.locator('#mobile-number').fill('+91 9876543210')
    await page.unroute('https://script.google.com/**');await page.route('https://script.google.com/**',lambda route: route.fulfill(status=200,content_type='application/json',body='{"ok":false}'))

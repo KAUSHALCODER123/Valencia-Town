@@ -137,13 +137,15 @@
   // One place at a time. Coordinates are percentages, populated only after verification.
   let planIndex = 0;
   const planItems = project.masterplan;
-  planItems.forEach((item, index) => {
-    if (!Number.isFinite(item.x) || !Number.isFinite(item.y) || item.x < 0 || item.x > 100 || item.y < 0 || item.y > 100) return;
-    const button = document.createElement('button'); button.className = 'plan-hotspot'; button.dataset.plan = index;
-    button.style.left = item.x+'%'; button.style.top = item.y+'%'; const label = document.createElement('span'); label.textContent = String(index+1).padStart(2,'0'); button.append(label);
-    button.setAttribute('aria-label', String(index+1).padStart(2,'0') + ' ' + item.title); button.addEventListener('click', () => showPlan(index));
-    $('#plan-hotspots').append(button);
-  });
+  // Inline aerial walkthrough: loads only when the masterplan is near the viewport, plays muted in place, pauses off screen.
+  const planVideo = $('.plan-video');
+  if (planVideo) {
+    const source = $('source', planVideo);
+    const start = () => { if (!source.src) { source.src = source.dataset.src; planVideo.load(); } if (!reduceMotion.matches) planVideo.play().catch(() => {}); };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) start(); else if (!planVideo.paused) planVideo.pause(); }), {rootMargin: '200px 0px'}).observe(planVideo);
+    } else start();
+  }
   function showPlan(index) {
     planIndex = (index + planItems.length) % planItems.length;
     const item = planItems[planIndex];
@@ -161,10 +163,6 @@
       };
       reduceMotion.matches ? swap() : setTimeout(swap, 180);
     }
-    $$('.plan-hotspot').forEach(button => {
-      const selected = Number(button.dataset.plan) === planIndex;
-      button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
-    });
   }
   $('[data-plan-prev]').addEventListener('click', () => showPlan(planIndex-1));
   $('[data-plan-next]').addEventListener('click', () => showPlan(planIndex+1)); showPlan(0);

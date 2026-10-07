@@ -223,3 +223,58 @@ a span[aria-hidden],button span[aria-hidden]{font-size:max(12px,1em)}
 @media(min-width:1024px){.hero-image{object-position:55% 50%}.hero-shade{background:linear-gradient(90deg,#0f171299 0%,#0f171233 55%,#0f171200 100%),linear-gradient(180deg,#0f171233,#0f171200 30%,#0f1712b8)}}
 @media(min-width:1280px){.hero-image{object-position:55% 50%}}
 @media(min-width:1920px){.hero-image{object-position:55% 50%}}
+
+/* masterplan: inline walkthrough instead of markers */
+.plan-video-wrap{background:var(--forest)}
+.plan-video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 45%}
+@media(min-width:768px){.plan-video{aspect-ratio:1.9}}
+
+/* masterplan video: crop the burnt-in caption and vendor mark */
+.plan-video-wrap{overflow:hidden}
+.plan-video{transform:scale(1.17);transform-origin:50% 32%}
+
+/* scrollbars: thin, warm, quiet */
+html{scrollbar-width:thin;scrollbar-color:#8b735b #e9e3d8}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#e9e3d8}
+::-webkit-scrollbar-thumb{background:#8b735b;border-radius:9px;border:2px solid #e9e3d8}
+::-webkit-scrollbar-thumb:hover{background:#6a543f}
+.forest ::-webkit-scrollbar-track,dialog.menu-dialog::-webkit-scrollbar-track{background:#1f2d26}
+.forest ::-webkit-scrollbar-thumb,dialog.menu-dialog::-webkit-scrollbar-thumb{border-color:#1f2d26;background:#c08a62}
+dialog{scrollbar-width:thin;scrollbar-color:#8b735b #e9e3d8}
+
+/* enquiry pop-up: editorial two-panel card, bottom sheet on phones */
+.enquiry-dialog{width:100%;max-width:100%;margin:auto 0 0;max-height:94dvh;padding:0;overflow:auto;background:var(--ivory);box-shadow:0 -20px 60px #0a140e55}
+.enquiry-dialog .close{right:10px;top:10px;color:var(--ivory)}
+.enquiry-side{background:var(--forest);color:var(--ivory);padding:34px var(--gutter) 30px;display:flex;flex-direction:column;gap:26px}
+.enquiry-mark{width:40px;display:block}.enquiry-mark svg{width:100%;height:auto;display:block}
+.enquiry-side .eyebrow{color:var(--gold-light);margin-bottom:14px}
+.enquiry-intro h2{font-size:40px;line-height:1}
+.enquiry-intro>p:last-child{color:#f3efe7cc;font-size:14px;margin-top:14px}
+.enquiry-side-foot{display:none;border-top:1px solid #f3efe722;padding-top:22px}
+.enquiry-side-foot a{display:inline-flex;align-items:center;min-height:40px;font-size:15px;border-bottom:1px solid #f3efe755;width:max-content}
+.enquiry-side-foot .fine{margin-top:14px;color:#bec5b9}
+.enquiry-main{padding:28px var(--gutter) 30px}
+#enquiry-form label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6a543f;margin:22px 0 2px}
+#enquiry-form label:first-of-type{margin-top:0}
+#enquiry-form input,#enquiry-form select{border-bottom:1px solid #b9b2a4;padding:12px 0;font-size:16px;transition:border-color .3s}
+#enquiry-form input:focus-visible,#enquiry-form select:focus-visible{outline:none;border-bottom-color:var(--gold)}
+#enquiry-form select{appearance:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M2 5l5 5 5-5' fill='none' stroke='%2317231d' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right center;padding-right:24px;cursor:pointer}
+#enquiry-form input::placeholder{color:#9a9a90}
+#enquiry-form .phone-field{border-bottom:1px solid #b9b2a4}
+#enquiry-form .phone-field:focus-within{border-bottom-color:var(--gold)}
+#enquiry-form .phone-field>span{color:var(--muted)}
+#enquiry-form .phone-field input{border-bottom:0}
+#phone-help{display:block;color:var(--muted);font-size:12px;margin-top:8px}
+.form-consent{margin-top:26px;font-size:12px;line-height:1.6}
+.form-consent button{text-decoration:underline;text-underline-offset:3px;padding:0;min-height:0;font:inherit}
+#enquiry-form .button-dark{width:100%;margin-top:22px;min-height:58px;letter-spacing:.14em}
+#enquiry-success{padding:10px 0 6px}
+#enquiry-success h3{font-size:36px}
+.success-mark{border-color:var(--gold);color:var(--gold);width:54px;height:54px}
+.enquiry-dialog[open]{animation:sheet-in .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sheet-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes card-in{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.enquiry-dialog[open]{animation:none}}
+@media(min-width:768px){.enquiry-dialog{width:900px;max-width:calc(100vw - 48px);max-height:calc(100dvh - 48px);margin:auto;display:grid;grid-template-columns:38% 1fr;box-shadow:0 30px 80px #0a140e66}.enquiry-dialog .close{right:16px;top:14px;color:var(--forest)}.enquiry-side{padding:46px 40px 40px;justify-content:space-between;gap:40px}.enquiry-side-foot{display:block}.enquiry-intro h2{font-size:48px}.enquiry-main{padding:52px 48px 40px;display:flex;flex-direction:column;justify-content:center}#enquiry-form label{margin-top:24px}.enquiry-dialog[open]{animation-name:card-in}}
+@media(min-width:1024px){.enquiry-dialog{width:960px}.enquiry-intro h2{font-size:54px}}
