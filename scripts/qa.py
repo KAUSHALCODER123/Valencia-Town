@@ -21,6 +21,8 @@ async def run():
     if width in [360,390,768,1024,1440]: await section.screenshot(path=str(OUT/f'section-{width}-{i:02}.png'))
    assert not any(s['overflow'] for s in section_results),f'Page overflow at {width}'
    assert not any(s['textOverflow'] for s in section_results),f'Text overflow at {width}: {section_results}'
+   await page.locator('img[loading=lazy]').evaluate_all('(images)=>images.forEach(img=>img.loading="eager")')
+   await page.wait_for_function('Array.from(document.images).every(img=>!img.getAttribute("src") || img.complete)')
    assert await page.locator('img').evaluate_all('(images)=>images.every(img=>!img.getAttribute("src") || (img.complete&&img.naturalWidth>0))'),'Broken image'
    assert not await page.locator('#rera-line').is_visible()
    assert await page.locator('a[href*="99999"]').count()==0

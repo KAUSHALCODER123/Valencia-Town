@@ -8,7 +8,7 @@
    - Execute as: **Me**
    - Who has access: **Anyone**
    - Click **Deploy** and copy the **Web app URL** (ends in `/exec`).
-6. Open `js/main.js` and paste the URL into `formEndpoint`:
+6. Open `data/project.json` and paste the URL into `formEndpoint`, then run `python scripts/build.py`:
    ```js
    formEndpoint: 'https://script.google.com/macros/s/XXXX/exec'
    ```

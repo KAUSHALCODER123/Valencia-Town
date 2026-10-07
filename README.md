@@ -1,95 +1,44 @@
-# Valencia-Town
+# Valencia Town
 
-Landing page for **Valencia Town**, a 48-acre gated township at Shahna, Indore–Ujjain Road, Madhya Pradesh.
+An editorial, mobile-first static website for Valencia Town at Shahna on the Indore–Ujjain corridor. Built with semantic HTML, local fonts, project WebP images and lightweight JavaScript. No framework or production dependencies.
 
-Static site: HTML, CSS and vanilla JavaScript. Open `index.html` or serve the folder with any static host.
+## Preview
 
-## Before going live
-Edit the `CONFIG` block at the top of `js/main.js` (phone, WhatsApp, RERA, form endpoint) and search `index.html` for `TODO` (price, domain).
+Run `python -m http.server 4173 --bind 127.0.0.1` from this directory, then open `http://127.0.0.1:4173`.
 
-After any change to `css/style.css` or `js/main.js`, bump the `?v=` value on both links in `index.html` so phones load the new files.
+## Content and components
 
-Leads go to Google Sheets — see [`apps-script/README.md`](apps-script/README.md).
+- `data/project.json`: single source for project facts, distances, contacts, lead endpoint and masterplan configuration.
+- `scripts/components.py`: reusable server-rendered chapter functions, shared image/CTA helpers and metadata.
+- `scripts/build.py`: generates `index.html`, `robots.txt` and `sitemap.xml`. Run `python scripts/build.py` after changing content. Build requires Python and Pillow (`python -m pip install -r scripts/requirements.txt`). Generated HTML is committed and deployable without Python.
+- `css/style.css`: mobile-first styles, explicit 360–430px adjustments, tablet compositions and desktop layouts.
+- `js/main.js`: enquiry dialog, verified submission states, masterplan discovery/zoom/pan, location selector, film and gallery.
+- `MOBILE-DESIGN.md`: section-by-section mobile specification.
 
----
+After stylesheet or script changes, bump the asset version in `scripts/components.py` and rebuild.
 
-## Render brief (for the visualiser / architect)
+## Configuration before launch
 
-### Technical specs (every image)
-- **Resolution:** at least **2560 px wide**, ideally 3840 px (4K).
-- **Format:** high-quality JPG or PNG (the site converts and compresses them).
-- **Clean files:** no watermark, no scene labels (e.g. "Aerial Day"), no white borders.
-- **Consistent look:** same time of day and colour grade across the set — golden hour suits the black and copper brand.
-- **Two crops where noted:** landscape **16:9** (desktop) and portrait **4:5** (mobile / Instagram).
+Use real, client-approved values in `data/project.json` and rebuild:
 
-### Shot list
+- `SALES_PHONE` and `WHATSAPP_NUMBER`: international digits, e.g. country code 91 followed by the real mobile number. Empty or placeholder values stay hidden.
+- `SALES_EMAIL`: actual sales address; empty stays hidden.
+- `RERA_NUMBER`: current MP registration (expected `P-XXX-YY-NNN...`); omitted until a matching value is supplied. Verify against official project documents. Do not use this formatting check as legal validation.
+- `siteUrl`: currently the existing `https://valenciatown.vercel.app` address. Canonical, social tags, robots and sitemap are generated consistently.
+- `formEndpoint`: the existing Google Apps Script endpoint is retained. Submission shows success only after a readable JSON response with `ok: true`. Failure retains the visitor's entries. Never use opaque/no-CORS requests to simulate success.
 
-| # | Shot | Used for | Crop |
-|---|---|---|---|
-| 1 | **Hero: entrance gate from the Indore–Ujjain Road** — golden hour, cars and people for scale, empty sky/road on the left for the headline | First screen | 16:9 + 4:5 |
-| 2 | **Coloured master plan (2D, top-down)** — plots, roads, clubhouse, temple, gardens, forest zone, entry, road frontage; legend and north arrow | Master plan section | Landscape + a clean version without labels |
-| 3 | **Aerial 3D bird's-eye** of the full 48 acres with the main road visible | Walkthrough cover, gallery | 16:9 |
-| 4 | **Clubhouse exterior**, evening, lit | Amenities (large tile) | 16:9 |
-| 5 | **Clubhouse interior** (lounge / hall) | Amenities, gallery | 16:9 |
-| 6 | **Temple** with landscaping | Amenities | 4:3 |
-| 7 | **Children's playground** with families | Amenities | 4:3 |
-| 8 | **Senior citizens' library** (interior or garden reading area) | Amenities | 4:3 |
-| 9 | **Women's activity zone** | Amenities | 4:3 |
-| 10 | **Meeting zone / community lawn** | Amenities | 4:3 |
-| 11 | **Forest zone** — dense trees, walking trail | Amenities, gallery | 4:3 |
-| 12 | **Internal road** — tree-lined, street lights, plots on both sides | Gallery, location | 16:9 |
-| 13 | **Plot-level view** — an empty plot ready to build, markers and road access | "What you buy" | 16:9 |
-| 14 | **Sample house on a plot** (optional, labelled as illustration) | Shows the end result | 16:9 |
-| 15 | **Night shot of the gate or signage wall** | CTA band background | 16:9, darker, empty centre |
+Each masterplan item accepts percentage-based `x` and `y` coordinates (0–100). They remain `null` because verified amenity coordinates have not been supplied. When configured, only the currently selected hotspot is shown. Current exploration uses accessible previous/next controls with one description at a time. The supplied masterplan is 832px wide: zoom is available, but a higher-resolution approved plan is needed for reliable plot-level reading.
 
-### Real photos (as important as renders)
-- Actual site today: land, road frontage, boundary, any work in progress
-- Drone photo of the site with the Indore–Ujjain Road visible
-- Site office or hoarding on the road
-- Team with visitors at the site (with consent)
+Existing project renders and local film are reused. No stock photography, invented amenities, testimonials, prices or approvals have been added. The site does not claim a pool despite its appearance in one unused supplied asset. Please have the client/legal team approve the disclaimer and privacy wording. A brochure request sends an enquiry; no brochure file was supplied.
 
-On the page, real photos are labelled "Actual site photo" and renders "Artist's impression".
+## Lead handling
 
-### Optional
-- New **walkthrough video**: 60–90 s, finished quality, 1080p or 4K, no watermark
-- **Vertical clips** (9:16, 15–30 s) for Instagram and Meta ads
+See `apps-script/README.md`. Existing attribution fields and source values remain compatible. Personal form fields are not sent to the analytics data layer. Live lead delivery must be verified in the client’s Sheet; automated tests mock the endpoint and do not create real leads.
 
-### Priority if only a few are possible
-1. #2 Master plan
-2. #1 Hero
-3. #6 Temple
-4. #4 Clubhouse
-5. #13 Plot view
-6. Real site photos
+## Verification
 
----
+`python -m pip install -r scripts/requirements-qa.txt`
 
-## Details still needed
-- Phone and WhatsApp number
-- MP RERA registration number
-- Price / starting price
-- Developer name, years in business, projects delivered, bank tie-ups
-- Real testimonials (with permission)
-- Brochure PDF
-- Google Analytics / Tag Manager and Meta Pixel IDs
+Start the local server, then run `python scripts/qa.py`. The runner uses installed Chrome on Windows and tests 360, 375, 390, 430, 768, 1024 and 1440px widths, all sections, overflow, images, dialogs, masterplan zoom, gallery, menus, mocked form success/failure, and on-demand video. Screenshots and results are saved to ignored `qa/`.
 
----
-
-## Local SEO – to do later
-
-### Before launch
-- **Set the real domain.** The canonical URL, Open Graph tags, sitemap and robots file still point to `https://www.valenciatown.in/`. Replace it with the domain the site goes live on (e.g. `valenciatown.vercel.app` or a custom domain).
-
-### Off-site (bigger impact than on-page)
-1. **Google Business Profile** for "Valencia Town" — exact map pin (22.902185, 75.864609), photos, phone, website link. Needed to appear on Google Maps for "plots near me" / "plots on Ujjain Road".
-2. **Property portals** after RERA approval — 99acres, MagicBricks, Housing.com, each linking back to the site.
-3. **Local backlinks** — local news, Indore real-estate blogs, Justdial and Sulekha listings.
-4. **Google reviews** from site visitors.
-5. **Hindi section or page** — many local searches are in Hindi (e.g. "इंदौर उज्जैन रोड पर प्लॉट").
-
-### Already done on the page
-- Title: "Plots on Indore–Ujjain Road, Shahna | Valencia Town"
-- Landmarks in hero, location heading, nearby paragraph and footer: Sri Aurobindo Hospital (SAIMS) 10 min, Vijay Nagar 25 min, Devi Ahilyabai Holkar Airport 25 min, Ujjain 40 min
-- Local FAQs with FAQ structured data
-- Location-based image alt text
-- Geo tags and structured address with coordinates
+Performance: self-hosted fonts, responsive WebP images, explicit dimensions, eager hero only, lazy below-fold images, and no video request until play. Lighthouse targets are goals, not certified scores.
