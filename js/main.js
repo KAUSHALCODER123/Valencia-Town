@@ -143,20 +143,6 @@
       button.classList.toggle('active', selected); button.hidden = !selected; button.setAttribute('aria-pressed', String(selected));
     });
   }
-  // Hero parallax: the image drifts at a third of scroll speed while the copy settles back and fades.
-  const heroMedia = $('.hero-media'), heroContent = $('.hero-content'), hero = $('.hero');
-  if (heroMedia && !reduceMotion.matches) {
-    let ticking = false;
-    const parallax = () => {
-      ticking = false;
-      const y = Math.min(window.scrollY, hero.offsetHeight);
-      heroMedia.style.transform = 'translate3d(0,' + (y * 0.32).toFixed(1) + 'px,0)';
-      heroContent.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(1) + 'px,0)';
-      heroContent.style.opacity = Math.max(0, 1 - y / (hero.offsetHeight * 0.55)).toFixed(3);
-    };
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(parallax); } }, {passive: true});
-    parallax();
-  }
   $('[data-plan-prev]').addEventListener('click', () => showPlan(planIndex-1));
   $('[data-plan-next]').addEventListener('click', () => showPlan(planIndex+1)); showPlan(0);
   const pan = $('.plan-pan'), zoomImage = $('#zoom-image');
