@@ -127,10 +127,35 @@
     $('#plan-detail .eyebrow').textContent = String(planIndex+1).padStart(2,'0')+' / '+String(planItems.length).padStart(2,'0');
     $('#plan-detail h3').textContent = item.title;
     $('#plan-detail p:not(.eyebrow)').textContent = item.description;
+    const figure = $('#plan-image');
+    if (figure && item.image && !figure.src.includes('/' + item.image + '-')) {
+      figure.classList.add('is-switching');
+      const swap = () => {
+        figure.src = 'assets/img/' + item.image + '-640.webp';
+        figure.srcset = 'assets/img/' + item.image + '-640.webp 640w, assets/img/' + item.image + '-1280.webp 1280w';
+        figure.alt = item.title + ' \u2014 artist\u2019s impression';
+        figure.decode().catch(() => {}).finally(() => figure.classList.remove('is-switching'));
+      };
+      reduceMotion.matches ? swap() : setTimeout(swap, 180);
+    }
     $$('.plan-hotspot').forEach(button => {
       const selected = Number(button.dataset.plan) === planIndex;
       button.classList.toggle('active', selected); button.hidden = !selected; button.setAttribute('aria-pressed', String(selected));
     });
+  }
+  // Hero parallax: the image drifts at a third of scroll speed while the copy settles back and fades.
+  const heroMedia = $('.hero-media'), heroContent = $('.hero-content'), hero = $('.hero');
+  if (heroMedia && !reduceMotion.matches) {
+    let ticking = false;
+    const parallax = () => {
+      ticking = false;
+      const y = Math.min(window.scrollY, hero.offsetHeight);
+      heroMedia.style.transform = 'translate3d(0,' + (y * 0.32).toFixed(1) + 'px,0)';
+      heroContent.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(1) + 'px,0)';
+      heroContent.style.opacity = Math.max(0, 1 - y / (hero.offsetHeight * 0.55)).toFixed(3);
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(parallax); } }, {passive: true});
+    parallax();
   }
   $('[data-plan-prev]').addEventListener('click', () => showPlan(planIndex-1));
   $('[data-plan-next]').addEventListener('click', () => showPlan(planIndex+1)); showPlan(0);

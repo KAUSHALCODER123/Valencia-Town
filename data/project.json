@@ -14,15 +14,68 @@
   "SALES_EMAIL": "",
   "RERA_NUMBER": "",
   "formEndpoint": "https://script.google.com/macros/s/AKfycbwnNCz74HjqDYzwVD0q0TPSB8Cw9Yr-FzU9EmfDq0XTHyniRTZDg1wej91xEWx1Qvk0/exec",
-  "distances": {"SAIMS": "10", "Vijay Nagar": "25", "Indore Airport": "25", "Ujjain": "40"},
+  "distances": {
+    "SAIMS": "10",
+    "Vijay Nagar": "25",
+    "Indore Airport": "25",
+    "Ujjain": "40"
+  },
   "masterplan": [
-    {"title":"Grand entrance", "description":"A considered arrival. Architecture and landscape introduce the world within.", "image":"grand-gate", "x":null, "y":null},
-    {"title":"Clubhouse", "description":"A place to come together, share a conversation and celebrate the everyday.", "image":"aerial-clubhouse", "x":null, "y":null},
-    {"title":"Temple", "description":"A space for reflection, woven into the life of the community.", "image":null, "x":null, "y":null},
-    {"title":"Forest garden", "description":"Forest-style gardens bring a greener rhythm to daily walks.", "image":"arch-walkway", "x":null, "y":null},
-    {"title":"Landscaped greens", "description":"Open lawns and landscaped spaces give everyday life room to breathe.", "image":"garden-lawn", "x":null, "y":null},
-    {"title":"Sports & recreation", "description":"Sports courts and children's play areas make space for movement and discovery.", "image":"sports-court", "x":null, "y":null},
-    {"title":"Residential precincts", "description":"Residential plots with space to imagine a home that feels entirely your own.", "image":null, "x":null, "y":null},
-    {"title":"Internal roads", "description":"Wide internal roads connect homes, gardens and shared spaces.", "image":"internal-road", "x":null, "y":null}
+    {
+      "title": "Grand entrance",
+      "description": "A considered arrival. Architecture and landscape introduce the world within.",
+      "image": "grand-gate",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Clubhouse",
+      "description": "A place to come together, share a conversation and celebrate the everyday.",
+      "image": "aerial-clubhouse",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Temple",
+      "description": "A space for reflection, woven into the life of the community.",
+      "image": "flower-garden",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Forest garden",
+      "description": "Forest-style gardens bring a greener rhythm to daily walks.",
+      "image": "arch-walkway",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Landscaped greens",
+      "description": "Open lawns and landscaped spaces give everyday life room to breathe.",
+      "image": "garden-lawn",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Sports & recreation",
+      "description": "Sports courts and children's play areas make space for movement and discovery.",
+      "image": "sports-court",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Residential precincts",
+      "description": "Residential plots with space to imagine a home that feels entirely your own.",
+      "image": "entrance-road",
+      "x": null,
+      "y": null
+    },
+    {
+      "title": "Internal roads",
+      "description": "Wide internal roads connect homes, gardens and shared spaces.",
+      "image": "internal-road",
+      "x": null,
+      "y": null
+    }
   ]
 }
