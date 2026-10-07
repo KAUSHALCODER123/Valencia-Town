@@ -172,17 +172,6 @@
   });
   ['pointerup','pointercancel','lostpointercapture'].forEach(type => pan.addEventListener(type, e => { pointers.delete(e.pointerId); previousDistance=0; if (!pointers.size) pan.classList.remove('dragging'); }));
   // Location never advances automatically: tap/keyboard controls give visitors time to read.
-  const destinations = Object.entries(project.distances); let routeIndex = 0;
-  const showRoute = index => {
-    routeIndex = (index+destinations.length)%destinations.length;
-    const [name,minutes] = destinations[routeIndex];
-    $('#route-time').replaceChildren(document.createTextNode(minutes));
-    const unit = document.createElement('small'); unit.textContent='MIN'; $('#route-time').append(unit);
-    $('#route-name').textContent = name === 'SAIMS' ? 'Sri Aurobindo Hospital (SAIMS)' : name;
-    $('.journey-count').textContent = String(routeIndex+1).padStart(2,'0')+' / 04';
-  };
-  $('[data-route-prev]').addEventListener('click', () => showRoute(routeIndex-1));
-  $('[data-route-next]').addEventListener('click', () => showRoute(routeIndex+1));
   const film = $('#film-modal'), video = $('video', film);
   $('[data-open-film]').addEventListener('click', () => {
     openDialog(film); if (!video.getAttribute('src')) video.src='assets/video/walkthrough.mp4';
