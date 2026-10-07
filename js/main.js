@@ -15,7 +15,7 @@
     const a = document.createElement('a'); a.textContent = label; a.href = href;
     $('#contact-details').append(a);
   };
-  if (phoneValid(salesPhone)) addContact('+' + salesPhone, 'tel:+' + salesPhone);
+  if (phoneValid(salesPhone)) addContact('+' + salesPhone, 'tel:+' + salesPhone); else $$('.call-link').forEach(a => a.hidden = true);
   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(project.SALES_EMAIL || '') && !/example\./i.test(project.SALES_EMAIL)) addContact(project.SALES_EMAIL, 'mailto:' + project.SALES_EMAIL);
   if (phoneValid(whatsapp)) $$('.whatsapp').forEach(a => {
     a.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('Hello, I would like to learn more about Valencia Town.'); a.hidden = false;
@@ -65,6 +65,7 @@
   document.addEventListener('click', event => {
     const trigger = event.target.closest('[data-enquiry]');
     if (trigger) {
+      if (trigger.hasAttribute('data-call') && matchMedia('(max-width: 767px)').matches && phoneValid(salesPhone)) { track('cta_click', {cta: 'call'}); location.href = 'tel:+' + salesPhone; return; }
       if (menu.open) menu.close();
       if (!submitting) {
         form.hidden = false; $('#enquiry-success').hidden = true; status.textContent = '';
@@ -74,6 +75,14 @@
       track('cta_click', {cta: trigger.dataset.enquiry});
     }
     if (event.target.closest('[data-privacy]')) openDialog($('#privacy-modal'));
+    if (event.target.closest('[data-terms]')) openDialog($('#terms-modal'));
+    const mapButton = event.target.closest('[data-load-map]');
+    if (mapButton) {
+      const frame = document.createElement('iframe');
+      frame.src = 'https://www.google.com/maps?q=' + project.latitude + ',' + project.longitude + '&z=11&output=embed';
+      frame.title = 'Map of Valencia Town at Shahna on the Indore–Ujjain Road'; frame.loading = 'lazy'; frame.referrerPolicy = 'no-referrer-when-downgrade'; frame.allowFullscreen = true;
+      mapButton.replaceWith(frame); track('map_load');
+    }
   });
   // Keep attribution tab-local and exclude personal field values from analytics.
   const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
@@ -82,26 +91,40 @@
   const params = new URLSearchParams(location.search);
   keys.forEach(key => { if (params.has(key)) attribution[key] = params.get(key).slice(0, 200); });
   try { sessionStorage.setItem('valencia-attribution', JSON.stringify(attribution)); } catch {}
-  form.elements.phone.addEventListener('input', () => form.elements.phone.setCustomValidity(''));
-  form.elements.name.addEventListener('input', () => form.elements.name.setCustomValidity(''));
+  const fieldError = (field, message) => {
+    const id = field.id + '-error'; let note = document.getElementById(id);
+    if (!note) { note = document.createElement('small'); note.id = id; note.className = 'field-error'; note.setAttribute('role', 'alert'); (field.closest('.phone-field') || field).insertAdjacentElement('afterend', note); }
+    note.textContent = message; note.hidden = !message;
+    field.classList.toggle('is-invalid', !!message); field.setAttribute('aria-invalid', String(!!message));
+    const described = [field.getAttribute('aria-describedby'), message ? id : null].filter(Boolean); if (described.length) field.setAttribute('aria-describedby', [...new Set(described)].join(' '));
+    if (message) field.focus();
+  };
+  ['name','phone','email'].forEach(key => form.elements[key].addEventListener('input', () => fieldError(form.elements[key], '')));
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (submitting || form.elements.website.value) return;
     const name = form.elements.name.value.trim();
     let number = cleanPhone(form.elements.phone.value);
     if (number.length === 12 && number.startsWith('91')) number = number.slice(2);
-    if (name.length < 2) { form.elements.name.setCustomValidity('Please enter your full name.'); form.elements.name.reportValidity(); return; }
-    if (!/^[6-9]\d{9}$/.test(number)) { form.elements.phone.setCustomValidity('Please enter a valid 10-digit Indian mobile number.'); form.elements.phone.reportValidity(); return; }
+    const email = form.elements.email.value.trim();
+    if (name.length < 2) { fieldError(form.elements.name, 'May we have your full name?'); return; }
+    if (!/^[6-9]\d{9}$/.test(number)) { fieldError(form.elements.phone, 'A 10-digit Indian mobile number, please, so the team can reach you.'); return; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fieldError(form.elements.email, 'That email address does not look complete.'); return; }
     if (!project.formEndpoint) { status.textContent = 'Online requests are currently unavailable. Please try again later.'; return; }
     const submit = $('button[type="submit"]', form);
     submitting = true; submit.disabled = true; submit.textContent = 'Sending your request…'; status.textContent = '';
     const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      const payload = {name, phone: '+91'+number, interest: form.elements.interest.value, source:'private-visit-modal', page:location.origin+location.pathname, submitted_at:new Date().toISOString(), website:'', ...attribution};
+      const payload = {name, phone: '+91'+number, email, preferred_time: form.elements.preferredTime.value, interest: form.elements.interest.value, source:'private-visit-modal', page:location.origin+location.pathname, submitted_at:new Date().toISOString(), website:'', ...attribution};
       const response = await fetch(project.formEndpoint, {method:'POST', headers:{'Content-Type':'text/plain;charset=UTF-8'}, body:JSON.stringify(payload), signal:controller.signal});
       if (!response.ok) throw new Error('HTTP failure');
       const result = await response.json();
       if (result.ok !== true) throw new Error('Request not acknowledged');
+      const interest = form.elements.interest.value;
+      const download = $('#success-download'); const docUrl = interest === 'Brochure' ? project.brochureUrl : interest === 'Layout' ? project.layoutUrl : '';
+      download.hidden = !docUrl; if (docUrl) { download.href = docUrl; download.innerHTML = (interest === 'Brochure' ? 'Download the brochure' : 'Download the layout') + ' <span aria-hidden="true">↓</span>'; }
+      const next = $('#success-whatsapp'); next.hidden = !phoneValid(whatsapp);
+      if (!next.hidden) next.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('Hello, I am ' + name + '. I just sent a request about ' + interest.toLowerCase() + ' at Valencia Town.');
       form.hidden = true; $('#enquiry-success').hidden = false;
       $('#enquiry-success').setAttribute('tabindex', '-1'); $('#enquiry-success').focus();
       track('generate_lead', {form: 'private-visit-modal'}); form.reset();
@@ -117,7 +140,7 @@
   planItems.forEach((item, index) => {
     if (!Number.isFinite(item.x) || !Number.isFinite(item.y) || item.x < 0 || item.x > 100 || item.y < 0 || item.y > 100) return;
     const button = document.createElement('button'); button.className = 'plan-hotspot'; button.dataset.plan = index;
-    button.style.left = item.x+'%'; button.style.top = item.y+'%'; button.textContent = String(index+1).padStart(2,'0');
+    button.style.left = item.x+'%'; button.style.top = item.y+'%'; const label = document.createElement('span'); label.textContent = String(index+1).padStart(2,'0'); button.append(label);
     button.setAttribute('aria-label', item.title); button.addEventListener('click', () => showPlan(index));
     $('#plan-hotspots').append(button);
   });
@@ -140,7 +163,7 @@
     }
     $$('.plan-hotspot').forEach(button => {
       const selected = Number(button.dataset.plan) === planIndex;
-      button.classList.toggle('active', selected); button.hidden = !selected; button.setAttribute('aria-pressed', String(selected));
+      button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected));
     });
   }
   $('[data-plan-prev]').addEventListener('click', () => showPlan(planIndex-1));
@@ -148,7 +171,7 @@
   const pan = $('.plan-pan'), zoomImage = $('#zoom-image');
   let zoom = 1;
   function setZoom(value, anchorX = pan.clientWidth/2, anchorY = pan.clientHeight/2) {
-    const next = Math.max(1, Math.min(4, value)); const ratio = next / zoom;
+    const next = Math.max(1, Math.min(2, value)); /* TODO: raise to 4 when a 3000px+ plan is supplied */ const ratio = next / zoom;
     const left = (pan.scrollLeft + anchorX)*ratio-anchorX;
     const top = (pan.scrollTop + anchorY)*ratio-anchorY;
     zoom = next; zoomImage.style.width = (zoom*100)+'%'; zoomImage.style.minHeight = (zoom*100)+'%';
@@ -172,12 +195,13 @@
   });
   ['pointerup','pointercancel','lostpointercapture'].forEach(type => pan.addEventListener(type, e => { pointers.delete(e.pointerId); previousDistance=0; if (!pointers.size) pan.classList.remove('dragging'); }));
   // Location never advances automatically: tap/keyboard controls give visitors time to read.
-  const film = $('#film-modal'), video = $('video', film);
-  $('[data-open-film]').addEventListener('click', () => {
-    openDialog(film); if (!video.getAttribute('src')) video.src='assets/video/walkthrough.mp4';
-    video.play().catch(() => {}); track('video_play', {video:'3d_walkthrough'});
-  });
-  film.addEventListener('close', () => { video.pause(); video.currentTime = 0; });
+  // Film section removed until a 1080p textured walkthrough exists (see data/project.json _TODO.film).
+  const film = $('#film-modal');
+  if (film) {
+    const video = $('video', film);
+    $('[data-open-film]')?.addEventListener('click', () => { openDialog(film); if (!video.getAttribute('src')) video.src='assets/video/walkthrough.mp4'; video.play().catch(() => {}); track('video_play', {video:'3d_walkthrough'}); });
+    film.addEventListener('close', () => { video.pause(); video.currentTime = 0; });
+  }
   const gallery = $('#gallery-modal'); const galleryItems = $$('[data-gallery]'); let galleryIndex = 0;
   function showGallery(index) {
     galleryIndex = (index+galleryItems.length)%galleryItems.length;

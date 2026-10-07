@@ -9,9 +9,9 @@
   "location": "Shahna · Indore–Ujjain corridor",
   "latitude": 22.902185,
   "longitude": 75.864609,
-  "SALES_PHONE": "",
-  "WHATSAPP_NUMBER": "",
-  "SALES_EMAIL": "",
+  "SALES_PHONE": "+91 90000 00000",
+  "WHATSAPP_NUMBER": "+91 90000 00000",
+  "SALES_EMAIL": "sales@valenciatown.in",
   "RERA_NUMBER": "",
   "formEndpoint": "https://script.google.com/macros/s/AKfycbwnNCz74HjqDYzwVD0q0TPSB8Cw9Yr-FzU9EmfDq0XTHyniRTZDg1wej91xEWx1Qvk0/exec",
   "distances": {
@@ -24,58 +24,108 @@
     {
       "title": "Grand entrance",
       "description": "A considered arrival. Architecture and landscape introduce the world within.",
-      "image": "grand-gate",
-      "x": null,
-      "y": null
+      "image": "entrance-road",
+      "x": 70,
+      "y": 87
     },
     {
       "title": "Clubhouse",
       "description": "A place to come together, share a conversation and celebrate the everyday.",
       "image": "aerial-clubhouse",
-      "x": null,
-      "y": null
+      "x": 53,
+      "y": 91
     },
     {
       "title": "Temple",
       "description": "A space for reflection, woven into the life of the community.",
       "image": "flower-garden",
-      "x": null,
-      "y": null
+      "x": 42,
+      "y": 76
     },
     {
       "title": "Forest garden",
       "description": "Forest-style gardens bring a greener rhythm to daily walks.",
       "image": "arch-walkway",
-      "x": null,
-      "y": null
+      "x": 48,
+      "y": 46
     },
     {
       "title": "Landscaped greens",
       "description": "Open lawns and landscaped spaces give everyday life room to breathe.",
       "image": "garden-lawn",
-      "x": null,
-      "y": null
+      "x": 55,
+      "y": 66
     },
     {
       "title": "Sports & recreation",
       "description": "Sports courts and children's play areas make space for movement and discovery.",
       "image": "sports-court",
-      "x": null,
-      "y": null
+      "x": 58,
+      "y": 36
     },
     {
       "title": "Residential precincts",
       "description": "Residential plots with space to imagine a home that feels entirely your own.",
       "image": "entrance-road",
-      "x": null,
-      "y": null
+      "x": 24,
+      "y": 59
     },
     {
       "title": "Internal roads",
       "description": "Wide internal roads connect homes, gardens and shared spaces.",
       "image": "internal-road",
-      "x": null,
-      "y": null
+      "x": 34,
+      "y": 68
     }
-  ]
+  ],
+  "brochureUrl": "assets/docs/valencia-town-brochure.pdf",
+  "layoutUrl": "assets/docs/valencia-town-layout.pdf",
+  "priceFrom": "TODO",
+  "paymentPlan": "Flexible payment plan",
+  "legalEntity": "TODO Legal entity name Pvt. Ltd.",
+  "developer": {
+    "name": "TODO Developer name",
+    "group": "TODO Group name",
+    "since": "TODO year established",
+    "pastProjects": [
+      "TODO Past project 1",
+      "TODO Past project 2"
+    ],
+    "salesGallery": "TODO Sales gallery address, Indore",
+    "hours": "10:00 am – 7:00 pm, all days",
+    "constructionStatus": "TODO e.g. Internal roads 60% complete (as of Month 2026)",
+    "possession": "TODO e.g. Plot registration from Month 2027",
+    "bankTieUps": [
+      "TODO Bank 1",
+      "TODO Bank 2"
+    ]
+  },
+  "testimonials": [
+    {
+      "quote": "TODO Buyer testimonial 1",
+      "name": "TODO Name",
+      "detail": "TODO City · Plot size"
+    },
+    {
+      "quote": "TODO Buyer testimonial 2",
+      "name": "TODO Name",
+      "detail": "TODO City · Plot size"
+    }
+  ],
+  "progressPhotos": [],
+  "_TODO": {
+    "SALES_PHONE": "Replace +91 90000 00000 with the real sales number (client).",
+    "WHATSAPP_NUMBER": "Replace with the WhatsApp Business number (client).",
+    "SALES_EMAIL": "Confirm the sales mailbox and domain (client).",
+    "priceFrom": "Starting price in lakh, e.g. \"24\" (client).",
+    "plots": "Confirm plot count: ~1,000 plots at 1,000–2,400 sq ft is 23–55 acres of saleable area before roads and amenities on a 48-acre site (client / architect).",
+    "developer": "Developer name, group, year, past projects, sales gallery address and hours (client).",
+    "legalEntity": "Registered legal entity shown in the footer (client).",
+    "testimonials": "Two or three real buyer quotes with consent (client).",
+    "progressPhotos": "Site progress photos and drone stills (client / photographer).",
+    "brochureUrl / layoutUrl": "Replace placeholder PDFs in assets/docs with the designed brochure and approved layout (client / design).",
+    "masterplan[].x/y": "Hotspot positions are estimated from the render; confirm against the approved plan (architect).",
+    "film": "Section removed until a 1080p textured walkthrough without captions or watermark exists (visualiser).",
+    "renders": "Clean 2560px exports without the vendor watermark for all renders; the current files are cropped (visualiser)."
+  }
 }

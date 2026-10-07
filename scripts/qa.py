@@ -26,7 +26,8 @@ async def run():
    assert await page.locator('img').evaluate_all('(images)=>images.every(img=>!img.getAttribute("src") || (img.complete&&img.naturalWidth>0))'),'Broken image'
    assert not await page.locator('#rera-line').is_visible()
    assert await page.locator('a[href*="99999"]').count()==0
-   assert await page.locator('video').get_attribute('src') is None,'Video preloaded'
+   assert await page.locator('.plan-hotspot').count()==8
+   assert await page.locator('#film-modal').count()==0,'Film section should stay removed until a clean render exists'
    await page.locator('[data-plan-next]').click();assert await page.locator('#plan-detail h3').inner_text()=='Clubhouse'
    await page.locator('[data-plan-prev]').click();assert await page.locator('#plan-detail h3').inner_text()=='Grand entrance'
    assert await page.locator('.route-list li').count()==4
@@ -48,11 +49,9 @@ async def run():
    await page.locator('#enquiry-form button[type="submit"]').click();await page.wait_for_function('document.querySelector("#form-status").textContent.includes("could not confirm")')
    assert await page.locator('#full-name').input_value()=='QA Failure Test'
    await page.screenshot(path=str(OUT/f'form-{width}.png'));await page.keyboard.press('Escape')
-   await page.locator('[data-open-film]').click();await page.wait_for_timeout(300);assert await page.locator('video').get_attribute('src')=='assets/video/walkthrough.mp4'
-   await page.keyboard.press('Escape');assert await page.locator('video').evaluate('v=>v.paused')
    assert errors==[],errors
    results.append({'width':width,'passed':True,'sections':section_results,'errors':errors})
-   print(f'{width}px: sections, no overflow, assets, masterplan, gallery, menus, mocked form success/failure and film passed',flush=True)
+   print(f'{width}px: sections, no overflow, assets, masterplan, gallery, menus, mocked form success/failure passed',flush=True)
    await context.close()
   (OUT/'results.json').write_text(json.dumps(results,indent=2),encoding='utf-8');await browser.close()
 asyncio.run(run())
