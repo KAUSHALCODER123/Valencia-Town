@@ -42,6 +42,7 @@ async def run():
    await page.locator('#full-name').fill('QA Local Test');await page.locator('#mobile-number').fill('9876543210')
    await page.route('https://script.google.com/**',lambda route: route.fulfill(status=200,content_type='application/json',body='{"ok":true}'))
    await page.locator('#enquiry-form button[type="submit"]').click();await page.locator('#enquiry-success').wait_for(state='visible')
+   await page.wait_for_function('document.activeElement && document.activeElement.id==="enquiry-success"',timeout=3000)
    await page.keyboard.press('Escape');await page.locator('#enquiry-modal').wait_for(state='hidden',timeout=3000)
    await page.locator('#visit [data-enquiry="Brochure"]').click();assert await page.locator('#interest').input_value()=='Brochure'
    await page.locator('#full-name').fill('QA Failure Test');await page.locator('#mobile-number').fill('+91 9876543210')

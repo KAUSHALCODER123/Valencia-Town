@@ -54,6 +54,11 @@
       if (dialog._opener?.isConnected) dialog._opener.focus({preventScroll: true});
     });
   });
+  // Escape always closes the open dialog, even when focus has drifted or the browser's close watcher declines.
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    const open = $('dialog[open]'); if (open) { event.preventDefault(); closeDialog(open); }
+  });
   const menu = $('#mobile-menu');
   $('.menu-toggle').addEventListener('click', () => openDialog(menu));
   $$('a[href^="#"]', menu).forEach(a => a.addEventListener('click', () => closeDialog(menu)));
