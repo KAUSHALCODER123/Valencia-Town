@@ -196,3 +196,30 @@ a span[aria-hidden],button span[aria-hidden]{font-size:max(12px,1em)}
 @media(min-width:1024px){.hero-content{bottom:70px}.hero h1{font-size:clamp(84px,6.6vw,104px)}}
 @media(min-width:1280px){.hero h1{font-size:clamp(96px,6.8vw,118px)}.hero-content{bottom:76px}}
 @media(min-width:1024px){.hero-foot{right:calc(var(--gutter) + 130px)}}
+
+/* contrast and decorative wordmark as a pseudo-element */
+:root{--muted:#4f564b}
+.footer::after{content:"VALENCIA";position:absolute;left:50%;bottom:-.08em;transform:translateX(-50%);font-family:var(--serif);font-size:17.5vw;line-height:1;letter-spacing:.04em;color:#f3efe70d;white-space:nowrap;pointer-events:none;user-select:none}
+
+/* WhatsApp glyph, location alignment */
+.wa-icon{width:18px;height:18px;flex:none}
+.mobile-visit .wa-icon{width:17px;height:17px}
+.desktop-whatsapp{display:none;align-items:center;gap:9px}
+.footer-whatsapp{gap:10px}
+.next-steps .text-link{gap:10px;justify-content:flex-start}
+.location-grid{align-items:start}
+.location-copy .route-list{margin-top:36px}
+.location-copy .fine{margin-top:14px}
+.location-copy .text-link{margin-top:28px}
+.journey{margin-top:48px}
+.journey .map-embed{margin-bottom:28px}
+.journey>.fine{text-align:center;margin-top:14px}
+@media(min-width:768px){.location-grid{grid-template-columns:1fr 1fr;gap:60px;align-items:start}.journey{margin-top:0;position:sticky;top:110px}.location .editorial{margin-top:26px}}
+@media(min-width:1024px){.desktop-whatsapp{display:inline-flex}.location-grid{gap:110px;min-height:0}}
+
+/* hero: signage render framing */
+.hero-image{object-position:50% 50%}
+@media(max-width:767px){.hero-image{object-position:50% 40%}}
+@media(min-width:1024px){.hero-image{object-position:55% 50%}.hero-shade{background:linear-gradient(90deg,#0f171299 0%,#0f171233 55%,#0f171200 100%),linear-gradient(180deg,#0f171233,#0f171200 30%,#0f1712b8)}}
+@media(min-width:1280px){.hero-image{object-position:55% 50%}}
+@media(min-width:1920px){.hero-image{object-position:55% 50%}}

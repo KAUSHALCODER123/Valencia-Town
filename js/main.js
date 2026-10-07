@@ -141,7 +141,7 @@
     if (!Number.isFinite(item.x) || !Number.isFinite(item.y) || item.x < 0 || item.x > 100 || item.y < 0 || item.y > 100) return;
     const button = document.createElement('button'); button.className = 'plan-hotspot'; button.dataset.plan = index;
     button.style.left = item.x+'%'; button.style.top = item.y+'%'; const label = document.createElement('span'); label.textContent = String(index+1).padStart(2,'0'); button.append(label);
-    button.setAttribute('aria-label', item.title); button.addEventListener('click', () => showPlan(index));
+    button.setAttribute('aria-label', String(index+1).padStart(2,'0') + ' ' + item.title); button.addEventListener('click', () => showPlan(index));
     $('#plan-hotspots').append(button);
   });
   function showPlan(index) {
