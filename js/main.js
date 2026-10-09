@@ -157,6 +157,7 @@
     $('#plan-detail .eyebrow').textContent = String(planIndex+1).padStart(2,'0')+' / '+String(planItems.length).padStart(2,'0');
     $('#plan-detail h3').textContent = item.title;
     $('#plan-detail p:not(.eyebrow)').textContent = item.description;
+    const progress = $('.walk-progress i'); if (progress) progress.style.width = ((planIndex+1)/planItems.length*100)+'%';
     const figure = $('#plan-image');
     if (figure && item.image && !figure.src.includes('/' + item.image + '-')) {
       figure.classList.add('is-switching');
@@ -225,6 +226,14 @@
     const dx=e.changedTouches[0].clientX-startX, dy=e.changedTouches[0].clientY-startY;
     if (Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)) showGallery(galleryIndex+(dx<0?1:-1));
   }, {passive:true});
+  /* Gallery strip arrows: scroll one card at a time and report the position. */
+  const strip = $('.gallery-strip'); const pos = $('.gallery-pos');
+  if (strip && pos) {
+    const cards = $$('.gallery-item', strip);
+    const report = () => { const i = Math.round(strip.scrollLeft / (cards[0].offsetWidth + 14)); pos.textContent = (Math.min(i, cards.length-1)+1) + ' of ' + cards.length; };
+    $$('[data-strip]').forEach(b => b.addEventListener('click', () => strip.scrollBy({left: Number(b.dataset.strip) * (cards[0].offsetWidth + 14), behavior: reduceMotion.matches ? 'auto' : 'smooth'})));
+    strip.addEventListener('scroll', report, {passive:true}); report();
+  }
   /* Story rail: marks the chapter under the middle of the viewport and matches its tone. */
   const rail = $('.story-rail'); const chapters = $$('[data-chapter]');
   if (rail && chapters.length) {
