@@ -225,4 +225,19 @@
     const dx=e.changedTouches[0].clientX-startX, dy=e.changedTouches[0].clientY-startY;
     if (Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)) showGallery(galleryIndex+(dx<0?1:-1));
   }, {passive:true});
+  /* Story rail: marks the chapter under the middle of the viewport and matches its tone. */
+  const rail = $('.story-rail'); const chapters = $$('[data-chapter]');
+  if (rail && chapters.length) {
+    let ticking = false;
+    const update = () => {
+      ticking = false; const mid = innerHeight / 2;
+      const current = chapters.find(el => { const r = el.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
+      rail.classList.toggle('is-visible', !!current);
+      if (!current) return;
+      rail.dataset.tone = current.dataset.tone;
+      $$('a', rail).forEach(a => a.classList.toggle('is-active', a.dataset.rail === current.dataset.chapter));
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive:true});
+    addEventListener('resize', update); update();
+  }
 })();

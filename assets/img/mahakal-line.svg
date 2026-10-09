@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" role="img" aria-label="Line illustration of the Mahakaleshwar temple shikhara above the Kshipra ghats at dusk" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <defs><mask id="mk-moon"><circle cx="318" cy="72" r="20" fill="#fff"/><circle cx="326" cy="65" r="17" fill="#000"/></mask></defs>
+  <circle cx="318" cy="72" r="20" fill="currentColor" stroke="none" mask="url(#mk-moon)"/>
+  <g fill="currentColor" stroke="none" opacity=".55"><circle cx="78" cy="92" r="1.3"/><circle cx="122" cy="58" r="1"/><circle cx="268" cy="132" r="1"/><circle cx="356" cy="152" r="1.3"/><circle cx="46" cy="176" r="1"/><circle cx="246" cy="44" r="1"/></g>
+  <path class="d mk-solid" pathLength="1" d="M70 330C70 292 86 262 104 250H112C130 262 146 292 146 330Z"/>
+  <path class="d" pathLength="1" d="M74 300Q108 305 142 300M84 272Q108 276 132 272"/>
+  <ellipse class="d" pathLength="1" cx="108" cy="246" rx="8" ry="3.5"/>
+  <path class="d" pathLength="1" d="M104 242C101 238 103 234 108 234C113 234 115 238 112 242M108 234V224"/>
+  <path class="d mk-solid" pathLength="1" d="M330 330C330 292 314 262 296 250H288C270 262 254 292 254 330Z"/>
+  <path class="d" pathLength="1" d="M326 300Q292 305 258 300M316 272Q292 276 268 272"/>
+  <ellipse class="d" pathLength="1" cx="292" cy="246" rx="8" ry="3.5"/>
+  <path class="d" pathLength="1" d="M296 242C299 238 297 234 292 234C287 234 285 238 288 242M292 234V224"/>
+  <path class="d mk-solid" pathLength="1" d="M140 330C140 250 160 170 192 128H208C240 170 260 250 260 330Z"/>
+  <path class="d" pathLength="1" d="M143.6 270.6Q200 278 256.4 270.6M154 214.7Q200 221 246 214.7M170.4 166Q200 171 229.6 166"/>
+  <path class="d" pathLength="1" d="M170 330C171 262 182 196 197 140M230 330C229 262 218 196 203 140M200 140V292"/>
+  <ellipse class="d" pathLength="1" cx="200" cy="121" rx="15" ry="6"/>
+  <path class="d" pathLength="1" d="M192 115C186 108 190 100 200 99C210 100 214 108 208 115M196 99V94H204V99M200 94V33"/>
+  <path class="d" pathLength="1" d="M191 51Q200 56 209 51M191 51C188 45 189 40 192 36M209 51C212 45 211 40 208 36M197 37L200 31L203 37"/>
+  <path class="mk-flag" d="M200 58C214 55 226 63 240 59L232 69L240 79C226 83 214 75 200 77Z"/>
+  <path class="d" pathLength="1" d="M186 330V308Q200 292 214 308V330"/>
+  <circle cx="200" cy="318" r="2.4" fill="currentColor" stroke="none"/>
+  <path class="d" pathLength="1" d="M50 330H350V344H50ZM50 344L36 354L22 366L8 378M350 344L364 354L378 366L392 378M36 354H364M22 366H378M8 378H392"/>
+  <g class="mk-diyas"><g transform="translate(70 351)"><path d="M-7 0Q0 7 7 0Z"/><path class="mk-flame" d="M0-2C-3-6-1-10 0-13C1-10 3-6 0-2Z"/></g><g transform="translate(330 351)"><path d="M-7 0Q0 7 7 0Z"/><path class="mk-flame" d="M0-2C-3-6-1-10 0-13C1-10 3-6 0-2Z"/></g><g transform="translate(118 363)"><path d="M-7 0Q0 7 7 0Z"/><path class="mk-flame" d="M0-2C-3-6-1-10 0-13C1-10 3-6 0-2Z"/></g><g transform="translate(282 363)"><path d="M-7 0Q0 7 7 0Z"/><path class="mk-flame" d="M0-2C-3-6-1-10 0-13C1-10 3-6 0-2Z"/></g></g>
+  <path class="d" pathLength="1" d="M0 398C40 392 80 404 120 398S200 392 240 398S320 404 400 398"/>
+  <path class="d" pathLength="1" opacity=".6" d="M20 412C60 406 100 418 140 412S220 406 260 412S340 418 380 412"/>
+  <path class="d" pathLength="1" opacity=".35" d="M60 426C100 420 140 432 180 426S260 420 300 426"/>
+  <path opacity=".5" d="M114 404H122M116 409H120M278 404H286M280 409H284"/>
+</svg>

@@ -30,7 +30,7 @@ async def run():
    assert await page.locator('#film-modal').count()==0,'Film section should stay removed until a clean render exists'
    await page.locator('[data-plan-next]').click();assert await page.locator('#plan-detail h3').inner_text()=='Clubhouse'
    await page.locator('[data-plan-prev]').click();assert await page.locator('#plan-detail h3').inner_text()=='Grand entrance'
-   assert await page.locator('.route-list li').count()==4
+   assert await page.locator('#mahakal .mahakal-svg').count()==1
    await page.locator('[data-open-plan]').first.click();await page.locator('[data-zoom="in"]').click();assert await page.locator('#zoom-level').inner_text()=='150%'
    assert await page.locator('#zoom-image').evaluate('el=>el.clientWidth>el.parentElement.clientWidth')
    await page.keyboard.press('Escape');assert not await page.locator('#plan-modal').is_visible()
