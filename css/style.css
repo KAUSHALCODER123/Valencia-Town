@@ -344,3 +344,58 @@ html{scroll-behavior:auto}
 /* Brand line in the hero; the Hindi salutation moves to the calling chapter. */
 .hero .display>span{font-size:.62em;letter-spacing:.04em;margin-bottom:.1em}
 .calling .hero-sign{margin-bottom:14px}
+
+/* The calling, reworked: the drawing is the scene. Its river runs across the chapter as a horizon; the facts become a day near Mahakal. */
+.calling{padding-bottom:0}
+.calling:before{left:28%;top:58%;width:min(120vw,900px);background:radial-gradient(circle,#d9a96124 0,#d9a9610d 40%,transparent 66%)}
+.calling-grid{align-items:end}
+.mahakal-art{width:min(100%,460px);margin:0 auto -6px}
+.mk-horizon path{stroke:var(--gold);stroke-width:1}
+.calling-copy{padding-bottom:calc(var(--bar) + 44px)}
+.day-title{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--gold);margin-top:28px}
+.day{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line)}
+.day li{display:grid;grid-template-columns:118px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.day-when{font-family:var(--serif);font-size:24px;font-weight:600;line-height:1;font-variant-numeric:lining-nums;white-space:nowrap}
+.day-what{font-size:16px;line-height:1.5;color:#f4eee3d9}
+.calling .actions{margin-top:26px}
+.calling .fine{max-width:48ch}
+@media(min-width:768px){.mahakal-art{width:100%;max-width:560px;margin-bottom:-8px}.day li{grid-template-columns:150px 1fr}}
+@media(min-width:1024px){
+.calling{padding-top:calc(var(--head) + 10px)}
+.calling-grid{grid-template-columns:1.05fr .95fr;gap:clamp(48px,6vw,100px);align-items:end}
+.mahakal-art{max-width:640px;margin:0 0 -10px}
+.calling-copy{padding-bottom:64px}
+.calling .display{font-size:clamp(52px,6svh,80px)}
+.calling .lede{font-size:17px;max-width:56ch;margin-top:16px}
+.day-title{font-size:23px;margin-top:22px}
+.day li{padding:11px 0}.day-when{font-size:25px}.day-what{font-size:16px}
+}
+@media(min-width:1024px) and (max-height:760px){.mahakal-art{max-width:480px}.day-title{display:none}.day li{padding:8px 0}.day-what{font-size:15px}}
+/* The drawing sizes itself to the screen so the ghats and river always sit above the fold. */
+.day li{grid-template-columns:96px 1fr}
+@media(min-width:768px){.day li{grid-template-columns:124px 1fr}}
+@media(min-width:1024px){
+.calling{min-height:100svh;display:flex;align-items:flex-end}
+.calling-grid{width:calc(100% - var(--gutter)*2);align-items:end}
+.mahakal-art{max-width:none;width:auto;margin:0 0 -10px;justify-self:start}
+.mahakal-svg{height:min(calc(100svh - var(--head) - 16px),780px);width:auto;max-width:100%}
+.calling-copy{padding-bottom:40px;max-width:600px}
+.calling .lede{font-size:17px;margin-top:14px}
+.day-title{margin-top:18px}.day li{padding:10px 0}
+}
+@media(min-width:1024px) and (max-height:760px){.calling-copy{padding-bottom:28px}.calling .display{font-size:clamp(44px,6.5svh,64px)}.day li{padding:7px 0}.day-when{font-size:21px}}
+/* Calling chapter fits the screen below the header; the river sits clear of the edge; copy tightened. */
+@media(min-width:1024px){
+.calling{min-height:calc(100svh - var(--head));padding-top:calc(var(--head) + 6px)}
+.mahakal-art{margin-bottom:34px}
+.mahakal-svg{height:min(calc(100svh - var(--head) - 70px),760px)}
+.calling-copy{padding-bottom:34px;max-width:620px}
+.calling .display{font-size:clamp(50px,5.6svh,72px)}
+.calling .lede{font-size:17px;margin-top:12px;max-width:60ch}
+.day-title{font-size:21px;margin-top:14px}.day{margin-top:8px}
+.day li{padding:8px 0;grid-template-columns:112px 1fr}.day-when{font-size:23px}.day-what{font-size:15px}
+.calling .actions{margin-top:18px}.calling .fine{max-width:420px;margin-top:12px;font-size:13px}
+}
+@media(min-width:1024px) and (max-height:760px){.calling .lede{font-size:15px;max-width:58ch}.day-what{font-size:14px}.day-when{font-size:20px}.day li{padding:6px 0}.calling .fine{font-size:12px;margin-top:8px}.calling .actions{margin-top:12px}.calling .btn{min-height:46px}.mahakal-svg{height:min(calc(100svh - var(--head) - 56px),760px)}.mahakal-art{margin-bottom:24px}}
+@media(min-width:1024px){.mahakal-svg{height:min(calc(100svh - var(--head) - 126px),740px)}}
+@media(min-width:1024px) and (max-height:760px){.mahakal-svg{height:min(calc(100svh - var(--head) - 112px),740px)}.calling .hero-sign{display:none}}
