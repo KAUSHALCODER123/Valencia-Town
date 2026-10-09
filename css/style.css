@@ -340,3 +340,7 @@ html{scroll-behavior:auto}
 @media(min-width:1024px){.calling{padding-top:calc(var(--head) + 16px);padding-bottom:44px}.calling .display{font-size:clamp(52px,6svh,80px)}.calling .lede{font-size:17px;max-width:62ch;margin-top:16px}.rituals li{font-size:19px;padding:9px 0 9px 24px}.rituals li:before{top:18px}.mahakal-art{max-width:460px}}
 
 .calling .fine,.frame .fine{max-width:60ch}
+
+/* Brand line in the hero; the Hindi salutation moves to the calling chapter. */
+.hero .display>span{font-size:.62em;letter-spacing:.04em;margin-bottom:.1em}
+.calling .hero-sign{margin-bottom:14px}
