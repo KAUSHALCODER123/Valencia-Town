@@ -200,7 +200,7 @@ function updatePage() {
   pageTicking = false;
   const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-  fills.forEach(i => { i.style.transform = 'scaleX(' + p.toFixed(4) + ')'; });
+  fills.forEach(i => { i.style.transform = (i.parentElement.classList.contains('hud-line') ? 'scaleY(' : 'scaleX(') + p.toFixed(4) + ')'; });
   if (heroFill) heroFill.style.transform = 'scaleX(' + Math.min(1, scrollY / (hero.offsetHeight * .8)).toFixed(3) + ')';
   html.classList.toggle('is-past-hero', hero.getBoundingClientRect().bottom < innerHeight * .35);
   html.classList.toggle('is-at-footer', footerEl.getBoundingClientRect().top < innerHeight * .9);

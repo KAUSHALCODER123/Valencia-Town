@@ -37,15 +37,15 @@ def hud():
 def bars():
     call = phone_link('bar-call', U['bar_call']) if phone_ok('PHONE') else (f'<a class="bar-call" href="#" aria-disabled="true">{ph("PHONE")}</a>' if DEV else '')
     whats = wa_link('bar-wa', WA_ICON + U['bar_whatsapp'] + ' ') if (phone_ok('WHATSAPP_NUMBER') or DEV) else ''
-    return f'''<div class="mobile-bar">{call}{whats}<button class="bar-visit" type="button" data-enquiry="Site Visit">{U["bar_visit"]}</button></div>{wa_link("float-wa", WA_ICON + "<span>" + U["whatsapp"] + "</span>")}'''
+    return f'''<div class="mobile-bar">{call}{whats}<button class="bar-visit" type="button" data-enquiry="Site Visit">{U["bar_visit"]}</button></div>{wa_link("float-wa", WA_ICON + "<span>" + U["whatsapp"] + "</span>").replace('class="float-wa"', 'class="float-wa" aria-label="' + U["whatsapp"] + '"')}'''
 
 def footer():
     F = C['footer']
     rera = ph('MP_RERA_NUMBER'); dev = ph('DEVELOPER_NAME'); legal = ph('LEGAL_ENTITY')
     facts = ''.join(x for x in [
-        f'<p><span>{F["rera"]}</span> {rera}</p>' if rera else '',
-        f'<p><span>{C["trust"]["developer"]}</span> {dev}</p>' if dev else '',
-        f'<p><span>{C["trust"]["legal"]}</span> {legal}</p>' if legal else ''])
+        f'<p><span class="fk">{F["rera"]}</span> {rera}</p>' if rera else '',
+        f'<p><span class="fk">{C["trust"]["developer"]}</span> {dev}</p>' if dev else '',
+        f'<p><span class="fk">{C["trust"]["legal"]}</span> {legal}</p>' if legal else ''])
     contact = ''.join([phone_link('footer-link'), email_link('footer-link'), wa_link('footer-link whatsapp', WA_ICON + U['whatsapp'])])
     return f'''<footer class="footer" id="contact"><div class="wrap footer-grid"><div class="footer-brand">{mark("footer-mark")}<p class="footer-wordmark">Valencia Town</p><p class="footer-tagline">{P["tagline"]}</p><address>{F["address"]}</address><a class="link" href="{MAPS}" target="_blank" rel="noopener">{F["directions"]}</a></div><div class="footer-contact"><p>{F["hours"]}</p><div class="footer-links">{contact}</div>{primary()}</div><div class="footer-facts">{facts}</div></div><div class="wrap footer-bottom"><nav class="footer-nav" aria-label="Footer">{nav_links()}</nav><p class="footer-disclaimer">{F["disclaimer"]}</p><p class="footer-copy">© <span id="year">2026</span> Valencia Town.{(" " + legal + ".") if legal else ""} <button class="text-btn" type="button" data-privacy>{F["privacy"]}</button> <button class="text-btn" type="button" data-terms>{F["terms"]}</button></p></div></footer>'''
 

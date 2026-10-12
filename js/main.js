@@ -204,7 +204,7 @@ function updatePage() {
   pageTicking = false;
   const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-  fills.forEach(i => { i.style.transform = 'scaleX(' + p.toFixed(4) + ')'; });
+  fills.forEach(i => { i.style.transform = (i.parentElement.classList.contains('hud-line') ? 'scaleY(' : 'scaleX(') + p.toFixed(4) + ')'; });
   if (heroFill) heroFill.style.transform = 'scaleX(' + Math.min(1, scrollY / (hero.offsetHeight * .8)).toFixed(3) + ')';
   html.classList.toggle('is-past-hero', hero.getBoundingClientRect().bottom < innerHeight * .35);
   html.classList.toggle('is-at-footer', footerEl.getBoundingClientRect().top < innerHeight * .9);
@@ -319,6 +319,18 @@ motion(() => {
     tl.to(masks, {yPercent: 0, duration: 1.2, stagger: .12}).from(fadeUps, {opacity: 0, y: 16, duration: 1, stagger: .1}, .3);
   }
   return () => { tl.progress(1); gsap.set(masks, {clearProps: 'all'}); };
+});
+
+/* 20-mahakal.js */
+/* Chapter II: the shikhara draws itself (scrubbed), the sky moves to dawn, timeline dots light in order. */
+motion(() => {
+  const section = $('#mahakal'); if (!section) return;
+  const paths = $$('.shikhara-svg .dr', section);
+  paths.forEach(p => { const l = Math.ceil(p.getTotalLength()); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; });
+  gsap.to(paths, {strokeDashoffset: 0, ease: 'none', stagger: .02, scrollTrigger: {trigger: '.shikhara', start: 'top 80%', end: 'bottom 45%', scrub: true}});
+  gsap.to($('.sky-dawn', section), {opacity: 1, ease: 'none', scrollTrigger: {trigger: section, start: 'top 60%', end: 'bottom bottom', scrub: true}});
+  const triggers = $$('.timeline li', section).map(li => ScrollTrigger.create({trigger: li, start: 'top 78%', onEnter: () => li.classList.add('is-lit')}));
+  return () => { paths.forEach(p => { p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; }); triggers.forEach(t => t.kill()); };
 });
 
 /* 99-run.js */

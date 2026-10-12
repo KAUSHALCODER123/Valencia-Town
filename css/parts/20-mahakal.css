@@ -1,0 +1,30 @@
+/* Chapter II: Mahakal. Night sky that warms to a low-saturation dawn; vermilion appears only here (flag, 2028). */
+.mahakal{overflow:hidden;background:var(--ink)}
+.sky,.sky-dawn{position:absolute;inset:0;pointer-events:none}
+.sky{background:radial-gradient(ellipse 60% 40% at 50% 100%,rgba(226,168,75,.10),transparent 70%),var(--ink)}
+.sky-dawn{opacity:.75;background:linear-gradient(180deg,#0B0A09 0%,#1A1411 38%,#33241D 72%,#4A3328 100%)}
+.motion .sky-dawn{opacity:0}
+.mahakal .wrap{position:relative}
+.deva{font:400 clamp(20px,2.2vw,28px)/1.5 var(--deva);color:var(--amber);margin:-4px 0 14px}
+.mahakal-grid{display:grid;gap:40px;margin-top:56px;align-items:center}
+.shikhara{margin:0 auto;width:min(100%,520px)}
+.shikhara-svg{width:100%;height:auto;max-height:calc(100svh - var(--head) - 48px);overflow:visible}
+.shikhara-svg .dr{stroke:var(--amber);stroke-width:1.25;vector-effect:non-scaling-stroke}
+.shikhara-svg .sun{stroke-opacity:.28}
+.shikhara-svg .flag{stroke:var(--vermilion);stroke-width:1.5}
+.time-block+.time-block{margin-top:40px}
+.time-block h3{font:italic 500 clamp(24px,2.4vw,32px)/1.2 var(--serif);margin-bottom:16px}
+.timeline{position:relative;display:grid;gap:0;border-left:1px solid var(--line);margin-left:5px}
+.timeline li{position:relative;display:grid;grid-template-columns:minmax(96px,auto) 1fr;gap:4px 18px;padding:12px 0 12px 24px}
+.timeline li:before{content:'';position:absolute;left:-6px;top:20px;width:11px;height:11px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(226,168,75,.16);transition:background-color .8s var(--ease),box-shadow .8s var(--ease)}
+.timeline li.is-key:before{background:var(--vermilion);box-shadow:0 0 0 4px rgba(181,67,47,.22)}
+.motion .timeline li:not(.is-lit):before{background:var(--night);box-shadow:0 0 0 1px var(--muted)}
+.t-when{font:500 13px/1.6 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+.is-key .t-when{color:#E8826E}
+.t-what{color:#EDE6DA}
+.mahakal .actions{margin-top:40px}
+@media(max-width:479px){.timeline li{grid-template-columns:1fr}}
+@media(min-width:1024px){
+  .mahakal-grid{grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,110px);margin-top:72px}
+  .shikhara{width:100%;max-width:600px;position:sticky;top:calc(var(--head) + 24px)}
+}
