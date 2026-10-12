@@ -57,7 +57,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .link,.text-btn,.footer-nav a,.menu-nav a,.footer-link{background:linear-gradient(var(--amber),var(--amber)) 0 100%/0 1px no-repeat;transition:background-size .8s var(--ease)}
 .link:hover,.text-btn:hover,.footer-nav a:hover,.footer-link:hover{background-size:100% 1px}
 .link{display:inline-flex;align-items:center;min-height:44px;font-weight:500}
-.text-btn{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--amber);min-height:24px}
+.text-btn{display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--amber);min-height:44px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:30px}
 .btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border:1px solid rgba(226,168,75,.6);font:500 15px/1.2 var(--sans);letter-spacing:.03em;color:var(--bone);transition:border-color .6s var(--ease),background-color .6s var(--ease)}
 .btn-ghost:hover{border-color:var(--amber);background:rgba(226,168,75,.08)}
@@ -66,7 +66,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .header{position:fixed;inset:0 0 auto;z-index:40;height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);background:var(--ink);transition:transform .8s var(--ease)}
 .wordmark{display:flex;align-items:center;gap:10px;font:500 19px/1 var(--serif);letter-spacing:.04em;min-height:44px}
 .brand-mark svg{width:24px;height:auto}
-.header-label{position:absolute;left:50%;transform:translateX(-50%);font:500 11px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .6s var(--ease);display:none}
+.header-label{position:absolute;left:50%;transform:translateX(-50%);font:500 12px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .6s var(--ease);display:none}
 .is-past-hero .header-label{opacity:0}
 .header-end{display:flex;align-items:center;gap:22px}
 .header-phone,.header-cta{display:none}

@@ -58,7 +58,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .link,.text-btn,.footer-nav a,.menu-nav a,.footer-link{background:linear-gradient(var(--amber),var(--amber)) 0 100%/0 1px no-repeat;transition:background-size .8s var(--ease)}
 .link:hover,.text-btn:hover,.footer-nav a:hover,.footer-link:hover{background-size:100% 1px}
 .link{display:inline-flex;align-items:center;min-height:44px;font-weight:500}
-.text-btn{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--amber);min-height:24px}
+.text-btn{display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--amber);min-height:44px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:30px}
 .btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border:1px solid rgba(226,168,75,.6);font:500 15px/1.2 var(--sans);letter-spacing:.03em;color:var(--bone);transition:border-color .6s var(--ease),background-color .6s var(--ease)}
 .btn-ghost:hover{border-color:var(--amber);background:rgba(226,168,75,.08)}
@@ -67,7 +67,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .header{position:fixed;inset:0 0 auto;z-index:40;height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 var(--gutter);background:var(--ink);transition:transform .8s var(--ease)}
 .wordmark{display:flex;align-items:center;gap:10px;font:500 19px/1 var(--serif);letter-spacing:.04em;min-height:44px}
 .brand-mark svg{width:24px;height:auto}
-.header-label{position:absolute;left:50%;transform:translateX(-50%);font:500 11px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .6s var(--ease);display:none}
+.header-label{position:absolute;left:50%;transform:translateX(-50%);font:500 12px/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .6s var(--ease);display:none}
 .is-past-hero .header-label{opacity:0}
 .header-end{display:flex;align-items:center;gap:22px}
 .header-phone,.header-cta{display:none}
@@ -247,7 +247,7 @@ body.modal-open{overflow:hidden}
 .hero-title .mask{padding-bottom:.08em}
 .hero-sub{margin-top:10px;font-size:clamp(22px,2.2vw,32px)}
 .hero-actions{position:absolute;z-index:2;left:0;right:0;bottom:calc(var(--bar) + clamp(20px,4vh,44px));display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 var(--gutter)}
-.hero-bar{position:absolute;z-index:3;left:0;right:0;bottom:0;height:var(--bar);background:var(--ink);display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);font:500 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.hero-bar{position:absolute;z-index:3;left:0;right:0;bottom:0;height:var(--bar);background:var(--ink);display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);font:500 12px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 .hero-bar-start,.hero-bar-end{display:none}
 .hero-bar-mid{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.22em}
 .sound-toggle{min-height:44px;font:inherit;letter-spacing:inherit;color:var(--bone)}
@@ -272,20 +272,31 @@ body.modal-open{overflow:hidden}
 
 /* Intro: a one-time, ≤1.2s title card. The render underneath stays visible (it is the LCP). */
 .intro-mark{position:absolute;z-index:4;left:50%;top:50%;width:88px;transform:translate(-50%,-50%);pointer-events:none;display:none}
-.intro .intro-mark{display:block}
-.intro-mark path{fill:none;stroke:var(--amber);stroke-width:1.2}
-.intro .hero-copy,.intro .hero-actions{opacity:0}
-.intro .header{transform:translateY(-100%)}
-.intro .hero-bar{transform:translateY(100%)}
-/* Before the script takes over, hold the title below its masks */
-.pre .hero-title .mask-in{transform:translateY(110%)}
-.pre .hero-sub,.pre .hero-actions{opacity:0}
-/* Failsafe if the script never runs */
-.pre .hero-title .mask-in,.pre .hero-sub,.pre .hero-actions{animation:vt-show 0s 2.4s forwards}
-.intro .hero-copy,.intro .hero-actions,.intro .header,.intro .hero-bar{animation:vt-show 0s 2.4s forwards}
-.intro .intro-mark{animation:vt-hide 0s 2.4s forwards}
-@keyframes vt-show{to{opacity:1;transform:none}}
-@keyframes vt-hide{to{opacity:0}}
+.intro-mark path{fill:none;stroke:var(--amber);stroke-width:1.2;vector-effect:non-scaling-stroke}
+/* Hero entrance in CSS so it never waits for the motion scripts (they load after the page). Fill-mode "both"
+   means the end state is the natural state: nothing stays hidden if the script fails. */
+.pre .hero-title .mask-in{animation:vt-rise 1.2s var(--ease) both}
+.pre .hero-title .mask:nth-child(2) .mask-in{animation-delay:.12s}
+.pre .hero-sub,.pre .hero-actions{animation:vt-fade 1s var(--ease) .3s both}
+.pre .hero-img{animation:vt-burns 8s cubic-bezier(.25,.46,.45,.94) both}
+/* First visit in a session: a ≤1.2s title card, skippable */
+.intro .intro-mark{display:block;animation:vt-hide .3s .55s both}
+.intro .intro-mark path{stroke-dasharray:1;stroke-dashoffset:1;animation:vt-draw .5s cubic-bezier(.65,0,.35,1) both}
+.intro .intro-mark path+path{animation-delay:.06s}
+.intro .header{animation:vt-drop .5s var(--ease) .25s both}
+.intro .hero-bar{animation:vt-lift .5s var(--ease) .25s both}
+.intro .hero-title .mask-in{animation-duration:.55s;animation-delay:.55s}
+.intro .hero-title .mask:nth-child(2) .mask-in{animation-delay:.67s}
+.intro .hero-sub,.intro .hero-actions{animation-duration:.5s;animation-delay:.65s}
+.intro-skip .intro-mark{display:none}
+.intro-skip .hero-title .mask-in,.intro-skip .hero-sub,.intro-skip .hero-actions,.intro-skip .header,.intro-skip .hero-bar{animation:none}
+@keyframes vt-rise{from{transform:translateY(110%)}to{transform:none}}
+@keyframes vt-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes vt-burns{from{transform:scale(1.188)}to{transform:scale(1.1)}}
+@keyframes vt-draw{to{stroke-dashoffset:0}}
+@keyframes vt-drop{from{transform:translateY(-100%)}to{transform:none}}
+@keyframes vt-lift{from{transform:translateY(100%)}to{transform:none}}
+@keyframes vt-hide{to{opacity:0;visibility:hidden}}
 
 /* Stats: four across the full width */
 .stats{background:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -435,8 +446,8 @@ body.modal-open{overflow:hidden}
 .plan-zoom{position:relative;transform-origin:50% 40%}
 .plan-img{width:100%;height:auto;filter:brightness(.72) contrast(1.08) saturate(.85)}
 .zones{position:absolute;inset:0}
-.zone{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-11px,-11px)}
-.z-dot{position:relative;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(7,7,7,.75);border:1px solid var(--amber);font:500 11px/1 var(--sans);color:var(--bone);transition:background-color .8s var(--ease),color .8s var(--ease)}
+.zone{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-12px,-12px)}
+.z-dot{position:relative;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(7,7,7,.75);border:1px solid var(--amber);font:500 12px/1 var(--sans);color:var(--bone);transition:background-color .8s var(--ease),color .8s var(--ease)}
 .z-dot:after{content:'';position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--amber);opacity:0;transform:scale(.6);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .z-label{display:none;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;background:rgba(7,7,7,.72);padding:5px 8px;color:var(--bone);white-space:nowrap;opacity:.75;transition:opacity .8s var(--ease)}
 .zone.is-active .z-dot{background:var(--amber);color:var(--ink)}

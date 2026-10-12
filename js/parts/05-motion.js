@@ -5,11 +5,13 @@ const EASE = 'expo.out';
 const motionFns = [], desktopFns = [];
 const motion = fn => motionFns.push(fn);
 const motionDesktop = fn => desktopFns.push(fn);
-const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
-const finishIntro = () => { html.classList.remove('intro', 'pre'); try { sessionStorage.setItem('vt-intro', '1'); } catch {} };
+/* Intro classes are only removed after the CSS entrance has finished (its end state is the natural state). */
+const finishIntro = () => { html.classList.remove('intro'); try { sessionStorage.setItem('vt-intro', '1'); } catch {} };
+setTimeout(() => html.classList.remove('pre', 'intro-skip'), 8200);
 let lenis = null;
-if (!hasGsap) finishIntro();
-else gsap.registerPlugin(ScrollTrigger);
+/* GSAP, ScrollTrigger and Lenis load after the page, so they never compete with the hero render. */
+const loadScript = src => new Promise((ok, fail) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = fail; document.head.append(s); });
+const loadMotion = () => project.vendor.reduce((p, src) => p.then(() => loadScript(src)), Promise.resolve());
 
 /* Lenis smooth scroll, only when motion is welcome. */
 function startLenis() {
