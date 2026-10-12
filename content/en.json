@@ -1,0 +1,207 @@
+{
+  "lang": "en",
+  "meta": {
+    "title": "Valencia Town | The Address of Tomorrow",
+    "og_title": "Valencia Town: The Address of Tomorrow",
+    "description": "Forty-eight acres of residential plots at Shahna on the Indore–Ujjain Road, forty minutes from Shri Mahakaleshwar, Ujjain. Mahakal is calling you home."
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "close_menu": "Close menu",
+    "primary": "Book a site visit",
+    "primary_mahakal": "Plan your darshan & site visit",
+    "secondary": "Get price list & layout",
+    "bar_call": "Call",
+    "bar_whatsapp": "WhatsApp",
+    "bar_visit": "Book a visit",
+    "whatsapp": "WhatsApp",
+    "artist": "Artist’s impression",
+    "chapter_of": "Chapter",
+    "lang_en": "EN",
+    "lang_hi": "हिंदी",
+    "wa_message": "Hello, I would like to learn more about Valencia Town."
+  },
+  "nav": [
+    ["#mahakal", "Mahakal"],
+    ["#location", "The Road"],
+    ["#growth", "Growth"],
+    ["#tomorrow", "Tomorrow"],
+    ["#plan", "The Plan"],
+    ["#life", "Life"],
+    ["#plots", "Plots"],
+    ["#visit", "Visit"]
+  ],
+  "hero": {
+    "label": "Chapter I · Arrival",
+    "title": ["The address", "of <em>tomorrow</em>"],
+    "sub": "Forty minutes from Mahakal.",
+    "begin": "Begin the story",
+    "film": "Watch the film",
+    "scroll": "Scroll to begin",
+    "bar": "48 Acres · Shahna · Indore–Ujjain Road",
+    "sound": "Sound",
+    "alt": "Valencia Town sales gallery at dusk with its illuminated signage wall, artist’s impression",
+    "stats": {"acres": "Acres", "plots": "Plots", "minutes": "Min to Mahakaleshwar", "rera": "MP RERA"}
+  },
+  "mahakal": {
+    "label": "Chapter II · Mahakal",
+    "deva": "महाकाल के पास, कल का पता।",
+    "title": ["<em>Mahakal</em>", "is calling"],
+    "sub": "you home.",
+    "lede": "Some come for a darshan. Some stay for a lifetime. Every year, crores of devotees travel to Ujjain; at Valencia Town the dawn Bhasma Aarti is a morning drive.",
+    "day_title": "A day, forty minutes from darshan",
+    "day": [
+      ["4 am", "Bhasma Aarti at Shri Mahakaleshwar, the only one of its kind among the twelve Jyotirlingas."],
+      ["~5:30 am", "The drive home along the Indore–Ujjain Road, about forty minutes."],
+      ["Evening", "Back for the evening aarti, and home in time for dinner."]
+    ],
+    "life_title": "A life near Mahakal",
+    "life": [
+      ["Shravan", "Every Shravan Monday within reach, not a journey away."],
+      ["Mahashivratri", "The great night of Shiva, a short drive from home."],
+      ["Nag Panchami", "Festival darshan without the long trip."],
+      ["2028", "Simhastha, the Kumbh of Ujjain, at your doorstep."]
+    ],
+    "fine": "Drive times are approximate and vary with traffic and festival crowds. Not an assurance of future value."
+  },
+  "road": {
+    "label": "Chapter III · The Road",
+    "title": ["Between Indore", "and <em>Ujjain</em>"],
+    "sub": "On the road itself.",
+    "lede": "Shahna sits on the Indore–Ujjain Road. Indore’s hospitals, schools and airport on one side. Mahakal’s Ujjain on the other.",
+    "alt": "Wide, tree-lined internal road at Valencia Town, artist’s impression",
+    "map_label": "Drive times from Valencia Town along the Indore–Ujjain Road",
+    "stops": {
+      "indore": ["Indore", "Vijay Nagar and the airport"],
+      "saims": ["Sri Aurobindo Hospital", "SAIMS"],
+      "home": ["Valencia Town", "Shahna"],
+      "ujjain": ["Mahakaleshwar", "Ujjain"]
+    },
+    "min": "min",
+    "directions": "Get directions",
+    "map": "Show the map here",
+    "map_title": "Map of Valencia Town at Shahna on the Indore–Ujjain Road",
+    "fine": "Drive times are approximate and vary with traffic and route."
+  },
+  "growth": {
+    "label": "Chapter IV · Growth",
+    "title": ["Godrej is building", "<em>on the same road</em>"],
+    "sub": "Read this one carefully.",
+    "lede": "Godrej Properties has launched {project}, a plotted development of about {acres} acres on the Indore–Ujjain Road. When a national developer commits to a corridor, it is a signal worth noting. Valencia Town sits on the same corridor, at Shahna.",
+    "stat_acres": "~{acres} acres",
+    "stat_km": "{km} km from Valencia Town",
+    "pin_godrej": "Godrej Greenview Estate",
+    "pin_home": "Valencia Town",
+    "same_road": "Indore–Ujjain Road",
+    "proof_kicker": "Source",
+    "proof_link": "Read the source",
+    "fine": "Valencia Town is an independent project and is not affiliated with, endorsed by or developed by Godrej Properties Ltd. “Godrej” and “{project}” are names of their respective owner, referenced only to describe nearby development, based on publicly available information. Not an assurance of future value or returns."
+  },
+  "tomorrow": {
+    "label": "Chapter V · Tomorrow",
+    "title": ["The address", "of <em>tomorrow</em>"],
+    "sub": "What is already on the calendar.",
+    "lede": "Tomorrow is not a slogan. These are the dates already set around Valencia Town, each with its source.",
+    "today_when": "Today",
+    "today_title": "Plots open at Valencia Town",
+    "today_line": "Residential plots of 1,000–2,400 sq ft at Shahna, visits by appointment.",
+    "source": "Source",
+    "fine": "Not an assurance of future value or returns. Dates are as published by the sources linked and may change."
+  },
+  "plan": {
+    "label": "Chapter VI · The Plan",
+    "title": ["Forty-eight acres,", "<em>planned as one</em>"],
+    "sub": "Every street, garden and court, drawn together.",
+    "lede": "Residential plots from 1,000–2,400 square feet, with a clubhouse, a temple, forest gardens, sports courts, children’s play areas and wide internal roads.",
+    "alt": "Aerial masterplan render of Valencia Town, artist’s impression",
+    "explore": "Explore the masterplan",
+    "note": "Indicative layout. Zone positions are approximate."
+  },
+  "life": {
+    "label": "Chapter VII · Life",
+    "title": ["Room to", "<em>breathe</em>"],
+    "sub": "Five scenes from an ordinary day.",
+    "scenes": [
+      ["entrance-road", "Arrival", "A considered arrival. Architecture and landscape introduce the world within.", "Tree-lined entrance road into Valencia Town, artist’s impression"],
+      ["garden-lawn", "Gardens", "Open lawns and forest-style gardens give everyday life room to breathe.", "Open lawns and landscaped gardens at Valencia Town, artist’s impression"],
+      ["aerial-clubhouse", "Clubhouse", "Familiar faces and shared celebrations, at the heart of the township.", "Valencia Town clubhouse and its landscaped approach from above, artist’s impression"],
+      ["kids-play-area", "Children & families", "Space for children to grow, families to connect and generations to belong.", "Children’s play spaces and tree-lined paths at Valencia Town, artist’s impression"],
+      ["sports-court", "Sports", "Courts and open ground for movement and play, close to home.", "Sports court with players at Valencia Town, artist’s impression"]
+    ],
+    "gallery_title": "A closer look",
+    "gallery_lede": "Four more views of the township as it is planned. Drag, swipe or use the arrows; tap to enlarge.",
+    "gallery": [
+      ["flower-garden", "Gardens in bloom"],
+      ["arch-walkway", "The arch walk at dusk"],
+      ["clubhouse-pool", "The clubhouse and reflecting pool"],
+      ["grand-gate", "The grand entrance"]
+    ],
+    "drag": "Drag",
+    "prev": "Previous image",
+    "next": "Next image",
+    "enlarge": "Enlarge"
+  },
+  "plots": {
+    "label": "Chapter VIII · Plots",
+    "title": ["Space to", "<em>build</em>"],
+    "sub": "life, your way.",
+    "unit": "sq ft",
+    "price": "Plots from {price}",
+    "lede": "Residential plots in a gated township, with a flexible payment plan. Sizes are approximate and availability changes, so ask the team what is open today.",
+    "slider_label": "Compare plot sizes",
+    "plot_caption": "Your plot",
+    "house_caption": "Reference: 20 × 30 ft house footprint (600 sq ft)",
+    "note": "Illustrative proportions only. Actual plot dimensions vary; see the layout."
+  },
+  "trust": {
+    "label": "Chapter IX · Trust",
+    "title": ["Check", "<em>everything</em>"],
+    "sub": "Before you decide.",
+    "developer": "Developer",
+    "legal": "Legal entity",
+    "rera": "MP RERA",
+    "rera_link": "View on the MP RERA portal",
+    "approvals": "Approvals",
+    "scale": "Project scale",
+    "scale_value": "Communicated project scale: {investment}.",
+    "documents": "Documents",
+    "brochure": "Brochure (PDF)",
+    "layout": "Layout (PDF)",
+    "track": "Track record",
+    "sales": "Sales gallery"
+  },
+  "visit": {
+    "label": "Chapter X · Visit",
+    "title": ["Come and", "<em>see</em>"],
+    "sub": "Valencia.",
+    "lede": "Walk the avenues. Stand on your plot. Then drive on to Ujjain for darshan. Visits by appointment, 10 am – 7 pm, every day.",
+    "alt": "Valencia Town entrance gate at sunset, artist’s impression"
+  },
+  "faq": {
+    "label": "Epilogue · Questions",
+    "title": ["Questions,", "<em>answered</em>"],
+    "lede": "The essentials in brief. For anything else, the Valencia team is a phone call away.",
+    "items": [
+      ["Where is Valencia Town?", "Valencia Town is at Shahna on the Indore–Ujjain Road in Madhya Pradesh, between Indore and Ujjain."],
+      ["How far is it from Mahakaleshwar Temple?", "About {ujjain} minutes by road to Ujjain, home of the Mahakaleshwar Jyotirlinga. Families visiting from anywhere in India can combine a darshan with a site visit. Drive times vary with traffic, route and festival crowds."],
+      ["What plot sizes are offered?", "Residential plots of approximately 1,000–2,400 square feet. The sales team can confirm current sizes and availability."],
+      ["What is planned within the township?", "A clubhouse, temple, children’s play areas, forest-style gardens, sports courts, landscaped lawns, a senior citizens’ library, meeting and women’s activity zones, wide internal roads and gated security. Specifications and layouts are indicative and subject to change."],
+      ["How well connected is it to Indore?", "Sri Aurobindo Hospital is about {saims} minutes away, and Vijay Nagar and Indore Airport about {vijay} minutes. Times vary with traffic and route."],
+      ["Is Valencia Town connected to the Godrej project nearby?", "No. Godrej Properties is developing {godrej}, about {acres} acres of plots on the same Indore–Ujjain Road. Valencia Town is an independent project and is not affiliated with Godrej."],
+      ["How do I arrange a visit?", "Use any “Book a site visit” button and leave your name and mobile number. The team will call to fix a time, and can also send the brochure, layout or price list."],
+      ["Where can I check approvals and project details?", "APPROVALS_ANSWER"]
+    ],
+    "approvals_with_rera": "Valencia Town is registered with MP RERA under {rera}. You can verify it on the MP RERA portal: {rera_link}. The developer, legal entity, approvals and documents are listed in the Trust chapter above.",
+    "approvals_without_rera": "The developer, approvals and project documents are listed in the Trust chapter above. Ask the sales team for the MP RERA registration and current approvals before making a decision."
+  },
+  "footer": {
+    "address": "Shahna, Indore–Ujjain Road, Madhya Pradesh",
+    "directions": "Get directions",
+    "hours": "Visits by appointment, 10 am – 7 pm, every day.",
+    "rera": "MP RERA No.",
+    "disclaimer": "Images are artist’s impressions for representation purposes. Specifications, amenities, layouts and drive times are indicative and subject to change.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
+}

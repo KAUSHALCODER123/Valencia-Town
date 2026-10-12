@@ -1,0 +1,59 @@
+{
+  "_readme": "Single source for every value that still needs client confirmation. Empty string or empty list = not known yet. `python scripts/build.py --dev` shows each missing value on the page as [KEY NAME]; the normal build (what Vercel serves) leaves the element out and prints a launch checklist. Never fill a value without a source.",
+
+  "ENABLE_HINDI": false,
+
+  "DEVELOPER_NAME": "",
+  "DEVELOPER_ABOUT": "",
+  "DEVELOPER_TRACK_RECORD": [],
+  "LEGAL_ENTITY": "",
+  "MP_RERA_NUMBER": "",
+  "RERA_URL": "",
+  "APPROVALS": [],
+  "_APPROVALS_format": [{"name": "e.g. T&CP layout approval", "reference": "e.g. order number and date"}],
+
+  "PHONE": "",
+  "WHATSAPP_NUMBER": "",
+  "EMAIL": "",
+  "SALES_GALLERY_ADDRESS": "",
+
+  "PRICE_FROM": "",
+  "PAYMENT_PLAN_SUMMARY": "",
+
+  "GODREJ_PROJECT": "Godrej Greenview Estate",
+  "GODREJ_ACRES": "46",
+  "GODREJ_DISTANCE_KM": "",
+  "GODREJ_SOURCE_NAME": "Godrej Properties, Godrej Greenview Estate project page",
+  "GODREJ_SOURCE_URL": "https://www.godrejproperties.com/indore/plotted/godrej-greenview-estate",
+  "GODREJ_SOURCE_DATE": "Accessed 12 October 2026",
+
+  "FILM_URL": "",
+  "BROCHURE_URL": "assets/docs/valencia-town-brochure.pdf",
+  "LAYOUT_URL": "assets/docs/valencia-town-layout.pdf",
+
+  "_MILESTONES_readme": "Chapter V timeline. A milestone renders only when it has source_url and enabled is not false. Keep `when` short.",
+  "MILESTONES": [
+    {
+      "when": "Dec 2026",
+      "title": "Six lanes to Ujjain",
+      "line": "Widening of the 46 km Indore–Ujjain Road to six lanes, reported target December 2026.",
+      "source_name": "The Times of India, January 2025",
+      "source_url": "https://timesofindia.indiatimes.com/city/indore/expansion-of-indore-ujjain-road-to-six-lanes-begins-with-eyes-on-simhastha-2028/articleshow/117245592.cms"
+    },
+    {
+      "when": "Dec 2027",
+      "title": "Godrej Greenview Estate",
+      "line": "Listed possession date for the Godrej plotted development on the same road.",
+      "source_name": "Third-party listing (MagicBricks). Verify on the MP RERA portal before enabling.",
+      "source_url": "https://www.magicbricks.com/godrej-greenview-estate-ujjain-indore-road-indore-pdpid-4d4235343236323933",
+      "enabled": false
+    },
+    {
+      "when": "2028",
+      "title": "Simhastha, Ujjain",
+      "line": "The Kumbh of Ujjain, held once in twelve years, forty minutes from Valencia Town.",
+      "source_name": "Ujjain Smart City Limited",
+      "source_url": "https://ujjainsmartcity.com/en/news/simhastha-2028/"
+    }
+  ]
+}
