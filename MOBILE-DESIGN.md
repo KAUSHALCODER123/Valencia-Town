@@ -1,3 +1,5 @@
+> **Superseded** by the cinematic redesign (October 2026). See `CHANGES.md` and `LAYOUT.md`; kept for history.
+
 # Design decisions
 
 ## Direction
