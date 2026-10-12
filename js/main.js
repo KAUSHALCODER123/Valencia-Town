@@ -276,7 +276,6 @@ motion(() => {
   });
   $$('.rv').forEach(el => gsap.to(el, {opacity: 1, y: 0, duration: 1.1, ease: EASE, scrollTrigger: {trigger: el, start: 'top 88%', once: true}}));
   $$('.opener').forEach(op => {
-    gsap.from($$('.lb', op), {scaleY: 0, duration: 1.2, ease: EASE, scrollTrigger: {trigger: op, start: 'top 75%', toggleActions: 'play none none reverse'}});
     const img = $('.opener-media img', op);
     if (img) gsap.fromTo(img, {scale: 1.1}, {scale: 1, ease: 'none', scrollTrigger: {trigger: op, start: 'top bottom', end: 'bottom top', scrub: true}});
   });
@@ -300,7 +299,7 @@ motion(() => {
   const section = $('#mahakal'); if (!section) return;
   const paths = $$('.shikhara-svg .dr', section);
   paths.forEach(p => { const l = Math.ceil(p.getTotalLength()); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; });
-  gsap.to(paths, {strokeDashoffset: 0, ease: 'none', stagger: .02, scrollTrigger: {trigger: '.shikhara', start: 'top 80%', end: 'bottom 45%', scrub: true}});
+  gsap.to(paths, {strokeDashoffset: 0, ease: 'none', stagger: .02, scrollTrigger: {trigger: '.shikhara', start: 'top 85%', end: 'top 30%', scrub: true}});
   gsap.to($('.sky-dawn', section), {opacity: 1, ease: 'none', scrollTrigger: {trigger: section, start: 'top 60%', end: 'bottom bottom', scrub: true}});
   const triggers = $$('.timeline li', section).map(li => ScrollTrigger.create({trigger: li, start: 'top 78%', onEnter: () => li.classList.add('is-lit')}));
   return () => { paths.forEach(p => { p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; }); triggers.forEach(t => t.kill()); };

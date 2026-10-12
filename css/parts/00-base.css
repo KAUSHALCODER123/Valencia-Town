@@ -137,11 +137,11 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .bone :focus-visible{outline-color:var(--amber-deep)}
 @media(min-width:1024px){.chapter{padding:calc(var(--head) + 96px) 0 140px}}
 
-/* Full-bleed chapter opener */
-.opener{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:var(--ink);--lb:var(--bar)}
+/* Full-bleed chapter opener (no letterbox bars: a solid bar between sections read as dead space) */
+.opener{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:var(--ink)}
 .opener-media{position:absolute;inset:0}
 .opener-media img{width:100%;height:100%;object-fit:cover}
-.opener-copy{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;padding:calc(var(--bar) + 48px) var(--gutter) calc(var(--bar) + 64px)}
+.opener-copy{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;padding:calc(var(--head) + 48px) var(--gutter) 72px}
 .opener-copy .lede{text-align:center;margin-inline:auto}
 
 /* Footer */

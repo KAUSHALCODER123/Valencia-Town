@@ -138,11 +138,11 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .bone :focus-visible{outline-color:var(--amber-deep)}
 @media(min-width:1024px){.chapter{padding:calc(var(--head) + 96px) 0 140px}}
 
-/* Full-bleed chapter opener */
-.opener{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:var(--ink);--lb:var(--bar)}
+/* Full-bleed chapter opener (no letterbox bars: a solid bar between sections read as dead space) */
+.opener{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:var(--ink)}
 .opener-media{position:absolute;inset:0}
 .opener-media img{width:100%;height:100%;object-fit:cover}
-.opener-copy{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;padding:calc(var(--bar) + 48px) var(--gutter) calc(var(--bar) + 64px)}
+.opener-copy{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;padding:calc(var(--head) + 48px) var(--gutter) 72px}
 .opener-copy .lede{text-align:center;margin-inline:auto}
 
 /* Footer */
@@ -328,6 +328,7 @@ body.modal-open{overflow:hidden}
 .shikhara-svg{width:100%;height:auto;max-height:calc(100svh - var(--head) - 48px);overflow:visible}
 .shikhara-svg .dr{stroke:var(--amber);stroke-width:1.25;vector-effect:non-scaling-stroke}
 .shikhara-svg .sun{stroke-opacity:.28}
+.shikhara-svg .moon{stroke-opacity:.6}
 .shikhara-svg .flag{stroke:var(--vermilion);stroke-width:1.5}
 .time-block+.time-block{margin-top:40px}
 .time-block h3{font:italic 500 clamp(24px,2.4vw,32px)/1.2 var(--serif);margin-bottom:16px}
@@ -349,7 +350,7 @@ body.modal-open{overflow:hidden}
 /* 30-road.css */
 /* Chapter III: The Road */
 .opener .ch-title,.opener .ch-sub,.opener .lede{text-shadow:0 2px 24px rgba(7,7,7,.55)}
-.route-chapter{padding-top:72px}
+.route-chapter{padding-top:72px!important}
 .route{position:relative}
 .route-line{position:absolute;pointer-events:none;overflow:visible}
 .route-line path{fill:none;stroke:var(--amber);stroke-width:1.5;vector-effect:non-scaling-stroke}
@@ -469,7 +470,6 @@ body.modal-open{overflow:hidden}
 .life{position:relative;background:var(--night)}
 .life-head{padding:calc(var(--head) + 64px) 0 40px}
 .life-stage{position:relative}
-.life-stage .lb{display:none}
 .scenes{display:grid;gap:4px}
 .scene{position:relative;margin:0;overflow:hidden;background:var(--ink);--lb:0px}
 .scene-img{width:100%;aspect-ratio:4/5;object-fit:cover}
@@ -479,14 +479,13 @@ body.modal-open{overflow:hidden}
 .scene-title{font:500 clamp(32px,4vw,64px)/1 var(--serif);text-transform:uppercase;letter-spacing:.08em;margin-top:12px}
 .scene-text{max-width:44ch;margin-top:12px;color:#EDE6DA}
 @media(min-width:768px){.scene-img{aspect-ratio:16/9}.scene-cap{bottom:64px}}
-.life-pinned .life-head{position:absolute;inset:0 0 auto;z-index:4;padding-top:calc(var(--bar) + 64px);pointer-events:none}
-.life-pinned .life-stage{height:100svh;overflow:hidden;--lb:var(--bar)}
-.life-pinned .life-stage .lb{display:block;z-index:5}
+.life-pinned .life-head{position:absolute;inset:0 0 auto;z-index:4;padding-top:calc(var(--head) + 64px);pointer-events:none}
+.life-pinned .life-stage{height:100svh;overflow:hidden}
 .life-pinned .scenes{position:absolute;inset:0;display:block}
-.life-pinned .scene{position:absolute;inset:0;--lb:var(--bar)}
+.life-pinned .scene{position:absolute;inset:0}
 .life-pinned .scene-img{height:100%;aspect-ratio:auto}
 .life-pinned .scene .vignette{background:radial-gradient(ellipse 80% 70% at 50% 50%,transparent 35%,rgba(7,7,7,.55) 100%),linear-gradient(180deg,rgba(7,7,7,.55),transparent 35%,transparent 55%,rgba(7,7,7,.8))}
-.life-pinned .scene-cap{bottom:calc(var(--bar) + 56px)}
+.life-pinned .scene-cap{bottom:64px}
 .life-pinned .scene .ai-label{z-index:6}
 
 /* A closer look: one drag gallery */
@@ -553,7 +552,7 @@ body.modal-open{overflow:hidden}
 
 /* Chapter X: Visit. Copy sits above the gate's built-in lettering, as in the hero. */
 .visit{place-items:start center}
-.visit .opener-copy{padding-top:calc(var(--bar) + clamp(24px,5vh,56px))}
+.visit .opener-copy{padding-top:calc(var(--head) + clamp(24px,5vh,56px))}
 .visit .ch-title{font-size:clamp(40px,4.6vw,76px)}
 .visit .lede{margin-top:14px}
 .visit .actions{justify-content:center;margin-top:22px}

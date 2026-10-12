@@ -1,6 +1,6 @@
 """Chapter VII: Life. Five former sections in one chapter: pinned clip-path wipes on desktop, a stack on mobile.
 Followed by one drag gallery, "A closer look"."""
-from vt import C, image, heading, letterbox, ai_label
+from vt import C, image, heading, ai_label
 
 def render():
     L = C['life']; n = len(L['scenes'])
@@ -8,4 +8,4 @@ def render():
     items = ''.join(f'''<li class="strip-item"><button class="strip-btn" type="button" data-strip-item data-caption="{cap}" aria-label="{L["enlarge"]}: {cap.lower()}">{image(img, cap + ", artist’s impression", "strip-img", sizes="(max-width: 767px) 84vw, 56vw")}{ai_label()}</button><p class="strip-cap">{cap}</p></li>''' for img, cap in L['gallery'])
     total = len(L['gallery'])
     gallery = f'''<section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="wrap gallery-head"><div><h2 id="gallery-title" class="ch-title ch-title-s"><span class="mask"><span class="mask-in">A closer <em>look</em></span></span></h2><p class="lede">{L["gallery_lede"]}</p></div><div class="gallery-nav"><p class="gallery-pos" aria-live="polite"><b>1</b> / {total}</p><button type="button" data-strip-step="-1" aria-label="{L["prev"]}">←</button><button type="button" data-strip-step="1" aria-label="{L["next"]}">→</button></div></div><div class="strip" tabindex="0" role="region" aria-label="{L["gallery_title"]}. Use the arrow keys to move."><ul class="strip-track">{items}</ul><div class="drag-cursor" aria-hidden="true">{L["drag"]}</div></div></section>'''
-    return f'''<section class="life" id="life" data-chapter="7" data-name="Life" aria-labelledby="life-title"><div class="life-head chapter-head wrap">{heading(L, "life-title")}</div><div class="life-stage">{letterbox()}<div class="scenes">{scenes}</div></div></section>{gallery}'''
+    return f'''<section class="life" id="life" data-chapter="7" data-name="Life" aria-labelledby="life-title"><div class="life-head chapter-head wrap">{heading(L, "life-title")}</div><div class="life-stage"><div class="scenes">{scenes}</div></div></section>{gallery}'''

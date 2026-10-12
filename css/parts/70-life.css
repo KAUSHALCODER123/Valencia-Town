@@ -2,7 +2,6 @@
 .life{position:relative;background:var(--night)}
 .life-head{padding:calc(var(--head) + 64px) 0 40px}
 .life-stage{position:relative}
-.life-stage .lb{display:none}
 .scenes{display:grid;gap:4px}
 .scene{position:relative;margin:0;overflow:hidden;background:var(--ink);--lb:0px}
 .scene-img{width:100%;aspect-ratio:4/5;object-fit:cover}
@@ -12,14 +11,13 @@
 .scene-title{font:500 clamp(32px,4vw,64px)/1 var(--serif);text-transform:uppercase;letter-spacing:.08em;margin-top:12px}
 .scene-text{max-width:44ch;margin-top:12px;color:#EDE6DA}
 @media(min-width:768px){.scene-img{aspect-ratio:16/9}.scene-cap{bottom:64px}}
-.life-pinned .life-head{position:absolute;inset:0 0 auto;z-index:4;padding-top:calc(var(--bar) + 64px);pointer-events:none}
-.life-pinned .life-stage{height:100svh;overflow:hidden;--lb:var(--bar)}
-.life-pinned .life-stage .lb{display:block;z-index:5}
+.life-pinned .life-head{position:absolute;inset:0 0 auto;z-index:4;padding-top:calc(var(--head) + 64px);pointer-events:none}
+.life-pinned .life-stage{height:100svh;overflow:hidden}
 .life-pinned .scenes{position:absolute;inset:0;display:block}
-.life-pinned .scene{position:absolute;inset:0;--lb:var(--bar)}
+.life-pinned .scene{position:absolute;inset:0}
 .life-pinned .scene-img{height:100%;aspect-ratio:auto}
 .life-pinned .scene .vignette{background:radial-gradient(ellipse 80% 70% at 50% 50%,transparent 35%,rgba(7,7,7,.55) 100%),linear-gradient(180deg,rgba(7,7,7,.55),transparent 35%,transparent 55%,rgba(7,7,7,.8))}
-.life-pinned .scene-cap{bottom:calc(var(--bar) + 56px)}
+.life-pinned .scene-cap{bottom:64px}
 .life-pinned .scene .ai-label{z-index:6}
 
 /* A closer look: one drag gallery */

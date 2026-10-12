@@ -1,38 +1,94 @@
-"""Chapter II: Mahakal. A generated shikhara line drawing that draws itself as the sky moves from night to dawn."""
+"""Chapter II: Mahakal. A generated Nagara temple elevation that draws itself as the sky moves from night to dawn.
+
+Drawn in a 600 × 820 box, centre line x = 300. Every element is a stroked path so it can draw on scroll."""
 from vt import C, primary, secondary, heading
 
-def _curve(points): return 'M' + ' L'.join(f'{x:.1f} {y:.1f}' for x, y in points)
+CX = 300
+BASE, TOP = 548, 206            # main shikhara: base of the curve and the shoulder under the amalaka
+HW0, HW1 = 112, 40              # half-width at base and at the shoulder
+
+def hw(y):
+    """Half-width of the main shikhara at height y: a convex Nagara curve, steepening towards the top."""
+    t = (BASE - y) / (BASE - TOP)
+    return HW1 + (HW0 - HW1) * (1 - t ** 3.4)
+
+def spine(y):
+    """Half-width of the central latā (spine) band."""
+    t = (BASE - y) / (BASE - TOP)
+    return 26 - 12 * t
+
+def poly(pts): return 'M' + ' L'.join(f'{x:.1f} {y:.1f}' for x, y in pts)
+
+def mini_spire(x, b, h, w):
+    """A miniature shikhara (kūṭa): curved sides, a small amalaka cap."""
+    top = b - h
+    return [f'M{x - w:.1f} {b:.1f} C{x - w:.1f} {b - h * .55:.1f} {x - w * .45:.1f} {top + h * .18:.1f} {x:.1f} {top + 2:.1f}',
+            f'M{x + w:.1f} {b:.1f} C{x + w:.1f} {b - h * .55:.1f} {x + w * .45:.1f} {top + h * .18:.1f} {x:.1f} {top + 2:.1f}',
+            f'M{x - w * .42:.1f} {top + 3:.1f} Q{x:.1f} {top - 3:.1f} {x + w * .42:.1f} {top + 3:.1f}']
+
+def flank_spire(cx, base, top, w0, w1):
+    """A smaller attached spire (uruśṛṅga) with its own courses and amalaka."""
+    f = lambda y: w1 + (w0 - w1) * (1 - ((base - y) / (base - top)) ** 2)
+    ys = [base - (base - top) * i / 24 for i in range(25)]
+    out = [poly([(cx - f(y), y) for y in ys]), poly([(cx + f(y), y) for y in ys])]
+    for t in (.22, .44, .66, .86):
+        y = base - (base - top) * t; w = f(y)
+        out.append(f'M{cx - w:.1f} {y:.1f} Q{cx:.1f} {y + 4:.1f} {cx + w:.1f} {y:.1f}')
+    out += [f'M{cx - w1 - 8} {top - 1} Q{cx} {top - 13} {cx + w1 + 8} {top - 1} Q{cx} {top + 9} {cx - w1 - 8} {top - 1}',
+            f'M{cx - 5} {top - 9} Q{cx} {top - 22} {cx + 5} {top - 9}', f'M{cx} {top - 18} V{top - 26}']
+    return out
 
 def shikhara_svg():
-    base, top, cx = 548, 214, 300
-    hw = lambda t, w0=140, w1=44: w1 + (w0 - w1) * (1 - t ** 2.2)        # curvilinear Nagara profile
-    ys = [base - (base - top) * i / 40 for i in range(41)]
-    ts = [(base - y) / (base - top) for y in ys]
-    paths = []
-    for k in (1, .62, .3):                                                 # outline, then two inner rathas
-        paths.append(_curve([(cx - hw(t) * k, y) for t, y in zip(ts, ys)]))
-        paths.append(_curve([(cx + hw(t) * k, y) for t, y in zip(ts, ys)]))
-    for t in (.12, .24, .36, .48, .6, .72, .84):                           # bhumi bands
-        y = base - (base - top) * t; w = hw(t)
-        paths.append(f'M{cx - w:.1f} {y:.1f} Q{cx} {y + 7:.1f} {cx + w:.1f} {y:.1f}')
-    for s in (-1, 1):                                                      # urushringa half-spires
-        x0, x1, xm = cx + s * 140, cx + s * 72, cx + s * 106
-        paths += [f'M{x0} 548 C{x0 - s * 2} 470 {xm + s * 18} 422 {xm} 404', f'M{x1} 548 C{x1 + s * 1} 470 {xm - s * 10} 424 {xm} 404',
-                  f'M{xm - 14} 401 Q{xm} 391 {xm + 14} 401 Q{xm} 409 {xm - 14} 401']
-    paths += [
-        'M60 780 H540', 'M90 780 V754 H510 V780', 'M118 754 V730 H482 V754',                       # jagati and plinth
-        'M150 730 V560 H450 V730', 'M190 730 V560', 'M410 730 V560',                                # sanctum walls
-        'M262 730 V644 Q300 604 338 644 V730', 'M276 730 V652 Q300 626 324 652 V730',               # doorway
-        'M138 560 H462', 'M138 560 L150 548 H450 L462 560',                                         # cornice
-        'M266 216 H334', 'M244 214 Q300 186 356 214 Q300 236 244 214',                              # griva and amalaka
-        'M262 205 V222', 'M281 200 V227', 'M300 199 V229', 'M319 200 V227', 'M338 205 V222',
-        'M290 199 C276 191 282 172 296 169 H304 C318 172 324 191 310 199 Z', 'M293 169 V162 H307 V169', 'M300 162 V120',   # kalash and finial
-        'M110 800 H230', 'M262 800 H338', 'M370 800 H490', 'M160 814 H260', 'M340 814 H440',       # Kshipra ripples
-    ]
-    sun = '<circle class="dr sun" cx="300" cy="520" r="230"/>'
-    flag = '<path class="dr flag" d="M300 120 V70 M300 72 L352 84 L300 98"/>'
-    body = ''.join(f'<path class="dr" d="{d}"/>' for d in paths)
-    return f'<svg class="shikhara-svg" viewBox="0 0 600 830" role="img" aria-label="Line drawing of a temple shikhara above the Kshipra at dawn" fill="none" stroke-linecap="round" stroke-linejoin="round">{sun}{body}{flag}</svg>'
+    p = []
+    ys = [BASE - (BASE - TOP) * i / 48 for i in range(49)]
+    # Main spire: outline and the central spine band
+    p += [poly([(CX - hw(y), y) for y in ys]), poly([(CX + hw(y), y) for y in ys])]
+    p += [poly([(CX - spine(y), y) for y in ys]), poly([(CX + spine(y), y) for y in ys])]
+    # Courses (bhūmi) and rows of miniature spires between the spine and the outline
+    rows = [548, 486, 430, 380, 336, 296, 262, 232, 206]
+    for i in range(len(rows) - 1):
+        b, t = rows[i], rows[i + 1]
+        for side in (-1, 1):
+            inner, outer = spine(b) + 4, hw(b) - 4
+            n = 2 if outer - inner > 44 else 1
+            w = (outer - inner) / n / 2 - 3
+            for k in range(n):
+                x = CX + side * (inner + w + 3 + k * (2 * w + 6))
+                p += mini_spire(x, b - 3, (b - t) * .82, w)
+        y = t; w_out, w_in = hw(y), spine(y)
+        p += [f'M{CX - w_out:.1f} {y:.1f} L{CX - w_in:.1f} {y:.1f}', f'M{CX + w_in:.1f} {y:.1f} L{CX + w_out:.1f} {y:.1f}']
+        # chaitya rungs on the spine
+        m = (b + t) / 2; s = spine(m)
+        p.append(f'M{CX - s + 4:.1f} {m + 6:.1f} Q{CX:.1f} {m - 8:.1f} {CX + s - 4:.1f} {m + 6:.1f}')
+    # Crown: neck, ribbed amalaka, second amalaka, kalasha, finial
+    p += ['M262 206 H338', 'M266 199 V206', 'M334 199 V206',
+          'M246 186 Q300 166 354 186 Q300 206 246 186', 'M258 180 V193', 'M272 176 V197', 'M286 174 V198', 'M300 173 V199', 'M314 174 V198', 'M328 176 V197', 'M342 180 V193',
+          'M278 167 Q300 157 322 167 Q300 175 278 167',
+          'M291 160 C276 152 282 132 296 129 H304 C318 132 324 152 309 160', 'M293 129 V123 H307 V129',
+          'M300 123 V84']
+    # Trident on the finial
+    p += ['M288 98 Q288 84 300 82 Q312 84 312 98', 'M288 98 V92', 'M312 98 V92']
+    # Flanking spires, attached at the shoulders of the sanctum
+    p += flank_spire(150, 548, 440, 32, 11) + flank_spire(450, 548, 440, 32, 11)
+    # Cornice and sanctum wall (mandovara) with projecting central bhadra
+    p += ['M120 562 H480', 'M120 562 L132 548 H468 L480 562',
+          'M132 700 V574 H150 V562', 'M468 700 V574 H450 V562',
+          'M196 700 V574', 'M404 700 V574', 'M240 700 V562', 'M360 700 V562',
+          'M132 574 H468', 'M132 688 H468', 'M132 678 H468']
+    # Doorway with torana arch
+    p += ['M268 700 V630 Q300 596 332 630 V700', 'M280 700 V636 Q300 612 320 636 V700', 'M262 618 Q300 576 338 618']
+    # Niches on the side rathas
+    for x in (168, 432):
+        p += [f'M{x - 14} 670 V622 Q{x} 604 {x + 14} 622 V670 Z']
+    # Jagati platform and ghat steps down to the Kshipra
+    p += ['M96 700 H504', 'M96 700 V718 H504 V700', 'M80 718 V736 H520 V718',
+          'M60 736 H540', 'M52 748 H548', 'M44 760 H556',
+          'M100 780 H220', 'M260 780 H340', 'M380 780 H500', 'M150 794 H250', 'M350 794 H450', 'M210 808 H390']
+    sun = '<circle class="dr sun" cx="300" cy="470" r="236"/>'
+    moon = '<path class="dr moon" d="M120 120 A34 34 0 1 0 156 168 A26 26 0 1 1 120 120"/>'
+    flag = '<path class="dr flag" d="M300 84 V44 M300 46 L350 58 L300 72"/>'
+    body = ''.join(f'<path class="dr" d="{d}"/>' for d in p)
+    return f'<svg class="shikhara-svg" viewBox="0 0 600 820" role="img" aria-label="Line drawing of a Nagara temple with a tall shikhara above the Kshipra ghats at dawn" fill="none" stroke-linecap="round" stroke-linejoin="round">{sun}{moon}{body}{flag}</svg>'
 
 def render():
     M = C['mahakal']

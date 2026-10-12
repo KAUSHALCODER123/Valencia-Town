@@ -11,6 +11,7 @@
 .shikhara-svg{width:100%;height:auto;max-height:calc(100svh - var(--head) - 48px);overflow:visible}
 .shikhara-svg .dr{stroke:var(--amber);stroke-width:1.25;vector-effect:non-scaling-stroke}
 .shikhara-svg .sun{stroke-opacity:.28}
+.shikhara-svg .moon{stroke-opacity:.6}
 .shikhara-svg .flag{stroke:var(--vermilion);stroke-width:1.5}
 .time-block+.time-block{margin-top:40px}
 .time-block h3{font:italic 500 clamp(24px,2.4vw,32px)/1.2 var(--serif);margin-bottom:16px}

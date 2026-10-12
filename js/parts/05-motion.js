@@ -50,7 +50,6 @@ motion(() => {
   });
   $$('.rv').forEach(el => gsap.to(el, {opacity: 1, y: 0, duration: 1.1, ease: EASE, scrollTrigger: {trigger: el, start: 'top 88%', once: true}}));
   $$('.opener').forEach(op => {
-    gsap.from($$('.lb', op), {scaleY: 0, duration: 1.2, ease: EASE, scrollTrigger: {trigger: op, start: 'top 75%', toggleActions: 'play none none reverse'}});
     const img = $('.opener-media img', op);
     if (img) gsap.fromTo(img, {scale: 1.1}, {scale: 1, ease: 'none', scrollTrigger: {trigger: op, start: 'top bottom', end: 'bottom top', scrub: true}});
   });

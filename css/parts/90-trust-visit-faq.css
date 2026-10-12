@@ -14,7 +14,7 @@
 
 /* Chapter X: Visit. Copy sits above the gate's built-in lettering, as in the hero. */
 .visit{place-items:start center}
-.visit .opener-copy{padding-top:calc(var(--bar) + clamp(24px,5vh,56px))}
+.visit .opener-copy{padding-top:calc(var(--head) + clamp(24px,5vh,56px))}
 .visit .ch-title{font-size:clamp(40px,4.6vw,76px)}
 .visit .lede{margin-top:14px}
 .visit .actions{justify-content:center;margin-top:22px}

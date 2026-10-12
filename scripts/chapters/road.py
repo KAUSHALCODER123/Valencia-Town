@@ -1,5 +1,5 @@
 """Chapter III: The Road. Letterboxed opener (internal-road; entrance-road now appears only in Life) and a drawn route."""
-from vt import C, P, image, heading, letterbox, ai_label
+from vt import C, P, image, heading, ai_label
 from layout import MAPS
 
 def render():
@@ -13,5 +13,5 @@ def render():
         return f'<li class="stop stop-{key}">{pin}<strong>{name}</strong>{sub}{when}</li>'
     h_line = '<svg class="route-line route-h" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M125 20 C 210 14, 290 26, 375 20 S 540 14, 625 20 S 790 26, 875 20"/></svg>'
     v_line = '<svg class="route-line route-v" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true"><path d="M20 40 C 8 200, 32 300, 20 500 S 10 800, 20 960"/></svg>'
-    return f'''<section class="opener road" id="location" data-chapter="3" data-name="The Road" aria-labelledby="road-title"><div class="opener-media">{image("internal-road", R["alt"], "grade")}<div class="vignette" aria-hidden="true"></div></div>{letterbox()}<div class="opener-copy">{heading(R, "road-title")}<p class="lede rv">{R["lede"]}</p></div>{ai_label()}</section>
+    return f'''<section class="opener road" id="location" data-chapter="3" data-name="The Road" aria-labelledby="road-title"><div class="opener-media">{image("internal-road", R["alt"], "grade")}<div class="vignette" aria-hidden="true"></div></div><div class="opener-copy">{heading(R, "road-title")}<p class="lede rv">{R["lede"]}</p></div>{ai_label()}</section>
 <section class="chapter route-chapter" aria-label="{R["map_label"]}"><div class="wrap"><div class="route">{h_line}{v_line}<ol class="route-stops" aria-label="{R["map_label"]}">{"".join(stop(k, m) for k, m in stops)}</ol></div><div class="actions route-actions"><a class="btn" href="{MAPS}" target="_blank" rel="noopener">{R["directions"]}</a><button class="btn-ghost" type="button" data-load-map>{R["map"]}</button></div><div class="map-embed" id="map-embed"></div><p class="fine route-fine">{R["fine"]}</p></div></section>'''

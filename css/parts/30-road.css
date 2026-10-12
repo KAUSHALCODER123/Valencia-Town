@@ -1,6 +1,6 @@
 /* Chapter III: The Road */
 .opener .ch-title,.opener .ch-sub,.opener .lede{text-shadow:0 2px 24px rgba(7,7,7,.55)}
-.route-chapter{padding-top:72px}
+.route-chapter{padding-top:72px!important}
 .route{position:relative}
 .route-line{position:absolute;pointer-events:none;overflow:visible}
 .route-line path{fill:none;stroke:var(--amber);stroke-width:1.5;vector-effect:non-scaling-stroke}
