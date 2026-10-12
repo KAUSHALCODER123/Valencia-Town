@@ -191,24 +191,15 @@ $('.gallery-viewer').addEventListener('touchend', e => {
 /* Page state: past the hero, at the footer, overall progress and the current chapter. */
 const hero = $('#top');
 const footerEl = $('#contact');
-const chapters = $$('[data-chapter]');
-const hudNum = $('.hud-num b'), hudName = $('.hud-name');
-const fills = $$('.hud-line i, .progress-top i');
-const heroFill = $('.hero-prog i');
+const fills = $$('.progress-top i');
 let pageTicking = false;
 function updatePage() {
   pageTicking = false;
   const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-  fills.forEach(i => { i.style.transform = (i.parentElement.classList.contains('hud-line') ? 'scaleY(' : 'scaleX(') + p.toFixed(4) + ')'; });
-  if (heroFill) heroFill.style.transform = 'scaleX(' + Math.min(1, scrollY / (hero.offsetHeight * .8)).toFixed(3) + ')';
+  fills.forEach(i => { i.style.transform = 'scaleX(' + p.toFixed(4) + ')'; });
   html.classList.toggle('is-past-hero', hero.getBoundingClientRect().bottom < innerHeight * .35);
   html.classList.toggle('is-at-footer', footerEl.getBoundingClientRect().top < innerHeight * .9);
-  const mid = innerHeight * .5;
-  const current = chapters.filter(el => el.getBoundingClientRect().top <= mid).pop() || chapters[0];
-  if (current && hudNum.textContent !== current.dataset.chapter.padStart(2, '0')) {
-    hudNum.textContent = current.dataset.chapter.padStart(2, '0'); hudName.textContent = current.dataset.name;
-  }
 }
 const requestPage = () => { if (!pageTicking) { pageTicking = true; requestAnimationFrame(updatePage); } };
 addEventListener('scroll', requestPage, {passive: true}); addEventListener('resize', requestPage); updatePage();
