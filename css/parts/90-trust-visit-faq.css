@@ -1,0 +1,39 @@
+/* Chapter IX: Trust. Cards, no paragraphs. */
+.trust{background:var(--night)}
+.cards{display:grid;gap:16px;margin-top:56px}
+.card{padding:26px 24px;border:1px solid var(--line);background:rgba(243,237,227,.03);display:grid;gap:10px;align-content:start}
+.card-key{font:500 12px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.card-value{font:500 clamp(22px,2vw,28px)/1.25 var(--serif)}
+.card-mono{font:500 18px/1.4 var(--sans);letter-spacing:.06em}
+.card-text{font-size:15px;color:#E3DCD0}
+.card-list{display:grid;gap:8px}
+.card-list li{display:grid;gap:2px}.card-list span{font-size:14px;color:var(--muted)}
+.doc-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:500;background:linear-gradient(var(--amber),var(--amber)) 0 calc(100% - 8px)/100% 1px no-repeat}
+@media(min-width:768px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.cards{grid-template-columns:repeat(3,1fr);gap:20px}}
+
+/* Chapter X: Visit. Copy sits above the gate's built-in lettering, as in the hero. */
+.visit{place-items:start center}
+.visit .opener-copy{padding-top:calc(var(--bar) + clamp(24px,5vh,56px))}
+.visit .ch-title{font-size:clamp(40px,4.6vw,76px)}
+.visit .lede{margin-top:14px}
+.visit .actions{justify-content:center;margin-top:22px}
+.visit .opener-media img{object-position:50% 70%}
+
+/* Questions */
+.faq{background:var(--ink)}
+.faq-grid{display:grid;gap:40px}
+.faq-intro .ch-label,.faq-intro .ch-title{text-align:left}
+.faq-intro .ch-title{font-size:clamp(36px,4vw,64px)}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa h3{margin:0;font:inherit}
+.qa-btn{display:flex;justify-content:space-between;align-items:center;gap:20px;width:100%;min-height:64px;padding:16px 0;text-align:left;font:500 clamp(19px,1.7vw,24px)/1.3 var(--serif);letter-spacing:.02em}
+.qa-btn:hover{color:var(--amber)}
+.qa-icon{position:relative;flex:none;width:14px;height:14px}
+.qa-icon:before,.qa-icon:after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--amber);transition:transform .8s var(--ease)}
+.qa-icon:after{transform:rotate(90deg)}
+.qa-btn[aria-expanded="true"] .qa-icon:after{transform:rotate(0)}
+.qa-panel p{padding:0 0 22px;max-width:62ch;color:#E3DCD0}
+.qa-panel a{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
+@media(min-width:1024px){.faq-grid{grid-template-columns:.8fr 1.2fr;gap:clamp(48px,7vw,120px);align-items:start}.faq-intro{position:sticky;top:calc(var(--head) + 40px)}}
