@@ -333,6 +333,51 @@ motion(() => {
   return () => { paths.forEach(p => { p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; }); triggers.forEach(t => t.kill()); };
 });
 
+/* 30-road.js */
+/* Chapter III: route draws Indore → Valencia → Ujjain (scrubbed); pins scale in; minute counters use the shared countUp. */
+motion(() => {
+  const route = $('.route'); if (!route) return;
+  const paths = $$('.route-line path', route);
+  paths.forEach(p => { const l = Math.ceil(p.getTotalLength()); gsap.set(p, {strokeDasharray: l, strokeDashoffset: l}); });
+  gsap.to(paths, {strokeDashoffset: 0, ease: 'none', scrollTrigger: {trigger: route, start: 'top 75%', end: 'bottom 55%', scrub: true}});
+  gsap.from($$('.stop-pin', route), {scale: 0, duration: 1, ease: EASE, stagger: .15, scrollTrigger: {trigger: route, start: 'top 70%', once: true}});
+  gsap.from($$('.stop', route), {opacity: 0, y: 16, duration: 1.1, ease: EASE, stagger: .12, scrollTrigger: {trigger: route, start: 'top 75%', once: true}});
+});
+
+/* 40-growth.js */
+/* Chapter IV: the line between the two pins draws, then the distance label settles in. */
+motion(() => {
+  const fig = $('.distance'); if (!fig) return;
+  gsap.fromTo($('.distance-line path', fig), {attr: {d: 'M8 8 H8'}}, {attr: {d: 'M8 8 H592'}, ease: 'none', scrollTrigger: {trigger: fig, start: 'top 80%', end: 'top 40%', scrub: true}});
+  gsap.from($$('.d-dot', fig), {scale: 0, duration: 1, ease: EASE, stagger: .2, scrollTrigger: {trigger: fig, start: 'top 80%', once: true}});
+  gsap.from($('.km', fig), {opacity: 0, y: 10, duration: 1.1, ease: EASE, scrollTrigger: {trigger: fig, start: 'top 55%', once: true}});
+});
+
+/* 50-tomorrow.js */
+/* Chapter V: the rule fills as you read. On desktop the row pins and moves sideways, but only when it truly overflows. */
+motion(() => {
+  const section = $('#tomorrow'); if (!section) return;
+  gsap.from($$('.milestone', section), {opacity: 0, y: 20, duration: 1.1, ease: EASE, stagger: .12, scrollTrigger: {trigger: $('.tl-list', section), start: 'top 80%', once: true}});
+  if (isDesktop.matches) return;
+  const fill = $('.tl-rule i', section);
+  const t = gsap.fromTo(fill, {scaleY: 0}, {scaleY: 1, ease: 'none', scrollTrigger: {trigger: $('.tl-list', section), start: 'top 75%', end: 'bottom 60%', scrub: true}});
+  return () => { t.scrollTrigger?.kill(); gsap.set(fill, {clearProps: 'transform'}); };
+});
+motionDesktop(() => {
+  const section = $('#tomorrow'); if (!section) return;
+  const viewport = $('.tl-viewport', section), track = $('.tl-track', section), fill = $('.tl-rule i', section);
+  section.classList.add('is-horizontal');
+  const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+  if (distance() < 160) {
+    section.classList.remove('is-horizontal');
+    const t = gsap.fromTo(fill, {scaleX: 0}, {scaleX: 1, ease: 'none', scrollTrigger: {trigger: $('.tl-list', section), start: 'top 75%', end: 'top 30%', scrub: true}});
+    return () => { t.scrollTrigger?.kill(); gsap.set(fill, {clearProps: 'transform'}); };
+  }
+  const tl = gsap.timeline({scrollTrigger: {trigger: $('.tomorrow-pin', section), start: 'top top', end: () => '+=' + distance(), pin: true, scrub: true, invalidateOnRefresh: true}});
+  tl.to(track, {x: () => -distance(), ease: 'none'}, 0).fromTo(fill, {scaleX: 0}, {scaleX: 1, ease: 'none'}, 0);
+  return () => { section.classList.remove('is-horizontal'); tl.scrollTrigger?.kill(); gsap.set([track, fill], {clearProps: 'transform'}); };
+});
+
 /* 99-run.js */
 /* Start the motion layer after every chapter has registered. */
 if (hasGsap) {

@@ -1,0 +1,26 @@
+/* Chapter V: Tomorrow. Vertical list by default; on desktop a row, pinned and moved sideways only if it overflows. */
+.tomorrow{background:var(--night)}
+.tl-viewport{margin-top:56px}
+.tl-track{position:relative;width:min(100% - var(--gutter)*2,var(--maxw));margin-inline:auto}
+.tl-rule{position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.tl-rule i{position:absolute;inset:0;background:var(--amber);transform-origin:50% 0}
+.tl-list{display:grid;gap:40px}
+.milestone{position:relative;padding-left:40px}
+.m-dot{position:absolute;left:0;top:14px;width:13px;height:13px;border-radius:50%;background:var(--night);border:1.5px solid var(--amber)}
+.is-today .m-dot{background:var(--amber)}
+.m-when{font:500 clamp(44px,5vw,76px)/1 var(--serif);color:var(--amber);font-variant-numeric:lining-nums}
+.m-title{font:500 clamp(20px,1.8vw,26px)/1.2 var(--serif);text-transform:uppercase;letter-spacing:.08em;margin-top:12px}
+.m-line{color:#E3DCD0;margin-top:8px;max-width:38ch}
+.m-source{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:6px;font-size:13px;color:var(--muted);background:linear-gradient(var(--amber),var(--amber)) 0 calc(100% - 10px)/0 1px no-repeat;transition:background-size .8s var(--ease)}
+.m-source:hover{background-size:100% 1px;color:var(--bone)}
+.tomorrow-fine{margin-top:48px}
+@media(min-width:1024px){
+  .tl-rule{left:0;right:0;top:6px;bottom:auto;width:auto;height:1px}
+  .tl-rule i{transform-origin:0 50%}
+  .tl-list{grid-auto-flow:column;grid-auto-columns:minmax(280px,1fr);gap:48px}
+  .milestone{padding:40px 0 0}
+  .m-dot{top:0}
+  .is-horizontal .tl-viewport{overflow:hidden}
+  .is-horizontal .tl-track{width:max-content;margin:0;padding:0 var(--gutter)}
+  .is-horizontal .tl-list{grid-auto-columns:420px}
+}
