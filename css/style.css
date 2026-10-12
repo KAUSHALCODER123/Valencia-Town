@@ -138,6 +138,7 @@ figure,p,h1,h2,h3,dl,dd{margin:0}ul{margin:0;padding:0;list-style:none}address{f
 .facts-list{display:grid;gap:0;border-top:1px solid var(--line)}
 .facts-list>div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
 .facts-list dt{font-size:14px;color:var(--mist)}.facts-list dd{font-size:17px}
+.neighbour{padding-bottom:70px}.neighbour .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:14px}.neighbour .lede{margin-top:16px}.neighbour .actions{margin-top:24px}.neighbour .fine{max-width:80ch;margin-top:36px}.neighbour .fine a{color:inherit;text-decoration:underline}
 .testimonials{display:grid;gap:30px;margin-top:50px}
 .testimonials blockquote{margin:0;font-family:var(--serif);font-size:24px;line-height:1.3}
 .testimonials footer{font-family:var(--sans);font-size:15px;color:var(--mist);margin-top:14px}.testimonials footer span{display:block}

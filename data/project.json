@@ -126,6 +126,14 @@
     "brochureUrl / layoutUrl": "Replace placeholder PDFs in assets/docs with the designed brochure and approved layout (client / design).",
     "masterplan[].x/y": "Hotspot positions are estimated from the render; confirm against the approved plan (architect).",
     "film": "Section removed until a 1080p textured walkthrough without captions or watermark exists (visualiser).",
-    "renders": "Clean 2560px exports without the vendor watermark for all renders; the current files are cropped (visualiser)."
+    "renders": "Clean 2560px exports without the vendor watermark for all renders; the current files are cropped (visualiser).",
+    "neighbour": "Godrej Greenview Estate facts taken from godrejproperties.com (Oct 2026). Re-check before launch; Valencia Town is not affiliated with Godrej, so keep the disclaimer and do not use Godrej logos."
+  },
+  "neighbour": {
+    "developer": "Godrej Properties",
+    "project": "Godrej Greenview Estate",
+    "acres": "46",
+    "road": "Ujjain Road, Indore",
+    "source": "https://www.godrejproperties.com/indore/plotted/godrej-greenview-estate"
   }
 }
