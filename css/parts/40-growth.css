@@ -1,0 +1,26 @@
+/* Chapter IV: Growth. The first bone section: read carefully. */
+.growth-stat{margin-top:22px;font:500 13px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--amber-deep)}
+.growth-stat .ph{letter-spacing:.04em}
+.growth-grid{display:grid;gap:48px;margin-top:64px;align-items:center}
+.distance{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:12px;padding:40px 0 72px;margin:0}
+.distance-line{position:absolute;left:0;right:0;top:40px;width:100%;height:16px;margin-top:0;overflow:visible}
+.distance-line path{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:2 7;vector-effect:non-scaling-stroke}
+.d-pin{position:relative;display:grid;gap:14px;font:500 clamp(16px,1.7vw,22px)/1.2 var(--serif);text-transform:uppercase;letter-spacing:.06em}
+.d-pin>span:last-child{position:absolute;top:calc(100% + 8px);width:max-content;max-width:min(150px,38vw)}
+.d-godrej{justify-items:start}.d-godrej>span:last-child{left:0;text-align:left}
+.d-home{justify-items:end}.d-home>span:last-child{right:0;text-align:right}
+.km{justify-self:center}
+.d-dot{width:16px;height:16px;border-radius:50%;background:var(--bone);border:2px solid var(--ink)}
+.d-home .d-dot{background:var(--amber-deep);border-color:var(--amber-deep)}
+.km{position:relative;z-index:1;margin-top:-16px;padding:4px 14px;background:var(--bone);font:500 clamp(28px,3vw,40px)/1 var(--serif);color:var(--ink);white-space:nowrap}
+.km-road{margin-top:-2px;font:500 12px/1.4 var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.clipping{position:relative;background:#FBF8F2;color:var(--ink);padding:36px 28px 26px;border:1px solid var(--line-bone);box-shadow:0 18px 40px -24px rgba(7,7,7,.35);transform:rotate(-.6deg)}
+.clipping:before{content:'';position:absolute;left:28px;right:28px;top:14px;border-top:3px double var(--ink)}
+.clip-kicker{font:500 12px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted-bone)}
+.clip-title{font:500 clamp(22px,2vw,28px)/1.2 var(--serif);margin-top:12px}
+.clip-date{font-size:13px;color:var(--muted-bone);margin-top:6px}
+.clip-quote{margin:18px 0 0;padding-left:16px;border-left:2px solid var(--amber-deep);font:italic 500 20px/1.4 var(--serif)}
+.clip-link{margin-top:10px;color:var(--ink);font-size:15px}
+.growth-fine{font-size:13px;line-height:1.6;color:var(--muted-bone);margin-top:22px;max-width:62ch}
+.growth-actions{justify-content:center;margin-top:56px}
+@media(min-width:1024px){.growth-grid{grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,110px)}}
