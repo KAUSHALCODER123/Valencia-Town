@@ -1,6 +1,6 @@
 """Page frame shared by every chapter: head, header, menu, progress HUD, contact bars, footer and dialogs."""
 import json, re
-from vt import C, CFG, P, DEV, SITE_URL, ASSET_VERSION, e, ph, has, phone_ok, tel, wa, mark, primary, WA_ICON, fmt
+from vt import ROOT, C, CFG, P, DEV, SITE_URL, ASSET_VERSION, e, ph, has, phone_ok, tel, wa, mark, primary, WA_ICON, fmt
 
 FONT_CSS = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap'
 DISPLAY_WOFF2 = 'https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06KnTOig.woff2'
@@ -10,7 +10,7 @@ U = C['ui']
 def nav_links(): return ''.join(f'<a href="{h}">{label}</a>' for h, label in C['nav'])
 
 def lang_toggle():
-    if not CFG.get('ENABLE_HINDI'): return ''
+    if not CFG.get('ENABLE_HINDI') or not (ROOT/'content/hi.json').exists(): return ''
     en, hi = ('aria-current="page" ', '') if C['lang'] == 'en' else ('', 'aria-current="page" ')
     return f'<div class="lang-toggle"><a {en}href="/" lang="en">{U["lang_en"]}</a><span aria-hidden="true">|</span><a {hi}href="/hi/" lang="hi">{U["lang_hi"]}</a></div>'
 

@@ -36,11 +36,10 @@
 .strip.is-dragging{scroll-snap-type:none}
 .strip-track{display:flex;gap:16px;width:max-content;padding:0 var(--gutter)}
 .strip-item{width:84vw;scroll-snap-align:start;scroll-margin-left:var(--gutter)}
-.strip-btn{display:block;width:100%;position:relative;overflow:hidden}
+.strip-btn{display:block;width:100%;position:relative;overflow:hidden;--lb:0px}
 .strip-img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:brightness(.82) contrast(1.05) saturate(.9);transition:transform 1.2s var(--ease),filter 1.2s var(--ease);-webkit-user-drag:none;user-select:none}
 .strip-btn:hover .strip-img{filter:brightness(.95) contrast(1.05) saturate(.95)}
 .strip-cap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:14px;color:var(--muted)}
-.strip-cap:after{content:'Artist’s impression';font-size:12px}
 .drag-cursor{position:absolute;left:0;top:0;z-index:3;display:none;place-items:center;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--amber);color:var(--ink);font:500 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity .4s var(--ease)}
 @media(min-width:768px){.strip-item{width:56vw}.gallery-head{grid-template-columns:1fr auto}}
 @media(hover:hover) and (pointer:fine){.strip{cursor:none}.drag-cursor{display:grid}.strip:hover .drag-cursor{opacity:1}.strip-btn{cursor:none}}

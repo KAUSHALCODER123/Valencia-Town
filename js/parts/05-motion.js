@@ -41,6 +41,7 @@ motion(() => {
   $$('.ch-title').forEach(title => {
     const head = title.parentElement;
     const parts = [$('.ch-label', head), $('.deva', head)].filter(Boolean);
+    if (!$('.mask-in', title)) return;
     const tl = gsap.timeline({scrollTrigger: {trigger: title, start: 'top 85%', once: true}});
     if (parts.length) tl.from(parts, {opacity: 0, y: 12, duration: 1, ease: EASE});
     tl.from($$('.mask-in', title), {yPercent: 110, duration: 1.2, stagger: .12, ease: EASE}, parts.length ? '-=.8' : 0);
