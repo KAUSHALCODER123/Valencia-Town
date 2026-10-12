@@ -195,24 +195,15 @@ $('.gallery-viewer').addEventListener('touchend', e => {
 /* Page state: past the hero, at the footer, overall progress and the current chapter. */
 const hero = $('#top');
 const footerEl = $('#contact');
-const chapters = $$('[data-chapter]');
-const hudNum = $('.hud-num b'), hudName = $('.hud-name');
-const fills = $$('.hud-line i, .progress-top i');
-const heroFill = $('.hero-prog i');
+const fills = $$('.progress-top i');
 let pageTicking = false;
 function updatePage() {
   pageTicking = false;
   const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-  fills.forEach(i => { i.style.transform = (i.parentElement.classList.contains('hud-line') ? 'scaleY(' : 'scaleX(') + p.toFixed(4) + ')'; });
-  if (heroFill) heroFill.style.transform = 'scaleX(' + Math.min(1, scrollY / (hero.offsetHeight * .8)).toFixed(3) + ')';
+  fills.forEach(i => { i.style.transform = 'scaleX(' + p.toFixed(4) + ')'; });
   html.classList.toggle('is-past-hero', hero.getBoundingClientRect().bottom < innerHeight * .35);
   html.classList.toggle('is-at-footer', footerEl.getBoundingClientRect().top < innerHeight * .9);
-  const mid = innerHeight * .5;
-  const current = chapters.filter(el => el.getBoundingClientRect().top <= mid).pop() || chapters[0];
-  if (current && hudNum.textContent !== current.dataset.chapter.padStart(2, '0')) {
-    hudNum.textContent = current.dataset.chapter.padStart(2, '0'); hudName.textContent = current.dataset.name;
-  }
 }
 const requestPage = () => { if (!pageTicking) { pageTicking = true; requestAnimationFrame(updatePage); } };
 addEventListener('scroll', requestPage, {passive: true}); addEventListener('resize', requestPage); updatePage();
@@ -377,6 +368,93 @@ motionDesktop(() => {
   tl.to(track, {x: () => -distance(), ease: 'none'}, 0).fromTo(fill, {scaleX: 0}, {scaleX: 1, ease: 'none'}, 0);
   return () => { section.classList.remove('is-horizontal'); tl.scrollTrigger?.kill(); gsap.set([track, fill], {clearProps: 'transform'}); };
 });
+
+/* 60-plan.js */
+/* Chapter VI: the masterplan zooms in slightly while the zones light one at a time (both scrubbed). */
+motion(() => {
+  const stage = $('.plan-stage'); if (!stage) return;
+  const zones = $$('.zone', stage), legend = $$('.zone-legend li');
+  const setActive = i => [zones, legend].forEach(list => list.forEach((el, k) => el.classList.toggle('is-active', k === i)));
+  const tl = gsap.timeline({scrollTrigger: {trigger: stage, start: 'top 75%', end: 'bottom 20%', scrub: true,
+    onUpdate: self => setActive(Math.min(zones.length - 1, Math.floor(self.progress * zones.length))),
+    onLeaveBack: () => setActive(-1)}});
+  tl.fromTo($('.plan-zoom', stage), {scale: 1}, {scale: 1.06, ease: 'none'});
+  return () => { setActive(-1); tl.scrollTrigger?.kill(); gsap.set($('.plan-zoom', stage), {clearProps: 'transform'}); };
+});
+
+/* 70-life.js */
+/* Chapter VII (desktop motion only): the chapter pins; each scene wipes in from the top while captions crossfade. */
+motionDesktop(() => {
+  const section = $('#life'); if (!section) return;
+  const scenes = $$('.scene', section);
+  section.classList.add('life-pinned');
+  const caps = scenes.map(s => $('.scene-cap', s));
+  gsap.set(scenes.slice(1), {clipPath: 'inset(0% 0% 100% 0%)'});
+  gsap.set(caps.slice(1), {opacity: 0, y: 20});
+  const tl = gsap.timeline({scrollTrigger: {trigger: section, start: 'top top', end: () => '+=' + innerHeight * (scenes.length - .4), pin: true, scrub: true, invalidateOnRefresh: true}});
+  tl.to($('.life-head', section), {opacity: 0, y: -24, ease: 'none', duration: .5}, .3);
+  scenes.slice(1).forEach((scene, k) => {
+    const at = k + .6;
+    tl.to(scene, {clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', duration: 1}, at)
+      .to(caps[k], {opacity: 0, y: -20, ease: 'none', duration: .4}, at)
+      .to(caps[k + 1], {opacity: 1, y: 0, ease: 'none', duration: .4}, at + .6);
+  });
+  tl.to({}, {duration: .3});
+  return () => { section.classList.remove('life-pinned'); tl.scrollTrigger?.kill(); gsap.set([...scenes, ...caps, $('.life-head', section)], {clearProps: 'all'}); };
+});
+
+/* 75-gallery.js */
+/* A closer look: native swipe on touch; mouse drag with inertia and a "Drag" cursor on desktop; arrow keys; 1 / 4 counter. */
+{
+  const strip = $('.strip');
+  if (strip) {
+    const items = $$('.strip-item', strip), buttons = $$('[data-strip-item]', strip);
+    const pos = $('.gallery-pos b'), cursor = $('.drag-cursor', strip);
+    const step = () => items[1] ? items[1].offsetLeft - items[0].offsetLeft : strip.clientWidth;
+    const index = () => Math.max(0, Math.min(items.length - 1, Math.round(strip.scrollLeft / step())));
+    const go = i => strip.scrollTo({left: Math.max(0, Math.min(items.length - 1, i)) * step(), behavior: reduceMotion.matches ? 'auto' : 'smooth'});
+    strip.addEventListener('scroll', () => { pos.textContent = index() + 1; }, {passive: true});
+    $$('[data-strip-step]').forEach(b => b.addEventListener('click', () => go(index() + Number(b.dataset.stripStep))));
+    strip.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); go(index() + (e.key === 'ArrowLeft' ? -1 : 1)); } });
+    let down = false, moved = 0, lastX = 0, velocity = 0, raf = 0;
+    strip.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = 0; lastX = e.clientX; velocity = 0; cancelAnimationFrame(raf);
+      strip.classList.add('is-dragging');
+    });
+    addEventListener('pointermove', e => {
+      if (cursor && e.pointerType === 'mouse') { const r = strip.getBoundingClientRect(); cursor.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px)`; }
+      if (!down) return;
+      const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx); velocity = dx;
+      strip.scrollLeft -= dx;
+    });
+    addEventListener('pointerup', () => {
+      if (!down) return; down = false;
+      const glide = () => {   // inertia, then settle on the nearest image
+        if (Math.abs(velocity) > .5 && !reduceMotion.matches) { strip.scrollLeft -= velocity; velocity *= .92; raf = requestAnimationFrame(glide); }
+        else { strip.classList.remove('is-dragging'); go(index()); }
+      };
+      glide();
+    });
+    buttons.forEach((b, i) => b.addEventListener('click', e => { if (moved > 6) { e.preventDefault(); moved = 0; return; } openGallery(buttons, i); }));
+  }
+}
+
+/* 80-plots.js */
+/* Chapter VIII: the plot outline scales with the slider (area ∝ side²); the reference house stays fixed. */
+{
+  const fig = $('.plot-compare');
+  if (fig) {
+    const slider = $('.plot-slider', fig), shape = $('.plot-shape', fig), out = $('[data-plot-out]', fig);
+    const max = Number(fig.dataset.max);
+    const update = () => {
+      const v = Number(slider.value); const label = v.toLocaleString('en-IN');
+      shape.style.transform = 'scale(' + Math.sqrt(v / max).toFixed(4) + ')';
+      out.textContent = label; slider.setAttribute('aria-valuetext', label + ' square feet');
+    };
+    slider.addEventListener('input', update); update();
+  }
+}
 
 /* 99-run.js */
 /* Start the motion layer after every chapter has registered. */

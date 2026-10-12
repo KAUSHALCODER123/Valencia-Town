@@ -1,0 +1,23 @@
+/* Chapter VIII: Plots. Second bone section. */
+.plots-grid{display:grid;gap:56px;margin-top:56px;align-items:center}
+.plot-size{font:500 clamp(56px,7vw,112px)/.95 var(--serif);font-variant-numeric:lining-nums;letter-spacing:.01em}
+.plot-size small{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted-bone);margin-top:12px}
+.plot-price{margin-top:20px;font:italic 500 clamp(24px,2.4vw,32px)/1.2 var(--serif);color:var(--amber-deep)}
+.plot-pay{margin-top:14px;font-weight:500}
+.plot-compare{margin:0;padding:28px;background:#FBF8F2;border:1px solid var(--line-bone)}
+.viz-wrap{position:relative}
+.plot-viz{width:100%;max-width:400px;height:auto;margin:0 auto}
+.plot-rect{fill:rgba(138,90,18,.08);stroke:var(--amber-deep);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.plot-shape{transition:transform .9s var(--ease)}
+.house-rect{fill:rgba(7,7,7,.06);stroke:var(--ink);stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+.house-text{font:500 13px var(--sans);fill:var(--muted-bone)}
+.viz-area{position:absolute;right:0;top:0;font:500 15px/1 var(--sans);color:var(--muted-bone)}
+.viz-area b{display:block;font:500 clamp(36px,4vw,52px)/1 var(--serif);color:var(--ink);font-variant-numeric:lining-nums tabular-nums;text-align:right}
+.slider-label{display:block;margin-top:20px;font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-bone)}
+.plot-slider{width:100%;height:44px;margin:6px 0 0;accent-color:var(--amber-deep);background:transparent;cursor:pointer}
+.slider-ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted-bone)}
+.plot-compare figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:16px;font-size:13px;color:var(--ink)}
+.key{display:inline-block;width:14px;height:14px;border:1.5px solid var(--amber-deep);background:rgba(138,90,18,.08)}
+.key-house{border:1px dashed var(--ink);background:rgba(7,7,7,.06);margin-left:10px}
+.plots .ph{letter-spacing:.04em}
+@media(min-width:1024px){.plots-grid{grid-template-columns:1.1fr .9fr;gap:clamp(48px,6vw,110px)}}

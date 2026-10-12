@@ -101,17 +101,11 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .lb-top{top:0}.lb-bottom{bottom:0;transform-origin:50% 100%}
 .has-lb{--lb:var(--bar)}
 
-/* Progress HUD (desktop) and top progress line (mobile) */
-.hud{position:fixed;left:calc(var(--gutter)/2 - 17px);bottom:24px;z-index:30;display:none;flex-direction:column;align-items:center;gap:12px;width:34px;padding:12px 0;border-radius:17px;background:rgba(7,7,7,.78);font:500 12px/1 var(--sans);color:var(--muted);opacity:0;transition:opacity .6s var(--ease);pointer-events:none}
-.hud-num{display:grid;justify-items:center;gap:4px;font-variant-numeric:tabular-nums}
-.hud b{color:var(--bone);font-weight:500}
-.hud-line{position:relative;width:1px;height:120px;background:var(--line)}
-.hud-line i{position:absolute;inset:0;background:var(--amber);transform-origin:50% 0;transform:scaleY(0)}
-.progress-top i,.hero-prog i{position:absolute;inset:0;background:var(--amber);transform-origin:0 50%;transform:scaleX(0)}
-.hud-name{writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase;letter-spacing:.3em;white-space:nowrap}
+/* Progress line above the mobile contact bar */
+.progress-top i{position:absolute;inset:0;background:var(--amber);transform-origin:0 50%;transform:scaleX(0)}
 .progress-top{position:fixed;left:0;right:0;bottom:calc(var(--mbar) + env(safe-area-inset-bottom));z-index:31;height:2px;background:var(--line);opacity:0;transition:opacity .6s var(--ease)}
 .is-past-hero .progress-top{opacity:1}
-@media(min-width:1024px){.hud{display:flex}.is-past-hero .hud{opacity:1}.progress-top{display:none}.is-at-footer .hud{opacity:0}}
+@media(min-width:1024px){.progress-top{display:none}}
 
 /* Contact bars */
 .mobile-bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;min-height:calc(var(--mbar) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:var(--ink);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .8s var(--ease)}
@@ -254,9 +248,8 @@ body.modal-open{overflow:hidden}
 .hero-sub{margin-top:10px;font-size:clamp(22px,2.2vw,32px)}
 .hero-actions{position:absolute;z-index:2;left:0;right:0;bottom:calc(var(--bar) + clamp(20px,4vh,44px));display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 var(--gutter)}
 .hero-bar{position:absolute;z-index:3;left:0;right:0;bottom:0;height:var(--bar);background:var(--ink);display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);font:500 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.hero-scroll,.hero-bar-end{display:none}
+.hero-bar-start,.hero-bar-end{display:none}
 .hero-bar-mid{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.22em}
-.hero-prog{position:relative;display:inline-block;width:64px;height:1px;background:var(--line);margin-left:14px;vertical-align:middle}
 .sound-toggle{min-height:44px;font:inherit;letter-spacing:inherit;color:var(--bone)}
 .hero .ai-label{bottom:calc(var(--bar) + 12px)}
 @media(max-width:374px){.hero-title{font-size:14.6vw}}
@@ -271,7 +264,7 @@ body.modal-open{overflow:hidden}
 }
 @media(min-width:1024px){
   .hero-bar{justify-content:space-between}
-  .hero-scroll,.hero-bar-end{display:flex;align-items:center;min-width:220px;white-space:nowrap}
+  .hero-bar-start,.hero-bar-end{display:flex;align-items:center;min-width:220px;white-space:nowrap}
   .hero-bar-end{justify-content:flex-end}
 }
 /* Short landscape screens: tighten so the bands still clear the signage */
@@ -434,3 +427,101 @@ body.modal-open{overflow:hidden}
   .is-horizontal .tl-track{width:max-content;margin:0;padding:0 var(--gutter)}
   .is-horizontal .tl-list{grid-auto-columns:420px}
 }
+
+/* 60-plan.css */
+/* Chapter VI: The Plan */
+.plan{background:var(--ink)}
+.plan-stage{position:relative;margin:56px auto 0;max-width:1180px;overflow:hidden;border:1px solid var(--line);--lb:0px}
+.plan-zoom{position:relative;transform-origin:50% 40%}
+.plan-img{width:100%;height:auto;filter:brightness(.72) contrast(1.08) saturate(.85)}
+.zones{position:absolute;inset:0}
+.zone{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-11px,-11px)}
+.z-dot{position:relative;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(7,7,7,.75);border:1px solid var(--amber);font:500 11px/1 var(--sans);color:var(--bone);transition:background-color .8s var(--ease),color .8s var(--ease)}
+.z-dot:after{content:'';position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--amber);opacity:0;transform:scale(.6);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.z-label{display:none;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;background:rgba(7,7,7,.72);padding:5px 8px;color:var(--bone);white-space:nowrap;opacity:.75;transition:opacity .8s var(--ease)}
+.zone.is-active .z-dot{background:var(--amber);color:var(--ink)}
+.zone.is-active .z-dot:after{opacity:1;transform:scale(1)}
+.zone.is-active .z-label{opacity:1}
+.plan-note{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+.zone-legend{display:grid;gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.zone-legend li{display:grid;grid-template-columns:40px 1fr;gap:2px 12px;padding:14px 0;border-bottom:1px solid var(--line);transition:color .8s var(--ease)}
+.lg-num{grid-row:1/span 2;font:500 13px/1.6 var(--sans);letter-spacing:.1em;color:var(--amber)}
+.lg-name{font:500 20px/1.2 var(--serif);text-transform:uppercase;letter-spacing:.08em}
+.lg-text{font-size:14px;color:var(--muted)}
+.zone-legend li.is-active .lg-name{color:var(--amber)}
+.plan-actions{justify-content:center;margin-top:48px}
+@media(min-width:768px){.zone-legend{grid-template-columns:1fr 1fr;column-gap:40px}}
+@media(min-width:1024px){.z-label{display:inline-block}.zone-legend{grid-template-columns:repeat(4,1fr)}.zone-legend li{grid-template-columns:1fr;padding:16px 0}.lg-num{grid-row:auto}}
+
+/* 70-life.css */
+/* Chapter VII: Life. Default (mobile, reduced motion, no script): a stack of scenes. Desktop motion: pinned wipes. */
+.life{position:relative;background:var(--night)}
+.life-head{padding:calc(var(--head) + 64px) 0 40px}
+.life-stage{position:relative}
+.life-stage .lb{display:none}
+.scenes{display:grid;gap:4px}
+.scene{position:relative;margin:0;overflow:hidden;background:var(--ink);--lb:0px}
+.scene-img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.scene .vignette{background:linear-gradient(180deg,transparent 40%,rgba(7,7,7,.82) 100%)}
+.scene-cap{position:absolute;left:var(--gutter);right:var(--gutter);bottom:52px;z-index:2}
+.scene-num{font:500 12px/1 var(--sans);letter-spacing:.3em;color:var(--muted)}
+.scene-title{font:500 clamp(32px,4vw,64px)/1 var(--serif);text-transform:uppercase;letter-spacing:.08em;margin-top:12px}
+.scene-text{max-width:44ch;margin-top:12px;color:#EDE6DA}
+@media(min-width:768px){.scene-img{aspect-ratio:16/9}.scene-cap{bottom:64px}}
+.life-pinned .life-head{position:absolute;inset:0 0 auto;z-index:4;padding-top:calc(var(--bar) + 64px);pointer-events:none}
+.life-pinned .life-stage{height:100svh;overflow:hidden;--lb:var(--bar)}
+.life-pinned .life-stage .lb{display:block;z-index:5}
+.life-pinned .scenes{position:absolute;inset:0;display:block}
+.life-pinned .scene{position:absolute;inset:0;--lb:var(--bar)}
+.life-pinned .scene-img{height:100%;aspect-ratio:auto}
+.life-pinned .scene .vignette{background:radial-gradient(ellipse 80% 70% at 50% 50%,transparent 35%,rgba(7,7,7,.55) 100%),linear-gradient(180deg,rgba(7,7,7,.55),transparent 35%,transparent 55%,rgba(7,7,7,.8))}
+.life-pinned .scene-cap{bottom:calc(var(--bar) + 56px)}
+.life-pinned .scene .ai-label{z-index:6}
+
+/* A closer look: one drag gallery */
+.gallery{background:var(--night);padding:96px 0 120px;overflow:hidden}
+.gallery-head{display:grid;gap:24px;align-items:end}
+.ch-title-s{font-size:clamp(34px,4vw,60px)}
+.gallery-nav{display:flex;align-items:center;gap:8px}
+.gallery-pos{font:500 14px/1 var(--sans);letter-spacing:.14em;color:var(--muted);margin-right:12px;font-variant-numeric:tabular-nums}
+.gallery-pos b{color:var(--bone);font-weight:500}
+.gallery-nav button{width:48px;height:48px;border:1px solid var(--line);font-size:18px;transition:border-color .6s var(--ease)}
+.gallery-nav button:hover{border-color:var(--amber)}
+.strip{position:relative;margin-top:40px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;outline-offset:-2px}
+.strip::-webkit-scrollbar{display:none}
+.strip.is-dragging{scroll-snap-type:none}
+.strip-track{display:flex;gap:16px;width:max-content;padding:0 var(--gutter)}
+.strip-item{width:84vw;scroll-snap-align:start;scroll-margin-left:var(--gutter)}
+.strip-btn{display:block;width:100%;position:relative;overflow:hidden}
+.strip-img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:brightness(.82) contrast(1.05) saturate(.9);transition:transform 1.2s var(--ease),filter 1.2s var(--ease);-webkit-user-drag:none;user-select:none}
+.strip-btn:hover .strip-img{filter:brightness(.95) contrast(1.05) saturate(.95)}
+.strip-cap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:14px;color:var(--muted)}
+.strip-cap:after{content:'Artist’s impression';font-size:12px}
+.drag-cursor{position:absolute;left:0;top:0;z-index:3;display:none;place-items:center;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--amber);color:var(--ink);font:500 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;pointer-events:none;opacity:0;transition:opacity .4s var(--ease)}
+@media(min-width:768px){.strip-item{width:56vw}.gallery-head{grid-template-columns:1fr auto}}
+@media(hover:hover) and (pointer:fine){.strip{cursor:none}.drag-cursor{display:grid}.strip:hover .drag-cursor{opacity:1}.strip-btn{cursor:none}}
+
+/* 80-plots.css */
+/* Chapter VIII: Plots. Second bone section. */
+.plots-grid{display:grid;gap:56px;margin-top:56px;align-items:center}
+.plot-size{font:500 clamp(56px,7vw,112px)/.95 var(--serif);font-variant-numeric:lining-nums;letter-spacing:.01em}
+.plot-size small{display:block;font:500 13px/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted-bone);margin-top:12px}
+.plot-price{margin-top:20px;font:italic 500 clamp(24px,2.4vw,32px)/1.2 var(--serif);color:var(--amber-deep)}
+.plot-pay{margin-top:14px;font-weight:500}
+.plot-compare{margin:0;padding:28px;background:#FBF8F2;border:1px solid var(--line-bone)}
+.viz-wrap{position:relative}
+.plot-viz{width:100%;max-width:400px;height:auto;margin:0 auto}
+.plot-rect{fill:rgba(138,90,18,.08);stroke:var(--amber-deep);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.plot-shape{transition:transform .9s var(--ease)}
+.house-rect{fill:rgba(7,7,7,.06);stroke:var(--ink);stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
+.house-text{font:500 13px var(--sans);fill:var(--muted-bone)}
+.viz-area{position:absolute;right:0;top:0;font:500 15px/1 var(--sans);color:var(--muted-bone)}
+.viz-area b{display:block;font:500 clamp(36px,4vw,52px)/1 var(--serif);color:var(--ink);font-variant-numeric:lining-nums tabular-nums;text-align:right}
+.slider-label{display:block;margin-top:20px;font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-bone)}
+.plot-slider{width:100%;height:44px;margin:6px 0 0;accent-color:var(--amber-deep);background:transparent;cursor:pointer}
+.slider-ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted-bone)}
+.plot-compare figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:16px;font-size:13px;color:var(--ink)}
+.key{display:inline-block;width:14px;height:14px;border:1.5px solid var(--amber-deep);background:rgba(138,90,18,.08)}
+.key-house{border:1px dashed var(--ink);background:rgba(7,7,7,.06);margin-left:10px}
+.plots .ph{letter-spacing:.04em}
+@media(min-width:1024px){.plots-grid{grid-template-columns:1.1fr .9fr;gap:clamp(48px,6vw,110px)}}
