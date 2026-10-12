@@ -1,0 +1,35 @@
+/* Chapter III: The Road */
+.opener .ch-title,.opener .ch-sub,.opener .lede{text-shadow:0 2px 24px rgba(7,7,7,.55)}
+.route-chapter{padding-top:72px}
+.route{position:relative}
+.route-line{position:absolute;pointer-events:none;overflow:visible}
+.route-line path{fill:none;stroke:var(--amber);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.route-h{display:none}
+.route-v{left:0;top:0;width:40px;height:100%}
+.route-stops{position:relative;display:grid;gap:8px}
+.stop{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:2px 16px;padding:18px 0 18px 56px;border-bottom:1px solid var(--line)}
+.stop strong{font:500 clamp(19px,2.2vw,30px)/1.15 var(--serif);text-transform:uppercase;letter-spacing:.06em}
+.stop-note{grid-column:1;font-size:14px;color:var(--muted)}
+.stop-min{grid-column:2;grid-row:1/span 2;align-self:center;font:500 clamp(24px,3vw,44px)/1 var(--serif);color:var(--amber);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.stop-min.stop-here{font:500 12px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.stop-pin{position:absolute;left:13px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--night);border:1.5px solid var(--amber)}
+.stop-pin-home{left:6px;width:28px;height:28px;margin-top:-14px;border:0;background:none}
+.stop-pin-home svg{width:28px;height:auto}
+.stop-pin-home path{fill:var(--amber)}
+.stop-home strong{color:var(--amber)}
+.route-actions{margin-top:40px}
+.map-embed iframe{display:block;width:100%;aspect-ratio:16/9;min-height:280px;border:1px solid var(--line);margin-top:24px}
+.route-fine{margin-top:24px}
+@media(min-width:1024px){
+  .route{padding-top:56px}
+  .route-v{display:none}
+  .route-h{display:block;left:0;right:0;top:56px;width:100%;height:40px}
+  .route-stops{grid-template-columns:repeat(4,1fr);gap:24px}
+  .stop{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:44px 8px 0;border:0}
+  .stop-pin{left:50%;top:20px;margin:-7px 0 0 -7px}
+  .stop-pin-home{margin:-14px 0 0 -14px}
+  .stop-min{order:-1;margin-bottom:10px;font-size:clamp(36px,3.4vw,52px)}
+  .stop-min.stop-here{font-size:12px;margin-bottom:10px;line-height:52px}
+  .route-actions{justify-content:center;margin-top:64px}
+  .route-fine{text-align:center;margin-inline:auto}
+}
