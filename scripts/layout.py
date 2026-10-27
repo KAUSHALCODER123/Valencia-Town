@@ -1,13 +1,14 @@
 """Page frame shared by every chapter: head, header, menu, progress HUD, contact bars, footer and dialogs."""
 import json, re
-from vt import ROOT, C, CFG, P, DEV, SITE_URL, ASSET_VERSION, e, ph, has, phone_ok, tel, wa, mark, primary, WA_ICON, fmt
+import vt
+from vt import ROOT, C, CFG, P, DEV, SITE_URL, ASSET_VERSION, LANG, home, e, ph, has, phone_ok, tel, wa, mark, primary, WA_ICON, fmt
 
 FONT_CSS = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap'
 DISPLAY_WOFF2 = 'https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06KnTOig.woff2'
 MAPS = f'https://www.google.com/maps/dir/?api=1&amp;destination={P["latitude"]},{P["longitude"]}'
 U = C['ui']
 
-def nav_links(): return ''.join(f'<a href="{h}">{label}</a>' for h, label in C['nav'])
+def nav_links(): return ''.join(f'<a href="{home(h)}">{label}</a>' for h, label in C['nav'])
 
 def lang_toggle():
     if not CFG.get('ENABLE_HINDI') or not (ROOT/'content/hi.json').exists(): return ''
@@ -28,7 +29,7 @@ def wa_link(cls, inner):
     p = ph('WHATSAPP_NUMBER'); return f'<a class="{cls}" href="#" aria-disabled="true">{inner}{p}</a>' if p and DEV else ''
 
 def header():
-    return f'''<a class="skip-link" href="#main">{U["skip"]}</a><header class="header" id="header"><a class="wordmark" href="#top">{mark()}<span>Valencia Town</span></a><div class="header-end">{lang_toggle()}{phone_link("header-phone")}<button class="header-cta" type="button" data-enquiry="Site Visit">{U["primary"]}</button><button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="menu" aria-label="{U["menu"]}"><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span>{U["menu"]}</span></button></div></header>
+    return f'''<a class="skip-link" href="#main">{U["skip"]}</a><header class="header" id="header"><a class="wordmark" href="{home('#top')}">{mark()}<span>Valencia Town</span></a><div class="header-end">{lang_toggle()}{phone_link("header-phone")}<button class="header-cta" type="button" data-enquiry="Site Visit">{U["primary"]}</button><button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="menu" aria-label="{U["menu"]}"><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span>{U["menu"]}</span></button></div></header>
 <dialog id="menu" class="menu-dialog" aria-label="Menu"><div class="menu-top">{mark("menu-mark")}<button class="close" type="button" data-close aria-label="{U["close_menu"]}">×</button></div><nav class="menu-nav" aria-label="Main navigation">{nav_links()}</nav><div class="menu-foot">{primary()}{phone_link("menu-phone")}<p>{C["footer"]["address"]}</p>{lang_toggle()}</div></dialog>'''
 
 def progress():
@@ -39,6 +40,14 @@ def bars():
     whats = wa_link('bar-wa', WA_ICON + U['bar_whatsapp'] + ' ') if (phone_ok('WHATSAPP_NUMBER') or DEV) else ''
     return f'''<div class="mobile-bar">{call}{whats}<button class="bar-visit" type="button" data-enquiry="Site Visit">{U["bar_visit"]}</button></div>{wa_link("float-wa", WA_ICON + "<span>" + U["whatsapp"] + "</span>").replace('class="float-wa"', 'class="float-wa" aria-label="' + U["whatsapp"] + '"')}'''
 
+def footer_pages():
+    """Links to the search landing pages (content/landing.json) in every English footer."""
+    f = ROOT/'content/landing.json'
+    if LANG != 'en' or not f.exists(): return ''
+    L = json.loads(f.read_text(encoding='utf-8-sig'))
+    items = ''.join(f'<li><a href="/{pg["slug"]}/">{pg["link"]}</a></li>' for pg in L['pages'])
+    return f'<nav class="footer-pages" aria-label="{L["nav_title"]}"><p class="fk">{L["nav_title"]}</p><ul>{items}</ul></nav>'
+
 def footer():
     F = C['footer']
     rera = ph('MP_RERA_NUMBER'); dev = ph('DEVELOPER_NAME'); legal = ph('LEGAL_ENTITY')
@@ -47,7 +56,7 @@ def footer():
         f'<p><span class="fk">{C["trust"]["developer"]}</span> {dev}</p>' if dev else '',
         f'<p><span class="fk">{C["trust"]["legal"]}</span> {legal}</p>' if legal else ''])
     contact = ''.join([phone_link('footer-link'), email_link('footer-link'), wa_link('footer-link whatsapp', WA_ICON + U['whatsapp'])])
-    return f'''<footer class="footer" id="contact"><div class="wrap footer-grid"><div class="footer-brand">{mark("footer-mark")}<p class="footer-wordmark">Valencia Town</p><p class="footer-tagline">{P["tagline"]}</p><address>{F["address"]}</address><a class="link" href="{MAPS}" target="_blank" rel="noopener">{F["directions"]}</a></div><div class="footer-contact"><p>{F["hours"]}</p><div class="footer-links">{contact}</div>{primary()}</div><div class="footer-facts">{facts}</div></div><div class="wrap footer-bottom"><nav class="footer-nav" aria-label="Footer">{nav_links()}</nav><p class="footer-disclaimer">{F["disclaimer"]}</p><p class="footer-copy">© <span id="year">2026</span> Valencia Town.{(" " + legal + ".") if legal else ""} <button class="text-btn" type="button" data-privacy>{F["privacy"]}</button> <button class="text-btn" type="button" data-terms>{F["terms"]}</button></p></div></footer>'''
+    return f'''<footer class="footer" id="contact"><div class="wrap footer-grid"><div class="footer-brand">{mark("footer-mark")}<p class="footer-wordmark">Valencia Town</p><p class="footer-tagline">{P["tagline"]}</p><address>{F["address"]}</address><a class="link" href="{MAPS}" target="_blank" rel="noopener">{F["directions"]}</a></div><div class="footer-contact"><p>{F["hours"]}</p><div class="footer-links">{contact}</div>{primary()}</div><div class="footer-facts">{facts}</div>{footer_pages()}</div><div class="wrap footer-bottom"><nav class="footer-nav" aria-label="Footer">{nav_links()}</nav><p class="footer-disclaimer">{F["disclaimer"]}</p><p class="footer-copy">© <span id="year">2026</span> Valencia Town.{(" " + legal + ".") if legal else ""} <button class="text-btn" type="button" data-privacy>{F["privacy"]}</button> <button class="text-btn" type="button" data-terms>{F["terms"]}</button></p></div></footer>'''
 
 INTERESTS = [('Site Visit', 'A site visit'), ('Price List', 'The price list'), ('Layout', 'The layout'), ('Brochure', 'The brochure'), ('Plot Availability', 'Plot availability')]
 
@@ -71,8 +80,18 @@ AMENITIES = ['Clubhouse', 'Temple', 'Children’s play areas', 'Forest-style gar
 
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 
-def document(body, faq_pairs):
-    M = C['meta']; url = SITE_URL
+def absolute(html):
+    """Root-relative asset paths, so pages in sub-folders (/hi/, landing pages) load the same files."""
+    return re.sub(r'(?<=["\' ,])(assets|css|js)/', r'/\1/', html)
+
+def hreflang():
+    if not vt.PAGE['home'] or not CFG.get('ENABLE_HINDI') or not (ROOT/'content/hi.json').exists(): return ''
+    u = SITE_URL
+    return f'<link rel="alternate" hreflang="en-IN" href="{u}/"><link rel="alternate" hreflang="hi-IN" href="{u}/hi/"><link rel="alternate" hreflang="x-default" href="{u}/">'
+
+def document(body, faq_pairs, meta=None, crumbs=None):
+    """A full page. meta overrides title/description for a landing page; crumbs is its breadcrumb trail [(name, path), ...]."""
+    M = meta or C['meta']; url = SITE_URL; page_url = url + vt.PAGE['path']; lang_tag = 'hi-IN' if LANG == 'hi' else 'en-IN'
     img = lambda name: url + '/assets/img/' + name
     org = {'@type': 'Organization', '@id': url + '/#organization', 'name': CFG.get('LEGAL_ENTITY') or CFG.get('DEVELOPER_NAME') or P['name'],
            'url': url + '/', 'logo': {'@type': 'ImageObject', 'url': img('apple-touch-icon.png'), 'width': 180, 'height': 180}}
@@ -88,24 +107,32 @@ def document(body, faq_pairs):
              'geo': {'@type': 'GeoCoordinates', 'latitude': P['latitude'], 'longitude': P['longitude']},
              'containedInPlace': {'@type': 'AdministrativeArea', 'name': 'Madhya Pradesh, India'},
              'amenityFeature': [{'@type': 'LocationFeatureSpecification', 'name': a, 'value': True} for a in AMENITIES]}
-    page = {'@type': 'WebPage', '@id': url + '/#webpage', 'url': url + '/', 'name': M['title'], 'description': M['description'], 'inLanguage': 'en-IN',
+    page = {'@type': 'WebPage', '@id': page_url + '#webpage', 'url': page_url, 'name': M['title'], 'description': M['description'], 'inLanguage': lang_tag,
             'isPartOf': {'@id': url + '/#website'}, 'about': {'@id': url + '/#place'},
             'primaryImageOfPage': {'@type': 'ImageObject', 'url': img('og-image.jpg'), 'width': 1200, 'height': 630}}
-    graph = [{'@type': 'WebSite', '@id': url + '/#website', 'name': P['name'], 'url': url + '/', 'inLanguage': 'en-IN', 'publisher': {'@id': url + '/#organization'}},
-             org, page, place,
-             {'@type': 'FAQPage', '@id': url + '/#faq', 'isPartOf': {'@id': url + '/#webpage'},
-              'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': strip_tags(a)}} for q, a in faq_pairs]}]
+    faq_node = {'@type': 'FAQPage', '@id': page_url + '#faq', 'isPartOf': {'@id': page_url + '#webpage'},
+                'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': strip_tags(a)}} for q, a in faq_pairs]}
+    if vt.PAGE['home']:
+        graph = [{'@type': 'WebSite', '@id': url + '/#website', 'name': P['name'], 'url': url + '/', 'inLanguage': 'en-IN', 'publisher': {'@id': url + '/#organization'}},
+                 org, page, place] + ([faq_node] if faq_pairs else [])
+    else:
+        # Landing pages point at the homepage's Place and Organization by @id instead of repeating them
+        trail = [('Valencia Town', '/')] + (crumbs or [])
+        crumb = {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': url + p} for i, (n, p) in enumerate(trail)]}
+        page['breadcrumb'] = {'@id': page_url + '#breadcrumb'}; crumb['@id'] = page_url + '#breadcrumb'
+        page['publisher'] = {'@id': url + '/#organization'}
+        graph = [page, crumb] + ([faq_node] if faq_pairs else [])
     film = P.get('film', {})
-    if has('FILM_URL') and film:
+    if has('FILM_URL') and film and vt.PAGE['home']:
         graph.append({'@type': 'VideoObject', '@id': url + '/#film', 'name': film['name'], 'description': film['description'],
                       'thumbnailUrl': url + '/' + film['thumbnail'], 'contentUrl': url + '/' + CFG['FILM_URL'].lstrip('/'),
-                      'uploadDate': film['uploadDate'], 'duration': film['duration'], 'isPartOf': {'@id': url + '/#webpage'}})
+                      'uploadDate': film['uploadDate'], 'duration': film['duration'], 'isPartOf': {'@id': page_url + '#webpage'}})
     schema = {'@context': 'https://schema.org', '@graph': graph}
     data = {'formEndpoint': P['formEndpoint'], 'brochureUrl': CFG.get('BROCHURE_URL', ''), 'layoutUrl': CFG.get('LAYOUT_URL', ''),
             'whatsapp': wa() if phone_ok('WHATSAPP_NUMBER') else '', 'mapsQuery': f'{P["latitude"]},{P["longitude"]}', 'mapTitle': C['road']['map_title'],
             'vendor': ['assets/vendor/gsap.min.js', 'assets/vendor/ScrollTrigger.min.js', 'assets/vendor/lenis.min.js']}
     intro = "(function(h){h.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){h.classList.add('pre');if(!sessionStorage.getItem('vt-intro'))h.classList.add('intro')}}catch(e){}})(document.documentElement)"
     v = ASSET_VERSION
-    head = f'''<!doctype html><html lang="{C["lang"]}"{' class="dev"' if DEV else ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{M["title"]}</title><meta name="description" content="{M["description"]}"><meta name="theme-color" content="#070707"><meta name="robots" content="{"noindex" if DEV else "index, follow, max-image-preview:large"}"><link rel="canonical" href="{url}/"><meta property="og:type" content="website"><meta property="og:locale" content="en_IN"><meta property="og:site_name" content="Valencia Town"><meta property="og:title" content="{M["og_title"]}"><meta property="og:description" content="{M["description"]}"><meta property="og:url" content="{url}/"><meta property="og:image" content="{url}/assets/img/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Valencia Town entrance and signage, artist’s impression"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{M["og_title"]}"><meta name="twitter:description" content="{M["description"]}"><meta name="twitter:image" content="{url}/assets/img/og-image.jpg"><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/img/favicon.ico" sizes="32x32"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"><script>{intro}</script><link rel="preload" as="image" href="assets/img/hero-signage-1280.webp" imagesrcset="assets/img/hero-signage-640.webp 640w, assets/img/hero-signage-1280.webp 1280w" imagesizes="100vw" media="(min-width: 768px)" fetchpriority="high"><link rel="preload" as="image" href="assets/img/hero-signage-portrait-580.webp" imagesrcset="assets/img/hero-signage-portrait-480.webp 480w, assets/img/hero-signage-portrait-580.webp 580w" imagesizes="100vw" media="(max-width: 767px)" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="font" type="font/woff2" href="{DISPLAY_WOFF2}" crossorigin><link rel="preload" as="style" href="{FONT_CSS}"><link rel="stylesheet" href="{FONT_CSS}" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="{FONT_CSS}"></noscript><link rel="stylesheet" href="css/style.css?v={v}"><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script></head>'''
+    head = f'''<!doctype html><html lang="{C["lang"]}"{' class="dev"' if DEV else ''}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{M["title"]}</title><meta name="description" content="{M["description"]}"><meta name="theme-color" content="#070707"><meta name="robots" content="{"noindex" if DEV else "index, follow, max-image-preview:large"}"><link rel="canonical" href="{page_url}">{hreflang()}<meta property="og:type" content="website"><meta property="og:locale" content="{"hi_IN" if LANG == "hi" else "en_IN"}"><meta property="og:site_name" content="Valencia Town"><meta property="og:title" content="{M["og_title"]}"><meta property="og:description" content="{M["description"]}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="{url}/assets/img/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Valencia Town entrance and signage, artist’s impression"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{M["og_title"]}"><meta name="twitter:description" content="{M["description"]}"><meta name="twitter:image" content="{url}/assets/img/og-image.jpg"><link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/img/favicon.ico" sizes="32x32"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"><script>{intro}</script><link rel="preload" as="image" href="assets/img/hero-signage-1280.webp" imagesrcset="assets/img/hero-signage-640.webp 640w, assets/img/hero-signage-1280.webp 1280w" imagesizes="100vw" media="(min-width: 768px)" fetchpriority="high"><link rel="preload" as="image" href="assets/img/hero-signage-portrait-580.webp" imagesrcset="assets/img/hero-signage-portrait-480.webp 480w, assets/img/hero-signage-portrait-580.webp 580w" imagesizes="100vw" media="(max-width: 767px)" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="font" type="font/woff2" href="{DISPLAY_WOFF2}" crossorigin><link rel="preload" as="style" href="{FONT_CSS}"><link rel="stylesheet" href="{FONT_CSS}" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="{FONT_CSS}"></noscript><link rel="stylesheet" href="css/style.css?v={v}"><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script></head>'''
     scripts = f'<script id="project-data" type="application/json">{json.dumps(data, ensure_ascii=False).replace("<", "&lt;")}</script><script src="js/main.js?v={v}" defer></script>'
-    return head + '<body>' + header() + progress() + '<main id="main">' + body + '</main>' + footer() + bars() + modals() + scripts + '</body></html>'
+    return absolute(head + '<body>' + header() + progress() + '<main id="main">' + body + '</main>' + footer() + bars() + modals() + scripts + '</body></html>')

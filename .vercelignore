@@ -1,0 +1,11 @@
+# Build sources, notes and tools stay in the repo but are not deployed: the site only serves the built pages,
+# /assets, /css, /js, robots.txt, sitemap.xml and the Search Console verification file.
+apps-script/
+content/
+data/
+scripts/
+video/
+qa/
+site.config.json
+*.md
+.gitignore

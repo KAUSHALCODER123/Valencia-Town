@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /apps-script/
+Disallow: /content/
+Disallow: /data/
+Disallow: /scripts/
+Disallow: /video/
+Disallow: /site.config.json
+Disallow: /*.md$
+Disallow: /*.py$
+Disallow: /*.gs$
 
 Sitemap: https://www.valenciatown.in/sitemap.xml

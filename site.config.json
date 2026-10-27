@@ -1,7 +1,7 @@
 {
   "_readme": "Single source for every value that still needs client confirmation. Empty string or empty list = not known yet. `python scripts/build.py --dev` shows each missing value on the page as [KEY NAME]; the normal build (what Vercel serves) leaves the element out and prints a launch checklist. Never fill a value without a source.",
 
-  "ENABLE_HINDI": false,
+  "ENABLE_HINDI": true,
 
   "DEVELOPER_NAME": "",
   "DEVELOPER_ABOUT": "",

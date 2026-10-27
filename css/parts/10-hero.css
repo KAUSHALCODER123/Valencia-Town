@@ -10,6 +10,8 @@
 .hero-copy{position:absolute;z-index:2;left:0;right:0;top:calc(var(--head) + clamp(20px,4.5vh,48px));padding:0 var(--gutter);text-align:center}
 .hero-title{font:500 clamp(56px,8vw,120px)/.98 var(--serif);text-transform:uppercase;letter-spacing:.08em;text-wrap:balance}
 .hero-title .mask{padding-bottom:.08em}
+.hero-kw{display:block;margin-bottom:14px;font:500 clamp(12px,1.05vw,15px)/1.5 var(--sans);letter-spacing:.28em;color:var(--bone);text-wrap:balance}
+.pre .hero-kw{animation:vt-fade 1s var(--ease) .2s both}
 .hero-sub{margin-top:10px;font-size:clamp(22px,2.2vw,32px)}
 .hero-actions{position:absolute;z-index:2;left:0;right:0;bottom:calc(var(--bar) + clamp(20px,4vh,44px));display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 var(--gutter)}
 .hero-bar{position:absolute;z-index:3;left:0;right:0;bottom:0;height:var(--bar);background:var(--ink);display:flex;align-items:center;justify-content:center;padding:0 var(--gutter);font:500 12px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
@@ -41,7 +43,7 @@
 /* Hero entrance in CSS so it never waits for the motion scripts (they load after the page). Fill-mode "both"
    means the end state is the natural state: nothing stays hidden if the script fails. */
 .pre .hero-title .mask-in{animation:vt-rise 1.2s var(--ease) both}
-.pre .hero-title .mask:nth-child(2) .mask-in{animation-delay:.12s}
+.pre .hero-title .mask:nth-last-child(1) .mask-in{animation-delay:.12s}
 .pre .hero-sub,.pre .hero-actions{animation:vt-fade 1s var(--ease) .3s both}
 .pre .hero-img{animation:vt-burns 8s cubic-bezier(.25,.46,.45,.94) both}
 /* First visit in a session: a ≤1.2s title card, skippable */
@@ -51,7 +53,7 @@
 .intro .header{animation:vt-drop .5s var(--ease) .25s both}
 .intro .hero-bar{animation:vt-lift .5s var(--ease) .25s both}
 .intro .hero-title .mask-in{animation-duration:.55s;animation-delay:.55s}
-.intro .hero-title .mask:nth-child(2) .mask-in{animation-delay:.67s}
+.intro .hero-title .mask:nth-last-child(1) .mask-in{animation-delay:.67s}
 .intro .hero-sub,.intro .hero-actions{animation-duration:.5s;animation-delay:.65s}
 .intro-skip .intro-mark{display:none}
 .intro-skip .hero-title .mask-in,.intro-skip .hero-sub,.intro-skip .hero-actions,.intro-skip .header,.intro-skip .hero-bar{animation:none}

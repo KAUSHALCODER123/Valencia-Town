@@ -26,10 +26,18 @@ js = '\n'.join(f'/* {p.name} */\n' + p.read_text(encoding='utf-8') for p in sort
 (ROOT/'js/main.js').write_text("/* Valencia Town. Generated from js/parts by scripts/build.py; edit the parts. */\n(() => {\n'use strict';\n" + js + "\n})();\n", encoding='utf-8')
 
 if LANG == 'en':
-    (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: ' + P['siteUrl'] + '/sitemap.xml\n', encoding='utf-8')
-    (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + P['siteUrl'] + '/</loc><lastmod>' + __import__('datetime').date.today().isoformat() + '</lastmod></url></urlset>\n', encoding='utf-8')
+    # Crawl the pages and everything they load (/assets, /css, /js); keep build sources and notes out of search
+    private = ['/apps-script/', '/content/', '/data/', '/scripts/', '/video/', '/site.config.json', '/*.md$', '/*.py$', '/*.gs$']
+    (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n' + ''.join(f'Disallow: {x}\n' for x in private) + '\nSitemap: ' + P['siteUrl'] + '/sitemap.xml\n', encoding='utf-8')
+    # Search landing pages (content/landing.json), then the Hindi homepage; the sitemap lists every page built
+    import landing
+    paths = ['/'] + landing.build()
     if CFG.get('ENABLE_HINDI') and (ROOT/'content/hi.json').exists():
         subprocess.run([sys.executable, __file__, '--lang=hi'] + (['--dev'] if DEV else []), check=True)
+        paths.append('/hi/')
+    today = __import__('datetime').date.today().isoformat()
+    urls = ''.join(f'<url><loc>{P["siteUrl"]}{p}</loc><lastmod>{today}</lastmod></url>' for p in paths)
+    (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + urls + '</urlset>\n', encoding='utf-8')
 
 print(f'Built {out.relative_to(ROOT)} ({"development" if DEV else "production"}), css/style.css, js/main.js')
 if MISSING:
