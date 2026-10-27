@@ -7,13 +7,14 @@
  */
 
 var SHEET_NAME = 'Leads';
-var NOTIFY_EMAIL = '';          // e.g. 'sales@example.com' – leave empty for no email alerts
+var NOTIFY_EMAIL = '';          // e.g. 'sales@example.com' or 'a@x.com,b@x.com' – leave empty for no email alerts
 var DUPLICATE_WINDOW_MIN = 10;  // ignore the same phone number again within this many minutes
 
 var HEADERS = [
   'Received (IST)', 'Name', 'Phone', 'Looking for', 'Form', 'Page',
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
-  'gclid', 'fbclid', 'Submitted (browser)', 'Status', 'Notes'
+  'gclid', 'fbclid', 'Submitted (browser)', 'Status', 'Notes',
+  'Email', 'Preferred call time'     // at the end so existing sheets keep their columns
 ];
 
 function doPost(e) {
@@ -30,6 +31,9 @@ function doPost(e) {
       return json({ ok: false, error: 'invalid' });
     }
 
+    var email = clean(data.email, 120);
+    var preferredTime = clean(data.preferred_time, 40);
+
     var sheet = getSheet();
     if (isDuplicate(sheet, phone)) return json({ ok: true, duplicate: true });
 
@@ -38,7 +42,7 @@ function doPost(e) {
       Utilities.formatDate(now, 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss'),
       name,
       "'" + phone,                                                     // keep the leading +
-      clean(data.interest, 60),
+      clean(data.interest, 120),
       clean(data.source, 40),
       clean(data.page, 200),
       clean(data.utm_source, 100),
@@ -50,14 +54,22 @@ function doPost(e) {
       clean(data.fbclid, 200),
       clean(data.submitted_at, 40),
       'New',
-      ''
+      '',
+      email,
+      preferredTime
     ]);
 
     if (NOTIFY_EMAIL) {
-      MailApp.sendEmail(NOTIFY_EMAIL, 'New Valencia Town lead: ' + name,
-        'Name: ' + name + '\nPhone: ' + phone + '\nLooking for: ' + clean(data.interest, 60) +
-        '\nSource: ' + (clean(data.utm_source, 100) || 'direct') + ' / ' + clean(data.source, 40) +
-        '\n\nOpen the sheet: ' + SpreadsheetApp.getActive().getUrl());
+      MailApp.sendEmail({
+        to: NOTIFY_EMAIL,
+        replyTo: email || NOTIFY_EMAIL.split(',')[0],
+        subject: 'New Valencia Town lead: ' + name,
+        body: 'Name: ' + name + '\nPhone: ' + phone + '\nEmail: ' + (email || 'not given') +
+          '\nPreferred call time: ' + (preferredTime || 'any time') +
+          '\nLooking for: ' + clean(data.interest, 120) +
+          '\nSource: ' + (clean(data.utm_source, 100) || 'direct') + ' / ' + clean(data.source, 40) +
+          '\n\nOpen the sheet: ' + SpreadsheetApp.getActive().getUrl()
+      });
     }
 
     return json({ ok: true });
@@ -114,7 +126,8 @@ function json(obj) {
 // Run once from the editor to check everything works (adds a test row)
 function testLead() {
   var res = doPost({ postData: { contents: JSON.stringify({
-    name: 'Test Lead', phone: '+919876543210', interest: 'Site visit', source: 'test',
+    name: 'Test Lead', phone: '+919876543210', email: 'test@example.com', preferred_time: 'Evening (4 pm – 7 pm)',
+    interest: 'Site visit', source: 'test',
     page: 'manual test', submitted_at: new Date().toISOString()
   }) } });
   Logger.log(res.getContent());

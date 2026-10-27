@@ -65,7 +65,7 @@ def heading(ch, hid, sub=True, deva=None):
     lines = ''.join(f'<span class="mask"><span class="mask-in">{line}</span></span>' for line in ch['title'])
     d = f'<p class="deva" lang="hi">{deva}</p>' if deva else ''
     s = f'<p class="ch-sub">{ch["sub"]}</p>' if sub and ch.get('sub') else ''
-    return f'<p class="ch-label">{ch["label"]}</p>{d}<h2 id="{hid}" class="ch-title">{lines}</h2>{s}'
+    return f'{d}<h2 id="{hid}" class="ch-title">{lines}</h2>{s}'
 
 MARK_SVG = (ROOT/'assets/img/logo-mark.svg').read_text(encoding='utf-8').replace('role="img" aria-label="Valencia Town"', 'aria-hidden="true" focusable="false"')
 def mark(cls='brand-mark'): return f'<span class="{cls}">{MARK_SVG}</span>'

@@ -28,7 +28,7 @@ def wa_link(cls, inner):
     p = ph('WHATSAPP_NUMBER'); return f'<a class="{cls}" href="#" aria-disabled="true">{inner}{p}</a>' if p and DEV else ''
 
 def header():
-    return f'''<a class="skip-link" href="#main">{U["skip"]}</a><header class="header" id="header"><a class="wordmark" href="#top">{mark()}<span>Valencia Town</span></a><p class="header-label" aria-hidden="true">{C["hero"]["label"]}</p><div class="header-end">{lang_toggle()}{phone_link("header-phone")}<button class="header-cta" type="button" data-enquiry="Site Visit">{U["primary"]}</button><button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="menu" aria-label="{U["menu"]}"><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span>{U["menu"]}</span></button></div></header>
+    return f'''<a class="skip-link" href="#main">{U["skip"]}</a><header class="header" id="header"><a class="wordmark" href="#top">{mark()}<span>Valencia Town</span></a><div class="header-end">{lang_toggle()}{phone_link("header-phone")}<button class="header-cta" type="button" data-enquiry="Site Visit">{U["primary"]}</button><button class="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="menu" aria-label="{U["menu"]}"><span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span>{U["menu"]}</span></button></div></header>
 <dialog id="menu" class="menu-dialog" aria-label="Menu"><div class="menu-top">{mark("menu-mark")}<button class="close" type="button" data-close aria-label="{U["close_menu"]}">×</button></div><nav class="menu-nav" aria-label="Main navigation">{nav_links()}</nav><div class="menu-foot">{primary()}{phone_link("menu-phone")}<p>{C["footer"]["address"]}</p>{lang_toggle()}</div></dialog>'''
 
 def progress():

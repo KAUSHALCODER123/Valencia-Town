@@ -1,0 +1,31 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant VT"; src: url("assets/fonts/cormorant-500.woff2") format("woff2"); font-weight: 500; }
+    @font-face { font-family: "Jost VT"; src: url("assets/fonts/jost.woff2") format("woff2"); font-weight: 400 500; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #070707; }
+    #s1-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 62%; }
+    #s1-night { position: absolute; inset: 0; background: #0a1410; }
+    #s1-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,7,7,.82) 0%, rgba(7,7,7,.35) 50%, rgba(7,7,7,0) 75%); }
+    .s1-line { overflow: hidden; }
+    .s1-line > span { display: block; }
+    #s1-time { position: absolute; left: 120px; top: 270px; font: 500 280px/1.12 "Cormorant VT", Georgia, serif; letter-spacing: .04em; color: #E2A84B; }
+    #s1-sub { position: absolute; left: 124px; top: 590px; font: 500 36px/1.3 "Jost VT", sans-serif; letter-spacing: .28em; text-transform: uppercase; color: #F3EDE3; width: 900px; }
+    #s1-legal { position: absolute; left: 124px; bottom: 56px; font: 400 28px/1 "Jost VT", sans-serif; letter-spacing: .08em; color: rgba(243,237,227,.75); }
+  </style>
+  <div data-hf-id="hf-3pu3" id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <img data-hf-id="hf-hgij" id="s1-bg" class="clip" data-start="0" data-duration="5.2" src="assets/img/entrance-road-1600.webp" alt="" />
+    <div data-hf-id="hf-eq8i" id="s1-night" class="clip" data-start="0" data-duration="5.2"></div>
+    <div data-hf-id="hf-av8q" id="s1-scrim" class="clip" data-start="0" data-duration="5.2"></div>
+    <div data-hf-id="hf-uzds" id="s1-time" class="clip s1-line" data-start="0" data-duration="5.2"><span data-hf-id="hf-qwpw" id="s1-time-in">4:00 AM</span></div>
+    <div data-hf-id="hf-pek3" id="s1-sub" class="clip s1-line" data-start="0" data-duration="5.2"><span data-hf-id="hf-rvib" id="s1-sub-in">Bhasma Aarti at Shri Mahakaleshwar, Ujjain</span></div>
+    <div data-hf-id="hf-19dh" data-layout-allow-overlap id="s1-legal" class="clip" data-start="0" data-duration="5.2">Artist’s impression</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#s1-bg", { scale: 1.0 }, { scale: 1.14, duration: 5.2, ease: "sine.inOut" }, 0);
+    tl.fromTo("#s1-night", { opacity: 0.66 }, { opacity: 0.4, duration: 5.2, ease: "sine.inOut" }, 0);
+    tl.fromTo("#s1-time-in", { yPercent: 115 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.1);
+    tl.fromTo("#s1-sub-in", { yPercent: 115 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.8);
+    window.__timelines["s1"] = tl;
+  </script>
+</template>

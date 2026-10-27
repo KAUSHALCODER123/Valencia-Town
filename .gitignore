@@ -7,3 +7,9 @@ qa/
 asset-review.jpg
 screenshots/
 __pycache__/
+scripts/brochure/_img/
+video/*/renders/
+video/*/.hyperframes/
+video/*/node_modules/
+video/*/.thumbnails/
+.env*

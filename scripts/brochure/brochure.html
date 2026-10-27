@@ -1,0 +1,162 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Valencia Town: Brochure</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap">
+<style>
+@page{size:A4;margin:0}
+:root{--ink:#070707;--night:#0F1713;--bone:#F3EDE3;--muted:#B8AE9F;--amber:#E2A84B;--amber-deep:#8A5A12;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font:300 10.5pt/1.6 var(--sans);color:var(--bone);background:var(--night)}
+.page{position:relative;width:210mm;height:297mm;overflow:hidden;page-break-after:always;background:var(--night);padding:18mm 16mm 20mm}
+.page.bone{background:var(--bone);color:var(--ink)}
+.page.ink{background:var(--ink)}
+.kicker{font:500 8pt/1 var(--sans);letter-spacing:.38em;text-transform:uppercase;color:var(--muted)}
+.bone .kicker{color:#6b6255}
+h1,h2{font:500 38pt/1.02 var(--serif);text-transform:uppercase;letter-spacing:.07em;margin-top:6mm}
+h2 em,h1 em{font-style:normal;color:var(--amber)}
+.bone h2 em{color:var(--amber-deep)}
+.sub{font:italic 500 17pt/1.25 var(--serif);margin-top:4mm}
+.lede{margin-top:6mm;max-width:150mm;font-size:11pt}
+.foot{position:absolute;left:16mm;right:16mm;bottom:9mm;display:flex;justify-content:space-between;font:400 7pt/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bone .foot{color:#6b6255}
+.fine{font:300 7.5pt/1.5 var(--sans);color:var(--muted);margin-top:5mm}
+.bone .fine{color:#6b6255}
+img{display:block;width:100%;height:100%;object-fit:cover}
+/* cover */
+.cover{padding:0}
+.cover .photo{position:absolute;inset:0}
+.cover .photo img{object-position:62% 50%}
+.cover .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.8) 0,rgba(7,7,7,.2) 38%,rgba(7,7,7,.1) 62%,rgba(7,7,7,.9) 100%)}
+.cover .top{position:absolute;top:20mm;left:0;right:0;text-align:center}
+.cover h1{font-size:50pt;margin-top:8mm}
+.cover .bottom{position:absolute;bottom:22mm;left:0;right:0;text-align:center}
+.cover .tag{font:italic 500 22pt/1.2 var(--serif);margin-bottom:6mm}
+.cover .bar{font:500 9pt/1 var(--sans);letter-spacing:.3em;text-transform:uppercase}
+/* road */
+.route{margin-top:12mm;position:relative;padding:0 6mm}
+.route .line{position:absolute;left:18mm;right:18mm;top:7mm;height:1px;background:var(--amber)}
+.route ol{list-style:none;display:flex;justify-content:space-between;position:relative}
+.route li{width:38mm;text-align:center}
+.route li i{display:block;width:9px;height:9px;border-radius:50%;background:var(--amber);margin:3mm auto 4mm}
+.route li.home i{width:14px;height:14px;margin:1.5mm auto 2.5mm;outline:3px solid rgba(226,168,75,.3)}
+.route b{display:block;font:500 15pt/1.1 var(--serif);color:var(--bone)}
+.route small{display:block;font-size:8pt;color:var(--muted);margin-top:1mm}
+.route .min{display:block;font:500 12pt/1 var(--sans);color:var(--amber);margin-top:2mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:12mm}
+.col h3{font:500 15pt/1.2 var(--serif);margin-bottom:4mm;letter-spacing:.04em}
+.col ul{list-style:none}
+.col li{padding:2.2mm 0;border-top:1px solid rgba(243,237,227,.15)}
+.bone .col li{border-top-color:rgba(7,7,7,.2)}
+.col li{display:flex;gap:4mm}.col li b{color:var(--amber);font-weight:500;flex:0 0 27mm}
+.bone .col li{display:block}.bone .col li b{color:var(--amber-deep);flex:none}
+.photo-band{position:absolute;left:0;right:0;bottom:30mm;height:62mm}
+/* plan */
+.planimg{margin-top:9mm;height:92mm;border:1px solid rgba(138,90,18,.4)}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:3mm 10mm;margin-top:8mm}
+.zones div{padding-top:2.5mm;border-top:1px solid rgba(7,7,7,.2)}
+.zones b{font:500 13pt/1.2 var(--serif)}
+.zones p{font-size:8.5pt;line-height:1.45;color:#3a342c;margin-top:.5mm}
+/* life */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:9mm}
+figure{position:relative;height:66mm;overflow:hidden}
+figcaption{position:absolute;left:0;right:0;bottom:0;padding:12mm 4mm 3.5mm;background:linear-gradient(0deg,rgba(7,7,7,.88),transparent)}
+figcaption b{display:block;font:500 13pt/1.1 var(--serif);color:var(--amber)}
+figcaption span{font-size:8pt;line-height:1.4;display:block;margin-top:1mm}
+figure.wide{height:50mm;margin-top:5mm}
+/* plots + visit */
+.plotsize{font:500 34pt/1 var(--serif);color:var(--amber-deep);margin-top:5mm}
+.plotsize small{font:400 9pt var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#6b6255;margin-left:2mm}
+.visitimg{height:46mm;margin-top:6mm}
+.cta{margin-top:5mm;padding:5mm 8mm;border:1px solid var(--amber);background:var(--night);color:var(--bone);display:flex;gap:8mm;justify-content:space-between;align-items:center}
+.cta b{display:block;font:500 18pt/1.2 var(--serif);margin-bottom:1mm}
+.cta p{font-size:9pt}
+.cta span{color:var(--amber);font:500 12pt/1 var(--sans);letter-spacing:.06em;white-space:nowrap}
+</style></head><body>
+
+<section class="page cover ink">
+  <div class="photo"><img src="_img/hero-signage-1280.jpg" alt=""></div><div class="shade"></div>
+  <div class="top"><p class="kicker" style="color:var(--bone)">Residential plots · Shahna</p><h1>Valencia <em>Town</em></h1></div>
+  <div class="bottom"><p class="tag">The address of tomorrow.</p><p class="bar">48 Acres · Shahna · Indore–Ujjain Road</p></div>
+</section>
+
+<section class="page">
+  <p class="kicker">Location</p>
+  <h2><em>Mahakal</em> is calling</h2>
+  <p class="sub">you home.</p>
+  <p class="lede">Some come for a darshan. Some stay for a lifetime. Every year, crores of devotees travel to Ujjain; at Valencia Town the dawn Bhasma Aarti is a morning drive.</p>
+  <div class="route"><div class="line"></div><ol>
+    <li><i></i><b>Indore</b><small>Vijay Nagar and the airport</small><span class="min">25 min</span></li>
+    <li><i></i><b>Sri Aurobindo Hospital</b><small>SAIMS</small><span class="min">10 min</span></li>
+    <li class="home"><i></i><b>Valencia Town</b><small>Shahna</small></li>
+    <li><i></i><b>Mahakaleshwar</b><small>Ujjain</small><span class="min">40 min</span></li>
+  </ol></div>
+  <div class="two">
+    <div class="col"><h3>A day, forty minutes from darshan</h3><ul>
+      <li><b>4 am</b>Bhasma Aarti at Shri Mahakaleshwar.</li>
+      <li><b>~5:30 am</b>The drive home along the Indore–Ujjain Road.</li>
+      <li><b>Evening</b>Back for the evening aarti, and home in time for dinner.</li></ul></div>
+    <div class="col"><h3>A life near Mahakal</h3><ul>
+      <li><b>Shravan</b>Every Monday within reach.</li>
+      <li><b>Mahashivratri</b>The great night of Shiva, a short drive away.</li>
+      <li><b>Nag Panchami</b>Festival darshan without the long trip.</li>
+      <li><b>2028</b>Simhastha, the Kumbh of Ujjain.</li></ul></div>
+  </div>
+  <div class="photo-band"><img src="_img/internal-road-1280.jpg" alt=""></div>
+  <p class="fine" style="position:absolute;left:16mm;right:16mm;bottom:17mm;margin:0">Drive times are approximate and vary with traffic, route and festival crowds. Not an assurance of future value.</p>
+  <div class="foot"><span>Valencia Town</span><span>valenciatown.in</span><span>02</span></div>
+</section>
+
+<section class="page bone">
+  <p class="kicker">The plan</p>
+  <h2>Forty-eight acres, <em>planned as one</em></h2>
+  <p class="sub">Every street, garden and court, drawn together.</p>
+  <div class="planimg"><img src="_img/master-layout-832.jpg" alt=""></div>
+  <div class="zones">
+    <div><b>Grand entrance</b><p>A considered arrival. Architecture and landscape introduce the world within.</p></div>
+    <div><b>Clubhouse</b><p>A place to come together, share a conversation and celebrate the everyday.</p></div>
+    <div><b>Temple</b><p>A space for reflection, woven into the life of the community.</p></div>
+    <div><b>Forest garden</b><p>Forest-style gardens bring a greener rhythm to daily walks.</p></div>
+    <div><b>Landscaped greens</b><p>Open lawns and landscaped spaces give everyday life room to breathe.</p></div>
+    <div><b>Sports &amp; recreation</b><p>Sports courts and children’s play areas make space for movement and discovery.</p></div>
+    <div><b>Residential precincts</b><p>Residential plots with space to imagine a home that feels entirely your own.</p></div>
+    <div><b>Internal roads</b><p>Wide internal roads connect homes, gardens and shared spaces.</p></div>
+  </div>
+  <p class="fine">Artist’s impression. Indicative layout; zone positions are approximate. Request the current layout for plot-level details.</p>
+  <div class="foot"><span>Valencia Town</span><span>valenciatown.in</span><span>03</span></div>
+</section>
+
+<section class="page ink">
+  <p class="kicker">Life</p>
+  <h2>Room to <em>breathe</em></h2>
+  <p class="sub">Five scenes from an ordinary day.</p>
+  <div class="grid">
+    <figure><img src="_img/garden-lawn-1280.jpg" alt=""><figcaption><b>Gardens</b><span>Open lawns and forest-style gardens give everyday life room to breathe.</span></figcaption></figure>
+    <figure><img src="_img/aerial-clubhouse-1280.jpg" alt=""><figcaption><b>Clubhouse</b><span>Familiar faces and shared celebrations, at the heart of the township.</span></figcaption></figure>
+    <figure><img src="_img/kids-play-area-1280.jpg" alt=""><figcaption><b>Children &amp; families</b><span>Space for children to grow, families to connect and generations to belong.</span></figcaption></figure>
+    <figure><img src="_img/sports-court-1280.jpg" alt=""><figcaption><b>Sports</b><span>Courts and open ground for movement and play, close to home.</span></figcaption></figure>
+  </div>
+  <figure class="wide"><img src="_img/entrance-road-1280.jpg" alt=""><figcaption><b>Arrival</b><span>A considered arrival. Architecture and landscape introduce the world within.</span></figcaption></figure>
+  <p class="fine">All images are artist’s impressions for representation purposes. Specifications, amenities and layouts are indicative and subject to change.</p>
+  <div class="foot"><span>Valencia Town</span><span>valenciatown.in</span><span>04</span></div>
+</section>
+
+<section class="page bone">
+  <p class="kicker">Plots · Visit</p>
+  <h2>Space to <em>build</em></h2>
+  <p class="sub">life, your way.</p>
+  <p class="plotsize">1,000–2,400<small>sq ft, approx.</small></p>
+  <p class="lede" style="max-width:none;margin-top:3mm">Residential plots in a gated township. Sizes are approximate and availability changes, so ask the team what is open today.</p>
+  <div class="two" style="margin-top:5mm">
+    <div class="col"><h3>In the township</h3><ul>
+      <li>Clubhouse and temple</li><li>Forest-style gardens and landscaped lawns</li><li>Sports courts and children’s play areas</li><li>Senior citizens’ library, meeting and women’s activity zones</li><li>Wide internal roads and gated security</li></ul></div>
+    <div class="col"><h3>At a glance</h3><ul>
+      <li><b>48</b> acres</li><li><b>1,000+</b> plots</li><li><b>40 min</b> to Mahakaleshwar, Ujjain</li><li><b>25 min</b> to Vijay Nagar and Indore Airport</li><li><b>10 min</b> to Sri Aurobindo Hospital</li></ul></div>
+  </div>
+  <figure class="visitimg"><img src="_img/gate-sunset-1280.jpg" alt=""></figure>
+  <div class="cta">
+    <div><b>Come and see Valencia.</b><p>Walk the avenues. Stand on your plot. Then drive on to Ujjain for darshan.<br>Visits by appointment, 10 am – 7 pm, every day.</p></div>
+    <span>valenciatown.in</span>
+  </div>
+  <p class="fine">Shahna, Indore–Ujjain Road, Madhya Pradesh. Prices, availability and payment plans are confirmed only in writing by the developer. Please verify the current project documentation, MP RERA registration and applicable approvals before making any decision. Valencia Town is an independent project and is not affiliated with Godrej Properties Ltd.</p>
+  <div class="foot"><span>Valencia Town</span><span>valenciatown.in</span><span>05</span></div>
+</section>
+</body></html>

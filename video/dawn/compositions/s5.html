@@ -1,0 +1,52 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant VT"; src: url("assets/fonts/cormorant-500.woff2") format("woff2"); font-weight: 500; }
+    @font-face { font-family: "Jost VT"; src: url("assets/fonts/jost.woff2") format("woff2"); font-weight: 400 500; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; }
+    .s5-shot { position: absolute; inset: 0; overflow: hidden; }
+    .s5-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .s5-shot .s5-scrim { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(7,7,7,.75) 0%, rgba(7,7,7,0) 45%); }
+    .s5-cap { position: absolute; left: 124px; bottom: 120px; font: 500 120px/1 "Cormorant VT", Georgia, serif; letter-spacing: .06em; text-transform: uppercase; color: #F3EDE3; overflow: hidden; }
+    .s5-cap span { display: block; }
+    .s5-legal { position: absolute; left: 124px; bottom: 48px; font: 400 28px/1 "Jost VT", sans-serif; letter-spacing: .08em; color: rgba(243,237,227,.75); }
+    #s5-plan { position: absolute; inset: 0; background: #F3EDE3; overflow: hidden; }
+    #s5-plan-img { position: absolute; left: 820px; top: 150px; width: 1000px; height: 780px; overflow: hidden; border: 2px solid rgba(138,90,18,.45); }
+    #s5-plan-img img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 50%; }
+    #s5-num { position: absolute; left: 110px; top: 150px; overflow: hidden; }
+    #s5-num span { display: block; font: 500 420px/1 "Cormorant VT", Georgia, serif; color: #8A5A12; }
+    #s5-plan-t { position: absolute; left: 124px; top: 600px; width: 640px; font: 500 72px/1.05 "Cormorant VT", Georgia, serif; letter-spacing: .06em; text-transform: uppercase; color: #070707; }
+    #s5-plan-s { position: absolute; left: 126px; top: 800px; width: 680px; font: 500 30px/1.5 "Jost VT", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #3a342c; }
+    #s5-plan-legal { position: absolute; left: 126px; bottom: 48px; font: 400 28px/1 "Jost VT", sans-serif; letter-spacing: .08em; color: #6b6255; }
+  </style>
+  <div data-hf-id="hf-4473" id="root" data-composition-id="s5" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-4ce8" id="s5-a" class="clip s5-shot" data-start="0" data-duration="2.3"><img data-hf-id="hf-ykg1" id="s5-a-img" src="assets/img/arch-walkway-1600.webp" alt="" /><div data-hf-id="hf-fomd" class="s5-scrim"></div><div data-hf-id="hf-3sgz" class="s5-cap"><span data-hf-id="hf-rcbz" id="s5-a-cap">The arch walk</span></div></div>
+    <div data-hf-id="hf-5raq" id="s5-b" class="clip s5-shot" data-start="1.6" data-duration="2.3"><img data-hf-id="hf-pfzc" id="s5-b-img" src="assets/img/aerial-clubhouse-1280.webp" alt="" /><div data-hf-id="hf-zw6x" class="s5-scrim"></div><div data-hf-id="hf-nc2r" class="s5-cap"><span data-hf-id="hf-vpns" id="s5-b-cap">Clubhouse</span></div></div>
+    <div data-hf-id="hf-whdl" id="s5-c" class="clip s5-shot" data-start="3.2" data-duration="2.3"><img data-hf-id="hf-by6w" id="s5-c-img" src="assets/img/kids-play-area-1600.webp" alt="" /><div data-hf-id="hf-1340" class="s5-scrim"></div><div data-hf-id="hf-mxrq" class="s5-cap"><span data-hf-id="hf-bxfc" id="s5-c-cap">Children &amp; families</span></div></div>
+    <div data-hf-id="hf-vdd1" data-layout-allow-overlap id="s5-legal" class="clip s5-legal" data-start="0" data-duration="5.5">Artist’s impressions</div>
+    <div data-hf-id="hf-sd0q" id="s5-plan" class="clip" data-start="4.8" data-duration="3.9">
+      <div data-hf-id="hf-fmft" id="s5-plan-img"><img data-hf-id="hf-y69r" src="assets/img/master-layout-832.webp" alt="" /></div>
+      <div data-hf-id="hf-f546" id="s5-num"><span data-hf-id="hf-awa3" id="s5-num-in">48</span></div>
+      <div data-hf-id="hf-f7mo" id="s5-plan-t">Acres, planned as one</div>
+      <div data-hf-id="hf-a2uu" id="s5-plan-s">1,000+ plots · 1,000–2,400 sq ft</div>
+      <div data-hf-id="hf-rpub" id="s5-plan-legal">Indicative layout, artist’s impression</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#s5-a", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power3.inOut" }, 0);
+    tl.fromTo("#s5-b", { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 0.7, ease: "power3.inOut" }, 1.6);
+    tl.fromTo("#s5-c", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power3.inOut" }, 3.2);
+    tl.fromTo("#s5-a-img", { scale: 1.12 }, { scale: 1.0, duration: 2.3, ease: "sine.inOut" }, 0);
+    tl.fromTo("#s5-b-img", { scale: 1.0 }, { scale: 1.12, duration: 2.3, ease: "sine.inOut" }, 1.6);
+    tl.fromTo("#s5-c-img", { scale: 1.12 }, { scale: 1.0, duration: 2.3, ease: "sine.inOut" }, 3.2);
+    tl.fromTo("#s5-a-cap", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, 0.5);
+    tl.fromTo("#s5-b-cap", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, 2.1);
+    tl.fromTo("#s5-c-cap", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, 3.7);
+    tl.fromTo("#s5-plan", { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.7, ease: "power3.inOut" }, 4.8);
+    tl.fromTo("#s5-plan-img img", { scale: 1.15 }, { scale: 1.0, duration: 3.9, ease: "sine.out" }, 4.8);
+    tl.fromTo("#s5-num-in", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 5.3);
+    tl.fromTo("#s5-plan-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, 5.4);
+    tl.fromTo("#s5-plan-s", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, 5.5);
+    window.__timelines["s5"] = tl;
+  </script>
+</template>

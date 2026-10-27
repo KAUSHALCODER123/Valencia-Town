@@ -24,3 +24,6 @@ Time (IST), name, phone, "looking for", which form, page URL, UTM source/medium/
 - Phone must be a valid Indian mobile (+91, starting 6–9).
 - The same number within 10 minutes is ignored (double clicks, both forms).
 - Text starting with `= + - @` is cleaned so it can't run as a formula.
+
+## Email and call time
+The form's optional **email** and **preferred call time** are saved in columns Q and R, and included in the notification email (replying to it writes to the visitor when they gave an email). On a sheet that already exists, type `Email` in Q1 and `Preferred call time` in R1 once. After pasting the new script, deploy a **New version**.

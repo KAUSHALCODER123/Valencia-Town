@@ -1,0 +1,81 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant VT"; src: url("assets/fonts/cormorant-500.woff2") format("woff2"); font-weight: 500; }
+    @font-face { font-family: "Jost VT"; src: url("assets/fonts/jost.woff2") format("woff2"); font-weight: 400 500; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; }
+    #s4-wipe { position: absolute; inset: 0; overflow: hidden; background: #0F1713; }
+    .s4-photo { position: absolute; left: 840px; top: 0; width: 1080px; height: 1080px; overflow: hidden; }
+    .s4-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 60%; }
+    #s4-panel { position: absolute; left: 0; top: 0; width: 840px; height: 1080px; background: #0F1713; }
+    .s4-num { position: absolute; left: 110px; top: 170px; height: 440px; overflow: hidden; display: flex; align-items: baseline; gap: 28px; }
+    .s4-num span { display: block; font: 500 400px/1.1 "Cormorant VT", Georgia, serif; color: #E2A84B; letter-spacing: .02em; }
+    .s4-num small { display: block; font: 500 64px/1 "Jost VT", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: #F3EDE3; }
+    .s4-cap { position: absolute; left: 118px; top: 640px; width: 640px; font: 500 40px/1.3 "Jost VT", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: #F3EDE3; }
+    #s4-track { position: absolute; left: 118px; width: 600px; top: 910px; height: 4px; background: rgba(243,237,227,.25); }
+    .s4-stop { position: absolute; top: -10px; width: 24px; height: 24px; border-radius: 50%; background: rgba(243,237,227,.45); }
+    #s4-stop-indore { left: 0; } #s4-stop-saims { left: 190px; } #s4-stop-home { left: 380px; } #s4-stop-ujjain { left: 576px; }
+    #s4-stop-home { background: #E2A84B; width: 32px; height: 32px; top: -14px; }
+    #s4-marker { position: absolute; top: -14px; left: 0; width: 32px; height: 32px; border-radius: 50%; border: 4px solid #E2A84B; }
+    .s4-lab { position: absolute; top: 950px; font: 500 28px/1 "Jost VT", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: rgba(243,237,227,.8); }
+    #s4-legal { position: absolute; left: 118px; bottom: 48px; font: 400 28px/1 "Jost VT", sans-serif; letter-spacing: .08em; color: rgba(243,237,227,.75); }
+  </style>
+  <div data-hf-id="hf-2tvg" id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-whbe" id="s4-wipe" class="clip" data-start="0" data-duration="8.7">
+      <div data-hf-id="hf-ipaz" class="s4-photo" id="s4-p1"><img data-hf-id="hf-siz7" src="assets/img/arch-walkway-1600.webp" alt="" /></div>
+      <div data-hf-id="hf-7ttc" class="s4-photo" id="s4-p2"><img data-hf-id="hf-7xod" src="assets/img/entrance-road-1600.webp" alt="" /></div>
+      <div data-hf-id="hf-8lh5" class="s4-photo" id="s4-p3"><img data-hf-id="hf-wali" src="assets/img/garden-lawn-1600.webp" alt="" /></div>
+      <div data-hf-id="hf-pdph" id="s4-panel"></div>
+    </div>
+    <div data-hf-id="hf-0aj9" id="s4-n1" data-layout-allow-overlap data-layout-allow-overflow class="clip s4-num" data-start="0" data-duration="8.7"><span data-hf-id="hf-8z71">40</span><small data-hf-id="hf-g8vs">min</small></div>
+    <div data-hf-id="hf-48na" id="s4-n2" data-layout-allow-overlap data-layout-allow-overflow class="clip s4-num" data-start="0" data-duration="8.7"><span data-hf-id="hf-l45w">25</span><small data-hf-id="hf-cp1s">min</small></div>
+    <div data-hf-id="hf-86rb" id="s4-n3" data-layout-allow-overlap data-layout-allow-overflow class="clip s4-num" data-start="0" data-duration="8.7"><span data-hf-id="hf-2xa8">10</span><small data-hf-id="hf-bi4p">min</small></div>
+    <div data-hf-id="hf-4gwu" id="s4-c1" class="clip s4-cap" data-start="0" data-duration="8.7">To Shri Mahakaleshwar, Ujjain</div>
+    <div data-hf-id="hf-75kc" id="s4-c2" class="clip s4-cap" data-start="0" data-duration="8.7">To Vijay Nagar and Indore Airport</div>
+    <div data-hf-id="hf-8i61" id="s4-c3" class="clip s4-cap" data-start="0" data-duration="8.7">To Sri Aurobindo Hospital</div>
+    <div data-hf-id="hf-jw70" id="s4-track" class="clip" data-start="0" data-duration="8.7">
+      <div data-hf-id="hf-z4xm" class="s4-stop" id="s4-stop-indore"></div><div data-hf-id="hf-f8ao" class="s4-stop" id="s4-stop-saims"></div><div data-hf-id="hf-es7q" class="s4-stop" id="s4-stop-home"></div><div data-hf-id="hf-dau8" class="s4-stop" id="s4-stop-ujjain"></div>
+      <div data-hf-id="hf-82dz" id="s4-marker"></div>
+    </div>
+    <div data-hf-id="hf-3xjg" class="clip s4-lab" id="s4-l-indore" style="left:118px" data-start="0" data-duration="8.7">Indore</div>
+    <div data-hf-id="hf-nuld" class="clip s4-lab" id="s4-l-saims" style="left:290px" data-start="0" data-duration="8.7">SAIMS</div>
+    <div data-hf-id="hf-9t7y" class="clip s4-lab" id="s4-l-home" style="left:440px" data-start="0" data-duration="8.7">Home</div>
+    <div data-hf-id="hf-2j1w" class="clip s4-lab" id="s4-l-ujjain" style="left:640px" data-start="0" data-duration="8.7">Ujjain</div>
+    <div data-hf-id="hf-tvvt" data-layout-allow-overlap id="s4-legal" class="clip" data-start="0" data-duration="8.7">Artist’s impressions. Drive times are approximate.</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // beats at 0.8 / 3.4 / 6.0 s; each number rises as a mask, the old one leaves upward
+    const beats = [
+      { n: "#s4-n1", c: "#s4-c1", p: "#s4-p1", at: 0.8, x: 572 },
+      { n: "#s4-n2", c: "#s4-c2", p: "#s4-p2", at: 3.4, x: -4 },
+      { n: "#s4-n3", c: "#s4-c3", p: "#s4-p3", at: 6.0, x: 186 }
+    ];
+    tl.fromTo("#s4-wipe", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.7, ease: "power3.inOut" }, 0);
+    gsap.set(["#s4-n1 span", "#s4-n2 span", "#s4-n3 span"], { yPercent: 110 });
+    gsap.set(["#s4-n1 small", "#s4-n2 small", "#s4-n3 small", "#s4-c1", "#s4-c2", "#s4-c3"], { opacity: 0 });
+    gsap.set(["#s4-p2", "#s4-p3"], { clipPath: "inset(0 0 0 100%)" });
+    // only the number on its beat is shown, so the masked ones never sit under it
+    tl.fromTo(["#s4-n1", "#s4-n2", "#s4-n3"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+    beats.forEach((b, i) => {
+      tl.set(b.n, { opacity: 1 }, b.at - 0.01);
+      if (i < beats.length - 1) tl.set(b.n, { opacity: 0 }, b.at + 2.6 + 0.45);
+    });
+    gsap.set("#s4-marker", { x: 0 });
+    beats.forEach((b, i) => {
+      tl.fromTo(b.n + " span", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, b.at);
+      tl.fromTo(b.n + " small", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, b.at + 0.25);
+      tl.fromTo(b.c, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }, b.at + 0.35);
+      tl.fromTo(b.p + " img", { scale: 1.0 }, { scale: 1.1, duration: 2.8, ease: "sine.inOut" }, b.at);
+      if (i > 0) {
+        tl.fromTo(b.p, { clipPath: "inset(0 0 0 100%)" }, { clipPath: "inset(0 0 0 0%)", duration: 0.7, ease: "power3.inOut" }, b.at - 0.1);
+      }
+      tl.fromTo("#s4-marker", { x: i === 0 ? 380 : beats[i - 1].x }, { x: b.x, duration: 0.7, ease: "power2.inOut", immediateRender: i === 0 }, b.at);
+      if (i < beats.length - 1) {
+        const nx = b.at + 2.6;
+        tl.to(b.n + " span", { yPercent: -110, duration: 0.5, ease: "power3.in" }, nx - 0.1);
+        tl.to([b.n + " small", b.c], { opacity: 0, duration: 0.3, ease: "power2.in" }, nx - 0.15);
+      }
+    });
+    window.__timelines["s4"] = tl;
+  </script>
+</template>

@@ -1,0 +1,55 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant VT"; src: url("assets/fonts/cormorant-500.woff2") format("woff2"); font-weight: 500; }
+    @font-face { font-family: "Jost VT"; src: url("assets/fonts/jost.woff2") format("woff2"); font-weight: 400 500; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: transparent; }
+    #s6-claim { position: absolute; inset: 0; overflow: hidden; }
+    #s6-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; }
+    #s6-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,7,7,.85) 0%, rgba(7,7,7,.4) 55%, rgba(7,7,7,.15) 100%); }
+    .s6-line { overflow: hidden; }
+    .s6-line span { display: block; }
+    #s6-text { position: absolute; left: 116px; top: 300px; font: 500 170px/1 "Cormorant VT", Georgia, serif; letter-spacing: .05em; text-transform: uppercase; color: #F3EDE3; }
+    #s6-text em { font-style: normal; color: #E2A84B; }
+    #s6-legal { position: absolute; left: 124px; bottom: 48px; font: 400 28px/1 "Jost VT", sans-serif; letter-spacing: .08em; color: rgba(243,237,227,.75); }
+    #s6-card { position: absolute; inset: 0; background: #0F1713; }
+    #s6-lock { position: absolute; left: 0; right: 0; top: 330px; display: flex; flex-direction: column; align-items: center; }
+    #s6-mark { width: 200px; height: 166px; overflow: hidden; }
+    #s6-mark img { width: 200px; display: block; }
+    #s6-word { margin-top: 36px; font: 500 120px/1 "Cormorant VT", Georgia, serif; letter-spacing: .1em; text-transform: uppercase; color: #F3EDE3; overflow: hidden; }
+    #s6-word span { display: block; }
+    #s6-url { margin-top: 44px; font: 500 40px/1 "Jost VT", sans-serif; letter-spacing: .2em; color: #E2A84B; }
+    #s6-cta { margin-top: 30px; font: 500 30px/1 "Jost VT", sans-serif; letter-spacing: .3em; text-transform: uppercase; color: #F3EDE3; padding-bottom: 14px; position: relative; }
+    #s6-cta-line { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #E2A84B; transform-origin: 0 50%; }
+  </style>
+  <div data-hf-id="hf-7obi" id="root" data-composition-id="s6" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-h2pd" id="s6-claim" class="clip" data-start="0" data-duration="3.2">
+      <img data-hf-id="hf-d1rr" id="s6-bg" src="assets/img/grand-gate-1280.webp" alt="" />
+      <div data-hf-id="hf-6r7b" id="s6-scrim"></div>
+      <div data-hf-id="hf-ll8e" id="s6-text"><div data-hf-id="hf-8sqm" class="s6-line"><span data-hf-id="hf-zdzn" id="s6-l1"><em data-hf-id="hf-a72m">Mahakal</em> is</span></div><div data-hf-id="hf-hisi" class="s6-line"><span data-hf-id="hf-7if3" id="s6-l2">calling you</span></div><div data-hf-id="hf-hx3j" class="s6-line"><span data-hf-id="hf-g6u0" id="s6-l3">home.</span></div></div>
+      <div data-hf-id="hf-nb02" id="s6-legal">Artist’s impression</div>
+    </div>
+    <div data-hf-id="hf-2c5l" id="s6-card" class="clip" data-start="2.6" data-duration="3.4">
+      <div data-hf-id="hf-pfg2" id="s6-lock">
+        <div data-hf-id="hf-nbwc" id="s6-mark"><img data-hf-id="hf-o79u" id="s6-mark-img" src="assets/img/logo-mark.svg" alt="" /></div>
+        <div data-hf-id="hf-5obv" id="s6-word"><span data-hf-id="hf-7wuv" id="s6-word-in">Valencia Town</span></div>
+        <div data-hf-id="hf-ndo2" id="s6-url">valenciatown.in</div>
+        <div data-hf-id="hf-1yv3" id="s6-cta">Book a site visit<div data-hf-id="hf-oy3i" id="s6-cta-line"></div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#s6-claim", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "power3.inOut" }, 0);
+    tl.fromTo("#s6-bg", { scale: 1.0 }, { scale: 1.08, duration: 3.2, ease: "sine.inOut" }, 0);
+    tl.fromTo("#s6-l1", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.6);
+    tl.fromTo("#s6-l2", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.72);
+    tl.fromTo("#s6-l3", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 0.84);
+    tl.fromTo("#s6-card", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.7, ease: "power3.inOut" }, 2.6);
+    tl.fromTo("#s6-mark-img", { yPercent: 100 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 3.0);
+    tl.fromTo("#s6-word-in", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "power4.out" }, 3.2);
+    tl.fromTo("#s6-url", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }, 3.5);
+    tl.fromTo("#s6-cta", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }, 3.65);
+    tl.fromTo("#s6-cta-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, 3.9);
+    window.__timelines["s6"] = tl;
+  </script>
+</template>
