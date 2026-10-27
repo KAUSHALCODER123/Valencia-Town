@@ -1,7 +1,7 @@
 {
   "name": "Valencia Town",
   "tagline": "The Address of Tomorrow.",
-  "siteUrl": "https://valenciatown.in",
+  "siteUrl": "https://www.valenciatown.in",
   "acres": "48",
   "plots": "1,000+",
   "plotSizes": "1,000–2,400",
@@ -66,6 +66,19 @@
       "y": 68
     }
   ],
+  "neighbour": {
+    "x": 90,
+    "y": 9,
+    "label": "Godrej plot",
+    "description": "Shown for context only; the marker position is indicative. Not part of, or affiliated with, Valencia Town."
+  },
+  "film": {
+    "name": "Valencia Town: The Dawn Drive",
+    "description": "From the 4 am Bhasma Aarti at Shri Mahakaleshwar, Ujjain, to Valencia Town at Shahna on the Indore–Ujjain Road. Artist’s impressions.",
+    "thumbnail": "assets/video/valencia-town-film-poster.jpg",
+    "uploadDate": "2026-10-27",
+    "duration": "PT37S"
+  },
   "_TODO": {
     "plots": "Shown as 1,000+ per the redesign brief. The earlier data said ~1,000 and was unconfirmed: confirm the real count (client / architect).",
     "masterplan[].x/y": "Hotspot positions are estimated from the render; confirm against the approved plan (architect).",

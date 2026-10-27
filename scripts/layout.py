@@ -65,16 +65,42 @@ def modals():
 <dialog id="privacy-modal" class="privacy-dialog" aria-labelledby="privacy-title"><button class="close" type="button" data-close aria-label="Close privacy details">×</button><h2 id="privacy-title" class="dialog-title">How your details are used.</h2><p><strong>Purpose.</strong> When you send a request, your name, mobile number, optional email, preferred time and selected interest are used by the Valencia Town sales team only to respond to that request. The page you were on and campaign referral details may be recorded with it.</p><p><strong>Retention.</strong> Enquiry details are kept for up to 24 months, or until you ask us to remove them, whichever is sooner. They are not sold or shared with third parties for their own marketing.</p><p><strong>Your choices.</strong> To correct or delete your details, {email_txt} the team member who contacts you. Please do not include sensitive personal information in your request.</p><p class="fine">Images are artist’s impressions for representation purposes. Specifications, amenities and layouts are indicative and subject to change. <button type="button" class="text-btn" data-terms>Terms of use</button></p></dialog>
 <dialog id="terms-modal" class="privacy-dialog" aria-labelledby="terms-title"><button class="close" type="button" data-close aria-label="Close terms">×</button><h2 id="terms-title" class="dialog-title">The small print.</h2><p>This website is for information only and does not constitute an offer, invitation or legal commitment. All images are artist’s impressions. Dimensions, areas, amenities, specifications, layouts and drive times are indicative and subject to change without notice.</p><p>Prices, availability and payment plans are confirmed only in writing by {by}. Please verify the current project documentation and applicable approvals before making any decision.</p><p>References to other developments, including Godrej Greenview Estate, describe nearby activity from public sources only. Valencia Town is not affiliated with those developers.</p></dialog>{film}'''
 
+# Amenities exactly as the FAQ answer on the page lists them
+AMENITIES = ['Clubhouse', 'Temple', 'Children’s play areas', 'Forest-style gardens', 'Sports courts', 'Landscaped lawns',
+             'Senior citizens’ library', 'Meeting and women’s activity zones', 'Wide internal roads', 'Gated security']
+
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 
 def document(body, faq_pairs):
     M = C['meta']; url = SITE_URL
-    schema = {'@context': 'https://schema.org', '@graph': [
-        {'@type': 'WebSite', '@id': url + '/#website', 'name': P['name'], 'url': url + '/', 'inLanguage': 'en-IN'},
-        {'@type': 'Place', 'name': P['name'], 'url': url + '/', 'image': url + '/assets/img/og-image.jpg', 'hasMap': 'https://www.google.com/maps?q=' + str(P['latitude']) + ',' + str(P['longitude']), 'description': M['description'],
-         'address': {'@type': 'PostalAddress', 'streetAddress': 'Indore–Ujjain Road', 'addressLocality': 'Shahna', 'addressRegion': 'Madhya Pradesh', 'addressCountry': 'IN'},
-         'geo': {'@type': 'GeoCoordinates', 'latitude': P['latitude'], 'longitude': P['longitude']}},
-        {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': strip_tags(a)}} for q, a in faq_pairs]}]}
+    img = lambda name: url + '/assets/img/' + name
+    org = {'@type': 'Organization', '@id': url + '/#organization', 'name': CFG.get('LEGAL_ENTITY') or CFG.get('DEVELOPER_NAME') or P['name'],
+           'url': url + '/', 'logo': {'@type': 'ImageObject', 'url': img('apple-touch-icon.png'), 'width': 180, 'height': 180}}
+    if phone_ok('PHONE'): org['telephone'] = tel()[4:]
+    if has('EMAIL'): org['email'] = CFG['EMAIL']
+    if phone_ok('PHONE') or has('EMAIL'):
+        org['contactPoint'] = {k: v for k, v in {'@type': 'ContactPoint', 'contactType': 'sales', 'areaServed': 'IN', 'availableLanguage': ['en', 'hi'],
+                               'telephone': org.get('telephone'), 'email': org.get('email')}.items() if v}
+    place = {'@type': 'Place', '@id': url + '/#place', 'name': P['name'], 'url': url + '/', 'description': M['description'],
+             'image': [img('og-image.jpg'), img('master-layout-832.webp'), img('aerial-clubhouse-1280.webp'), img('garden-lawn-1280.webp')],
+             'hasMap': 'https://www.google.com/maps?q=' + str(P['latitude']) + ',' + str(P['longitude']),
+             'address': {'@type': 'PostalAddress', 'streetAddress': 'Indore–Ujjain Road', 'addressLocality': 'Shahna', 'addressRegion': 'Madhya Pradesh', 'addressCountry': 'IN'},
+             'geo': {'@type': 'GeoCoordinates', 'latitude': P['latitude'], 'longitude': P['longitude']},
+             'containedInPlace': {'@type': 'AdministrativeArea', 'name': 'Madhya Pradesh, India'},
+             'amenityFeature': [{'@type': 'LocationFeatureSpecification', 'name': a, 'value': True} for a in AMENITIES]}
+    page = {'@type': 'WebPage', '@id': url + '/#webpage', 'url': url + '/', 'name': M['title'], 'description': M['description'], 'inLanguage': 'en-IN',
+            'isPartOf': {'@id': url + '/#website'}, 'about': {'@id': url + '/#place'},
+            'primaryImageOfPage': {'@type': 'ImageObject', 'url': img('og-image.jpg'), 'width': 1200, 'height': 630}}
+    graph = [{'@type': 'WebSite', '@id': url + '/#website', 'name': P['name'], 'url': url + '/', 'inLanguage': 'en-IN', 'publisher': {'@id': url + '/#organization'}},
+             org, page, place,
+             {'@type': 'FAQPage', '@id': url + '/#faq', 'isPartOf': {'@id': url + '/#webpage'},
+              'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': strip_tags(a)}} for q, a in faq_pairs]}]
+    film = P.get('film', {})
+    if has('FILM_URL') and film:
+        graph.append({'@type': 'VideoObject', '@id': url + '/#film', 'name': film['name'], 'description': film['description'],
+                      'thumbnailUrl': url + '/' + film['thumbnail'], 'contentUrl': url + '/' + CFG['FILM_URL'].lstrip('/'),
+                      'uploadDate': film['uploadDate'], 'duration': film['duration'], 'isPartOf': {'@id': url + '/#webpage'}})
+    schema = {'@context': 'https://schema.org', '@graph': graph}
     data = {'formEndpoint': P['formEndpoint'], 'brochureUrl': CFG.get('BROCHURE_URL', ''), 'layoutUrl': CFG.get('LAYOUT_URL', ''),
             'whatsapp': wa() if phone_ok('WHATSAPP_NUMBER') else '', 'mapsQuery': f'{P["latitude"]},{P["longitude"]}', 'mapTitle': C['road']['map_title'],
             'vendor': ['assets/vendor/gsap.min.js', 'assets/vendor/ScrollTrigger.min.js', 'assets/vendor/lenis.min.js']}

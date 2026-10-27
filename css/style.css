@@ -454,6 +454,11 @@ body.modal-open{overflow:hidden}
 .zone.is-active .z-dot{background:var(--amber);color:var(--ink)}
 .zone.is-active .z-dot:after{opacity:1;transform:scale(1)}
 .zone.is-active .z-label{opacity:1}
+/* Godrej marker: outside the township, so it sits apart (dashed, bone) and its label opens to the left of the dot */
+.zone-ext{position:absolute;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;transform:translate(calc(-100% + 12px),-12px)}
+.zone-ext .z-dot{border:1px dashed var(--bone);background:rgba(7,7,7,.85)}
+.zone-ext .z-label{opacity:1;border:1px dashed rgba(243,237,227,.45)}
+.zone-legend li.lg-ext .lg-num{color:var(--muted)}
 .plan-note{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
 .zone-legend{display:grid;gap:0;margin-top:40px;border-top:1px solid var(--line)}
 .zone-legend li{display:grid;grid-template-columns:40px 1fr;gap:2px 12px;padding:14px 0;border-bottom:1px solid var(--line);transition:color .8s var(--ease)}
