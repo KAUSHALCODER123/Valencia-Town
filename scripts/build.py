@@ -27,7 +27,7 @@ js = '\n'.join(f'/* {p.name} */\n' + p.read_text(encoding='utf-8') for p in sort
 
 if LANG == 'en':
     (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: ' + P['siteUrl'] + '/sitemap.xml\n', encoding='utf-8')
-    (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + P['siteUrl'] + '/</loc></url></urlset>\n', encoding='utf-8')
+    (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + P['siteUrl'] + '/</loc><lastmod>' + __import__('datetime').date.today().isoformat() + '</lastmod></url></urlset>\n', encoding='utf-8')
     if CFG.get('ENABLE_HINDI') and (ROOT/'content/hi.json').exists():
         subprocess.run([sys.executable, __file__, '--lang=hi'] + (['--dev'] if DEV else []), check=True)
 
