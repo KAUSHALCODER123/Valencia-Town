@@ -1,7 +1,7 @@
 """Chapter II: Mahakal. A generated Nagara temple elevation that draws itself as the sky moves from night to dawn.
 
 Drawn in a 600 × 820 box, centre line x = 300. Every element is a stroked path so it can draw on scroll."""
-from vt import C, primary, secondary, heading
+from vt import refs, C, primary, secondary, heading
 
 CX = 300
 BASE, TOP = 548, 206            # main shikhara: base of the curve and the shoulder under the amalaka
@@ -92,5 +92,5 @@ def shikhara_svg():
 
 def render():
     M = C['mahakal']
-    li = lambda items, key=None: ''.join(f'<li{" class=\"is-key\"" if w == key else ""}><span class="t-when">{w}</span><span class="t-what">{t}</span></li>' for w, t in items)
+    li = lambda items, key=None: ''.join(f'<li{" class=\"is-key\"" if w == key else ""}><span class="t-when">{w}</span><span class="t-what">{refs(t)}</span></li>' for w, t in items)
     return f'''<section class="chapter mahakal" id="mahakal" data-chapter="2" data-name="Mahakal" aria-labelledby="mahakal-title"><div class="sky" aria-hidden="true"><div class="sky-dawn"></div></div><div class="wrap"><div class="chapter-head">{heading(M, "mahakal-title", deva=M["deva"])}<p class="lede rv">{M["lede"]}</p></div><div class="mahakal-grid"><figure class="shikhara">{shikhara_svg()}</figure><div class="mahakal-times"><div class="time-block rv"><h3>{M["day_title"]}</h3><ol class="timeline">{li(M["day"])}</ol></div><div class="time-block rv"><h3>{M["life_title"]}</h3><ol class="timeline">{li(M["life"], "2028")}</ol></div><div class="actions">{primary(C["ui"]["primary_mahakal"])}{secondary()}</div><p class="fine">{M["fine"]}</p></div></div></div></section>'''

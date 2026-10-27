@@ -26,3 +26,5 @@
 .plan-actions{justify-content:center;margin-top:48px}
 @media(min-width:768px){.zone-legend{grid-template-columns:1fr 1fr;column-gap:40px}}
 @media(min-width:1024px){.z-label{display:inline-block}.zone-legend{grid-template-columns:repeat(4,1fr)}.zone-legend li{grid-template-columns:1fr;padding:16px 0}.lg-num{grid-row:auto}}
+.lg-name a{color:inherit;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:5px}
+.lg-name a:hover{color:var(--amber)}

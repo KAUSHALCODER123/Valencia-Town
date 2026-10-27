@@ -411,6 +411,8 @@ body.modal-open{overflow:hidden}
 .growth-fine{font-size:13px;line-height:1.6;color:var(--muted-bone);margin-top:22px;max-width:62ch}
 .growth-actions{justify-content:center;margin-top:56px}
 @media(min-width:1024px){.growth-grid{grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,110px)}}
+.clip-link{margin-right:22px}
+.growth-plan-link{margin-top:6px;color:var(--ink);font-size:15px;text-decoration:underline;text-decoration-color:var(--amber-deep);text-underline-offset:5px}
 
 /* 50-tomorrow.css */
 /* Chapter V: Tomorrow. Vertical list by default; on desktop a row, pinned and moved sideways only if it overflows. */
@@ -469,6 +471,8 @@ body.modal-open{overflow:hidden}
 .plan-actions{justify-content:center;margin-top:48px}
 @media(min-width:768px){.zone-legend{grid-template-columns:1fr 1fr;column-gap:40px}}
 @media(min-width:1024px){.z-label{display:inline-block}.zone-legend{grid-template-columns:repeat(4,1fr)}.zone-legend li{grid-template-columns:1fr;padding:16px 0}.lg-num{grid-row:auto}}
+.lg-name a{color:inherit;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:5px}
+.lg-name a:hover{color:var(--amber)}
 
 /* 70-life.css */
 /* Chapter VII: Life. Default (mobile, reduced motion, no script): a stack of scenes. Desktop motion: pinned wipes. */

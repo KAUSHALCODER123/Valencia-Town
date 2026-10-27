@@ -17,7 +17,7 @@ DEV = '--dev' in sys.argv
 LANG = next((a.split('=',1)[1] for a in sys.argv if a.startswith('--lang=')), 'en')
 C = json.loads((ROOT/f'content/{LANG}.json').read_text(encoding='utf-8-sig'))
 SITE_URL = P['siteUrl'].rstrip('/')
-ASSET_VERSION = '20261027a'  # bump after stylesheet or script changes
+ASSET_VERSION = '20261027b'  # bump after stylesheet or script changes
 MISSING = set()
 
 def has(key):
@@ -41,6 +41,19 @@ def wa(key='WHATSAPP_NUMBER'):
     from urllib.parse import quote
     d = digits(key); d = d if len(d) == 12 else '91' + d
     return f'https://wa.me/{d}?text={quote(C["ui"]["wa_message"])}'
+REFS_USED = set()
+def refs(text):
+    """Link the first mention on the page of each landmark in data/project.json "references" to its official site."""
+    for phrase, url in P.get('references', []):
+        if url in REFS_USED: continue
+        # first whole-word mention that is not part of the road name (Indore–Ujjain) and not already inside a link
+        ok = lambda i: not (text[i - 1:i].isalnum() or text[i - 1:i] == '–' or text[i + len(phrase):i + len(phrase) + 1].isalnum() or text[i + len(phrase):i + len(phrase) + 1] == '–' or text.rfind('<a ', 0, i) > text.rfind('</a>', 0, i))
+        i = next((m for m in range(len(text)) if text.startswith(phrase, m) and ok(m)), -1)
+        if i < 0: continue
+        text = text[:i] + f'<a class="ref" href="{url}" target="_blank" rel="noopener">{phrase}</a>' + text[i + len(phrase):]
+        REFS_USED.add(url)
+    return text
+
 def fmt(text, **kw):
     for k, v in kw.items(): text = text.replace('{'+k+'}', str(v))
     return text

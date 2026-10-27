@@ -66,6 +66,14 @@
       "y": 68
     }
   ],
+  "references": [
+    ["Shri Mahakaleshwar", "https://www.shrimahakaleshwar.mp.gov.in/"],
+    ["Mahakaleshwar Jyotirlinga", "https://www.shrimahakaleshwar.mp.gov.in/"],
+    ["Sri Aurobindo Hospital", "https://sriaurobindouniversity.edu.in/"],
+    ["Indore Airport", "https://www.aai.aero/en/airports/indore"],
+    ["Ujjain", "https://ujjain.nic.in/"],
+    ["Indore", "https://indore.nic.in/"]
+  ],
   "neighbour": {
     "x": 90,
     "y": 9,
