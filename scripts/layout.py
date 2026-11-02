@@ -52,6 +52,11 @@ def footer_pages():
         out += f'<nav class="footer-pages" aria-label="{L["nav_title"]}"><p class="fk">{L["nav_title"]}</p><ul>{items}</ul></nav>'
     return out
 
+def preferred_source():
+    """Google 'preferred sources' deeplink: lets a reader pick this site to be highlighted in their Top Stories and AI results."""
+    label = C['footer'].get('preferred')
+    return f'<p class="footer-pref"><a href="https://www.google.com/preferences/source?q=valenciatown.in" target="_blank" rel="noopener">{label}</a></p>' if label else ''
+
 def footer():
     F = C['footer']
     rera = ph('MP_RERA_NUMBER'); dev = ph('DEVELOPER_NAME'); legal = ph('LEGAL_ENTITY')
@@ -60,7 +65,7 @@ def footer():
         f'<p><span class="fk">{C["trust"]["developer"]}</span> {dev}</p>' if dev else '',
         f'<p><span class="fk">{C["trust"]["legal"]}</span> {legal}</p>' if legal else ''])
     contact = ''.join([phone_link('footer-link'), email_link('footer-link'), wa_link('footer-link whatsapp', WA_ICON + U['whatsapp'])])
-    return f'''<footer class="footer" id="contact"><div class="wrap footer-grid"><div class="footer-brand">{mark("footer-mark")}<p class="footer-wordmark">Valencia Town</p><p class="footer-tagline">{P["tagline"]}</p><address>{F["address"]}</address><a class="link" href="{MAPS}" target="_blank" rel="noopener">{F["directions"]}</a></div><div class="footer-contact"><p>{F["hours"]}</p><div class="footer-links">{contact}</div>{primary()}</div><div class="footer-facts">{facts}</div>{footer_pages()}</div><div class="wrap footer-bottom"><nav class="footer-nav" aria-label="Footer">{nav_links()}</nav><p class="footer-disclaimer">{F["disclaimer"]}</p><p class="footer-copy">© <span id="year">2026</span> Valencia Town.{(" " + legal + ".") if legal else ""} <button class="text-btn" type="button" data-privacy>{F["privacy"]}</button> <button class="text-btn" type="button" data-terms>{F["terms"]}</button></p></div></footer>'''
+    return f'''<footer class="footer" id="contact"><div class="wrap footer-grid"><div class="footer-brand">{mark("footer-mark")}<p class="footer-wordmark">Valencia Town</p><p class="footer-tagline">{P["tagline"]}</p><address>{F["address"]}</address><a class="link" href="{MAPS}" target="_blank" rel="noopener">{F["directions"]}</a></div><div class="footer-contact"><p>{F["hours"]}</p><div class="footer-links">{contact}</div>{primary()}</div><div class="footer-facts">{facts}</div>{footer_pages()}</div><div class="wrap footer-bottom"><nav class="footer-nav" aria-label="Footer">{nav_links()}</nav>{preferred_source()}<p class="footer-disclaimer">{F["disclaimer"]}</p><p class="footer-copy">© <span id="year">2026</span> Valencia Town.{(" " + legal + ".") if legal else ""} <button class="text-btn" type="button" data-privacy>{F["privacy"]}</button> <button class="text-btn" type="button" data-terms>{F["terms"]}</button></p></div></footer>'''
 
 INTERESTS = [('Site Visit', 'A site visit'), ('Price List', 'The price list'), ('Layout', 'The layout'), ('Brochure', 'The brochure'), ('Plot Availability', 'Plot availability')]
 

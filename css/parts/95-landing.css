@@ -27,3 +27,5 @@
 html[lang="hi"] body *{letter-spacing:0!important}
 .lp-date{margin-top:10px;font:500 12px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .footer-pages+.footer-pages{margin-top:22px}
+.footer-pref{margin-top:14px;font-size:14px}
+.footer-pref a{color:var(--bone);text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:4px}
