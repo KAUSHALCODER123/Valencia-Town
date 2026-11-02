@@ -1,0 +1,123 @@
+{
+  "_readme": "Guide articles, built by scripts/landing.py into guides/<slug>/index.html. Every fact carries its source in the text; reported figures are labelled as reported. {acres}, {ujjain}, {vijay}, {saims} come from data/project.json.",
+  "base": "/guides",
+  "nav_title": "Guides",
+  "crumb_home": "Valencia Town",
+  "related_title": "Keep exploring",
+  "faq_title": "Quick answers",
+  "facts": {"acres": "Acres", "sizes": "Plot sizes, sq ft", "ujjain": "Min to Mahakaleshwar", "airport": "Min to Indore Airport"},
+  "pages": [
+    {
+      "slug": "indore-ujjain-road-six-lane",
+      "date": "2026-11-02",
+      "crumb": "Indore–Ujjain Road six-lane",
+      "link": "Indore–Ujjain Road six-lane widening, explained",
+      "meta": {
+        "title": "Indore–Ujjain Road Six-Lane Widening: What Plot Buyers Should Know",
+        "og_title": "Indore–Ujjain Road six-lane widening, explained for plot buyers",
+        "description": "The 46 km Indore–Ujjain Road is being widened from four to six lanes by MPRDC, with a December 2026 target ahead of Simhastha 2028. What it means if you are buying a plot."
+      },
+      "image": ["entrance-road", "Tree-lined entrance road into Valencia Town, artist’s impression"],
+      "h1": "The Indore–Ujjain Road six-lane widening, explained for plot buyers",
+      "intro": "The road between Indore and Ujjain is being widened from four lanes to six. If you are looking at plots along it, here is what is being built, when, and what it does and does not change.",
+      "sections": [
+        ["What is being built", [
+          "The 46 km Indore–Ujjain Road is being widened from four to six lanes by the Madhya Pradesh Road Development Corporation (MPRDC). The project was reported at Rs 1,692 crore, of which Rs 623 crore is for the widening and construction work, with completion targeted for December 2026. Places named along the route include Ninora, Aurobindo Hospital and Harifatak.",
+          "Source: <a href=\"https://timesofindia.indiatimes.com/city/indore/expansion-of-indore-ujjain-road-to-six-lanes-begins-with-eyes-on-simhastha-2028/articleshow/117245592.cms\" target=\"_blank\" rel=\"noopener\">The Times of India, January 2025</a>. Targets for public works often move; check the latest MPRDC or news updates before relying on a date."
+        ]],
+        ["Why now: Simhastha 2028", [
+          "The widening is timed for Simhastha 2028, the Kumbh of Ujjain held once in twelve years, when crores of pilgrims are expected to travel between the two cities. A wider road is meant to carry that traffic and the daily commuter traffic that already uses it."
+        ]],
+        ["What it means if you are buying a plot", [
+          "A finished six-lane road should make the drive between Indore and Ujjain faster and more predictable. During construction, expect diversions and slower journeys on some stretches.",
+          "It does not make every plot on the road a good buy. Check how a project actually connects to the highway (a service road, a safe entry and exit, the width of the approach road), and treat the road as context for your decision, not a promise of price growth."
+        ]],
+        ["Where Valencia Town sits", [
+          "Valencia Town is a {acres}-acre township of residential plots at Shahna, on this road. Sri Aurobindo Hospital is about {saims} minutes away, Vijay Nagar and Indore Airport about {vijay} minutes, and Ujjain about {ujjain} minutes."
+        ]]
+      ],
+      "faq": [
+        ["When will the Indore–Ujjain six-lane road be complete?", "The target reported in January 2025 was December 2026. Public works targets can change, so check the latest updates."],
+        ["Who is building the six-lane Indore–Ujjain Road?", "The Madhya Pradesh Road Development Corporation (MPRDC), as reported by The Times of India."],
+        ["How long is the Indore–Ujjain Road?", "About 46 km."],
+        ["Will the six-lane road raise plot prices?", "No one can promise that. Better access is one factor among many; compare approvals, title, location and price before buying."]
+      ],
+      "links": [["/plots-on-indore-ujjain-road/", "Plots on the Indore–Ujjain Road"], ["/#location", "The road and drive times"]]
+    },
+    {
+      "slug": "plot-buying-checklist-indore",
+      "date": "2026-11-02",
+      "crumb": "Plot buying checklist",
+      "link": "Buying a plot near Indore: a checklist",
+      "meta": {
+        "title": "Buying a Plot Near Indore: RERA, T&CP and Title Checklist",
+        "og_title": "Buying a residential plot near Indore: a checklist",
+        "description": "A practical checklist for buying a residential plot on the Indore–Ujjain Road: MP RERA registration, T&CP layout approval, land records, title, road width and bank loans."
+      },
+      "image": ["signage-wall", "Valencia Town signage wall at dusk, artist’s impression"],
+      "h1": "Buying a residential plot near Indore: a checklist",
+      "intro": "There are many plotted projects on the Indore–Ujjain Road. Whichever you consider, including Valencia Town, these are the checks worth doing before you pay a booking amount.",
+      "sections": [
+        ["1. MP RERA registration", [
+          "Under the Real Estate (Regulation and Development) Act, 2016, plotted projects above 500 square metres or with more than eight plots generally have to be registered with the state RERA before they are advertised or sold. Ask for the registration number and check it on the MP RERA portal: the project name, promoter, approved layout and declared completion date should match what you are told."
+        ]],
+        ["2. Layout approval and colony permission", [
+          "Ask for the layout approved by the Town and Country Planning department (T&CP) and the colony development permission. The plot you are offered should appear on the approved layout with the same number and dimensions."
+        ]],
+        ["3. Land records and title", [
+          "Check the land records (khasra and related documents) on MP Bhulekh, the state land records portal, and confirm that agricultural land has been diverted for residential use. Ask a lawyer to review the chain of title and confirm there are no loans or disputes on the land."
+        ]],
+        ["4. The plot itself", [
+          "Visit the site. Match the plot’s dimensions and facing against the layout, note the width of the road in front of it, and ask how water, electricity and drainage will reach it."
+        ]],
+        ["5. Money and paperwork", [
+          "Pay by bank transfer and keep receipts. Read the agreement to sell before signing, and ask early whether banks finance plots in the layout: lenders usually require approved layouts and clear title."
+        ]],
+        ["At Valencia Town", [
+          "Ask the team for each of these documents during your visit. The developer, approvals and project documents are also listed on the homepage."
+        ]]
+      ],
+      "faq": [
+        ["Is RERA registration mandatory for plotted projects in Madhya Pradesh?", "Generally yes, for projects above 500 square metres or with more than eight plots, under the RERA Act, 2016. Check the registration on the MP RERA portal."],
+        ["Where can I check land records in Madhya Pradesh?", "On MP Bhulekh, the state’s land records portal, using the khasra number of the land."],
+        ["Can I get a bank loan for a residential plot?", "Often yes, but lenders usually require an approved layout and clear title. Ask the bank before you book."],
+        ["What is a diversion order?", "The permission that converts agricultural land to non-agricultural use such as residential. Plotted colonies on former farmland need it."]
+      ],
+      "links": [["/#trust", "Valencia Town: developer and documents"], ["/plots-on-indore-ujjain-road/", "Plots on the Indore–Ujjain Road"]]
+    },
+    {
+      "slug": "simhastha-2028-ujjain",
+      "date": "2026-11-02",
+      "crumb": "Simhastha 2028, Ujjain",
+      "link": "Simhastha 2028 in Ujjain: dates and works",
+      "meta": {
+        "title": "Simhastha 2028 in Ujjain: Dates, Works and Living Nearby",
+        "og_title": "Simhastha 2028 in Ujjain: dates, works and living nearby",
+        "description": "Simhastha 2028 in Ujjain is reported for 27 March–27 May 2028. What is being built for it, from the six-lane Indore–Ujjain Road to a planned Kumbh city."
+      },
+      "image": ["arch-walkway", "The arch walk at Valencia Town at dusk, artist’s impression"],
+      "h1": "Simhastha 2028 in Ujjain: dates, works and living nearby",
+      "intro": "Simhastha, the Kumbh of Ujjain, comes once in twelve years. The next one is in 2028, and work for it is already reshaping the road between Indore and Ujjain.",
+      "sections": [
+        ["When is Simhastha 2028?", [
+          "Simhastha is held in Ujjain once every twelve years, on the banks of the Kshipra. The 2028 Simhastha is widely reported to run from 27 March to 27 May 2028; follow official announcements from the Madhya Pradesh government and the Ujjain administration for confirmed dates and bathing days."
+        ]],
+        ["What is being built for it", [
+          "The 46 km Indore–Ujjain Road is being widened from four to six lanes by MPRDC, with a December 2026 target (<a href=\"https://timesofindia.indiatimes.com/city/indore/expansion-of-indore-ujjain-road-to-six-lanes-begins-with-eyes-on-simhastha-2028/articleshow/117245592.cms\" target=\"_blank\" rel=\"noopener\">The Times of India, January 2025</a>).",
+          "The Ujjain Development Authority has planned a permanent Kumbh city over 2,378 hectares at a cost of about Rs 5,000 crore, with wide roads, schools, hospitals and ashrams; the report noted that land pooling faced hesitation from farmers (<a href=\"https://www.bhaskarenglish.in/local/mp/news/permanent-kumbh-city-to-be-built-in-ujjain-rs-5000-crore-investment-planned-134894480.html\" target=\"_blank\" rel=\"noopener\">Dainik Bhaskar, April 2025</a>)."
+        ]],
+        ["Living near Ujjain through Simhastha and after", [
+          "Valencia Town is at Shahna on the Indore–Ujjain Road, about {ujjain} minutes from Ujjain and the Mahakaleshwar Jyotirlinga, with Indore Airport about {vijay} minutes the other way. The township has a temple of its own.",
+          "Any effect of Simhastha on property prices is uncertain. Treat it as context, not a promise of returns."
+        ]]
+      ],
+      "faq": [
+        ["When is Simhastha 2028 in Ujjain?", "It is widely reported for 27 March to 27 May 2028. Check official announcements for confirmed dates."],
+        ["How often is Simhastha held?", "Once every twelve years, in Ujjain."],
+        ["What is the permanent Kumbh city in Ujjain?", "A planned development by the Ujjain Development Authority over 2,378 hectares, reported at about Rs 5,000 crore (Dainik Bhaskar, April 2025)."],
+        ["How far is Valencia Town from Ujjain?", "About {ujjain} minutes by road. Drive times vary, especially during festivals."]
+      ],
+      "links": [["/plots-near-ujjain-mahakaleshwar/", "Plots near Ujjain and Mahakaleshwar"], ["/#tomorrow", "What is coming, with sources"]]
+    }
+  ]
+}

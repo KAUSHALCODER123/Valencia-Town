@@ -25,3 +25,5 @@
 .footer-pages a:hover{color:var(--amber)}
 /* Devanagari breaks apart when letter-spaced: the Hindi page drops the tracking the English small caps use */
 html[lang="hi"] body *{letter-spacing:0!important}
+.lp-date{margin-top:10px;font:500 12px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.footer-pages+.footer-pages{margin-top:22px}

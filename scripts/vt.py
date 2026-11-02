@@ -17,7 +17,7 @@ DEV = '--dev' in sys.argv
 LANG = next((a.split('=',1)[1] for a in sys.argv if a.startswith('--lang=')), 'en')
 C = json.loads((ROOT/f'content/{LANG}.json').read_text(encoding='utf-8-sig'))
 SITE_URL = P['siteUrl'].rstrip('/')
-ASSET_VERSION = '20261027c'  # bump after stylesheet or script changes
+ASSET_VERSION = '20261102a'  # bump after stylesheet or script changes
 MISSING = set()
 # The page being built. Landing pages replace it; HOME is the homepage these pages link back to.
 HOME = '/' if LANG == 'en' else f'/{LANG}/'

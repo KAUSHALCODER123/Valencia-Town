@@ -41,12 +41,16 @@ def bars():
     return f'''<div class="mobile-bar">{call}{whats}<button class="bar-visit" type="button" data-enquiry="Site Visit">{U["bar_visit"]}</button></div>{wa_link("float-wa", WA_ICON + "<span>" + U["whatsapp"] + "</span>").replace('class="float-wa"', 'class="float-wa" aria-label="' + U["whatsapp"] + '"')}'''
 
 def footer_pages():
-    """Links to the search landing pages (content/landing.json) in every English footer."""
-    f = ROOT/'content/landing.json'
-    if LANG != 'en' or not f.exists(): return ''
-    L = json.loads(f.read_text(encoding='utf-8-sig'))
-    items = ''.join(f'<li><a href="/{pg["slug"]}/">{pg["link"]}</a></li>' for pg in L['pages'])
-    return f'<nav class="footer-pages" aria-label="{L["nav_title"]}"><p class="fk">{L["nav_title"]}</p><ul>{items}</ul></nav>'
+    """Links to the search landing pages and guides (content/landing.json, guides.json) in every English footer."""
+    if LANG != 'en': return ''
+    out = ''
+    for name in ('landing.json', 'guides.json'):
+        f = ROOT/'content'/name
+        if not f.exists(): continue
+        L = json.loads(f.read_text(encoding='utf-8-sig'))
+        items = ''.join(f'<li><a href="{L.get("base", "")}/{pg["slug"]}/">{pg["link"]}</a></li>' for pg in L['pages'])
+        out += f'<nav class="footer-pages" aria-label="{L["nav_title"]}"><p class="fk">{L["nav_title"]}</p><ul>{items}</ul></nav>'
+    return out
 
 def footer():
     F = C['footer']
@@ -122,6 +126,12 @@ def document(body, faq_pairs, meta=None, crumbs=None):
         page['breadcrumb'] = {'@id': page_url + '#breadcrumb'}; crumb['@id'] = page_url + '#breadcrumb'
         page['publisher'] = {'@id': url + '/#organization'}
         graph = [page, crumb] + ([faq_node] if faq_pairs else [])
+        if M.get('date'):  # guide articles
+            graph.append({'@type': 'Article', '@id': page_url + '#article', 'headline': M['title'], 'description': M['description'],
+                          'datePublished': M['date'], 'dateModified': M['date'], 'inLanguage': lang_tag,
+                          'image': img(M.get('image', 'og-image') + '-1280.webp') if M.get('image') else img('og-image.jpg'),
+                          'author': {'@id': url + '/#organization'}, 'publisher': {'@id': url + '/#organization'},
+                          'mainEntityOfPage': {'@id': page_url + '#webpage'}})
     film = P.get('film', {})
     if has('FILM_URL') and film and vt.PAGE['home']:
         graph.append({'@type': 'VideoObject', '@id': url + '/#film', 'name': film['name'], 'description': film['description'],
