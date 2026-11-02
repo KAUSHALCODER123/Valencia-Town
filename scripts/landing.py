@@ -18,7 +18,10 @@ def body(L, pg):
     sections = ''.join(f'<section class="lp-section"><h2>{h}</h2>' + ''.join(f'<p>{refs(fill(t))}</p>' for t in paras) + '</section>' for h, paras in pg['sections'])
     qa = ''.join(f'''<div class="qa"><h3><button class="qa-btn" type="button" aria-expanded="true" aria-controls="lpq-{i}" id="lpq-b-{i}">{e(q)}<span class="qa-icon" aria-hidden="true"></span></button></h3><div class="qa-panel" id="lpq-{i}" role="region" aria-labelledby="lpq-b-{i}"><p>{fill(a)}</p></div></div>''' for i, (q, a) in enumerate(pg['faq']))
     others = [(path(S, o), o['link']) for S in SETS for o in S['pages'] if o is not pg]
-    related = ''.join(f'<li><a href="{h}">{t}</a></li>' for h, t in pg['links'] + others)
+    seen, rel = {path(L, pg)}, []
+    for h, t in pg['links'] + others:   # one link per URL; never the page itself
+        if h not in seen: seen.add(h); rel.append((h, t))
+    related = ''.join(f'<li><a href="{h}">{t}</a></li>' for h, t in rel)
     dated = f'<p class="lp-date">Updated <time datetime="{pg["date"]}">{pg["date"]}</time></p>' if pg.get('date') else ''
     name, alt = pg['image']
     return (f'<section class="lp-hero" id="top"><div class="lp-hero-media">{image(name, alt, "lp-hero-img", eager=True)}<p class="ai-label">{vt.C["ui"]["artist"]}</p></div>'
